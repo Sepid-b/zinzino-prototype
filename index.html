@@ -3,1143 +3,381 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Zinzino · Subscription & Returns</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<title>Zinzino · Return</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --g:#1a6b4a;--gl:#e8f5f0;--gm:#2d9b6f;
-  --t1:#0d1117;--t2:#4b5563;--t3:#9ca3af;--t4:#d1d5db;
-  --sf:#fff;--sf2:#f9fafb;--sf3:#f3f4f6;--sf4:#e5e7eb;
-  --bd:#e5e7eb;--bd2:#d1d5db;
-  --am:#b45309;--aml:#fffbeb;--amb:#fde68a;
-  --rd:#dc2626;--rdl:#fef2f2;--rdb:#fecaca;
-  --bl:#2563eb;--bll:#eff6ff;--blb:#bfdbfe;
-  --pu:#7c3aed;--pul:#f5f3ff;--pub:#ddd6fe;
-  --or:#c2410c;--orl:#fff7ed;--orb:#fed7aa;
-  --pk:#9d174d;--pkl:#fdf2f8;--pkb:#fbcfe8;
-  --gap-bg:#fffbeb;--gap-bd:#fbbf24;--gap-tx:#92400e;
-  --risk-bg:#fef2f2;--risk-bd:#f87171;--risk-tx:#991b1b;
-  --r8:8px;--r12:12px;--r16:16px;--r20:20px;
+  --k-black:#1A1A1A;--k-gray1:#F5F5F5;--k-gray2:#E8E8E8;--k-gray3:#ADADAD;--k-gray4:#666;
+  --k-green:#00A67E;--k-green-bg:#E6F7F2;--k-green-light:#D1FAE5;
+  --k-red:#E53E3E;--k-red-bg:#FFF5F5;
+  --k-blue:#0055FF;--k-blue-bg:#F0F4FF;
+  --k-amber:#C05621;--k-amber-bg:#FFFBEB;
+  --sf:#fff;--radius:16px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans',sans-serif;background:#d8dce3;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:20px 10px 48px}
+body{font-family:'Inter',sans-serif;background:#EDEDED;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px 12px 52px}
 .wrap{display:flex;flex-direction:column;align-items:center}
-.dlabel{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a9199;margin-bottom:10px}
-.phone{width:375px;max-width:calc(100vw - 20px);background:var(--sf2);border-radius:42px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.09),0 24px 60px rgba(0,0,0,.16);display:flex;flex-direction:column}
-/* Status bar */
-.sbar{background:var(--sf);padding:12px 24px 5px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;color:var(--t1);flex-shrink:0}
-/* Nav */
-.nav{background:var(--sf);padding:9px 14px 11px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--bd);flex-shrink:0}
-.nav-back{width:32px;height:32px;border-radius:50%;background:var(--sf3);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--t1);flex-shrink:0;line-height:1;font-weight:300;transition:background .12s}
-.nav-back:hover{background:var(--sf4)}.nav-back.h{visibility:hidden;pointer-events:none}
-.nav-title{font-size:14px;font-weight:700;color:var(--t1);flex:1;text-align:center}
-.nav-ghost{width:32px;height:32px;flex-shrink:0}
-/* Screen */
-.scr{flex:1;overflow-y:auto;overflow-x:hidden;background:var(--sf2);min-height:520px;max-height:568px;scrollbar-width:none}
+.dlabel{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;margin-bottom:10px}
+.phone{width:375px;max-width:calc(100vw - 24px);background:#fff;border-radius:44px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.08),0 32px 72px rgba(0,0,0,.16);display:flex;flex-direction:column}
+.sbar{background:#fff;padding:13px 26px 5px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;color:var(--k-black);flex-shrink:0}
+.nav{background:#fff;padding:10px 18px 13px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.back-btn{width:34px;height:34px;border-radius:50%;background:var(--k-gray1);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--k-black);flex-shrink:0;font-weight:400;line-height:1;transition:background .1s;border:none}
+.back-btn:hover{background:var(--k-gray2)}.back-btn.h{visibility:hidden;pointer-events:none}
+.nav-title{font-size:15px;font-weight:700;color:var(--k-black);flex:1;text-align:center}
+.nav-ghost{width:34px;flex-shrink:0}
+.scr{flex:1;overflow-y:auto;overflow-x:hidden;background:#fff;min-height:520px;max-height:568px;scrollbar-width:none}
 .scr::-webkit-scrollbar{display:none}
-/* Bottom nav */
-.bnav{background:var(--sf);border-top:1px solid var(--bd);padding:7px 0 15px;display:flex;justify-content:space-around;flex-shrink:0}
-.bni{display:flex;flex-direction:column;align-items:center;gap:2px;padding:3px 10px;opacity:.35}
-.bni.on{opacity:1}.bni-ic{font-size:19px}.bni-lb{font-size:8px;font-weight:700;letter-spacing:.04em;color:var(--t2)}
-.bni.on .bni-lb{color:var(--g)}
-/* screen id */
-.sid{margin-top:9px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a9199}
-/* fade */
+.bnav{background:#fff;border-top:1px solid var(--k-gray2);padding:8px 0 18px;display:flex;justify-content:space-around;flex-shrink:0}
+.bni{display:flex;flex-direction:column;align-items:center;gap:3px;padding:3px 12px;opacity:.3}
+.bni.on{opacity:1}.bni-ic{font-size:20px}.bni-l{font-size:9px;font-weight:600;color:var(--k-black)}
+.pid{margin-top:9px;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#aaa}
 @keyframes fs{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-/* ═══════════════ ATOMS ═══════════════ */
-.pad{padding:0 14px 24px}.pt{padding-top:14px}
-/* cards */
-.card{background:var(--sf);border-radius:var(--r16);border:1px solid var(--bd);margin-bottom:9px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-.cb{padding:14px}
-.cr{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd)}.cr:last-child{border-bottom:none}
-.ck{font-size:12px;color:var(--t2);font-weight:500}.cv{font-size:12px;color:var(--t1);font-weight:600}
-/* hero */
-.hero{background:var(--g);border-radius:var(--r20);padding:18px;margin:11px 14px 0;position:relative;overflow:hidden;box-shadow:0 4px 14px rgba(26,107,74,.22)}
-.hero::before{content:'';position:absolute;top:-22px;right:-22px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.06)}
-.hey{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:4px}
-.hpd{font-size:17px;font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.01em}
-.hgr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.hgl{font-size:8px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:2px}
-.hgv{font-size:15px;font-weight:800;color:#fff}.hgs{font-size:10px;color:rgba(255,255,255,.5);margin-top:1px}
-/* badges */
-.bdg{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700}
-.bg{background:#dcfce7;color:#15803d}.ba{background:var(--aml);color:var(--am);border:1px solid var(--amb)}
-.br{background:var(--rdl);color:var(--rd);border:1px solid var(--rdb)}.bp{background:var(--pul);color:var(--pu)}
-.bo{background:var(--orl);color:var(--or);border:1px solid var(--orb)}.bb{background:var(--bll);color:var(--bl);border:1px solid var(--blb)}
-.bgr{background:var(--sf3);color:var(--t2)}
-.dot-s{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
-/* section header */
-.sh{padding:14px 14px 7px;display:flex;justify-content:space-between;align-items:center}
-.sht{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3)}
-/* buttons */
-.btn{width:100%;padding:13px 18px;border-radius:var(--r12);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;margin-bottom:7px;transition:opacity .1s,transform .1s}
-.btn:active{transform:scale(.98);opacity:.88}
-.btn-p{background:var(--g);color:#fff}.btn-s{background:var(--sf);color:var(--t1);border:1px solid var(--bd2)}
-.btn-d{background:var(--rdl);color:var(--rd);border:1px solid var(--rdb)}
-.btn-g{background:transparent;color:var(--t2);font-size:12px;font-weight:600;text-decoration:underline;text-decoration-color:var(--bd2)}
-.btn-amb{background:var(--aml);color:var(--am);border:1px solid var(--amb)}
-/* progress */
-.pt2{height:4px;background:var(--sf3);border-radius:100px;overflow:hidden}
-.pf{height:100%;border-radius:100px}
-.pss{display:flex;align-items:center;gap:3px}
-.ps{flex:1;height:3px;border-radius:100px}
-.psd{background:var(--g)}.psa{background:var(--am)}.psf{background:var(--sf3)}
-/* info rows */
-.il{display:flex;flex-direction:column;gap:9px}
-.ir{display:flex;gap:9px;align-items:flex-start}
-.ii{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
-.iig{background:#dcfce7}.iia{background:var(--aml)}.iir{background:var(--rdl)}.iib{background:var(--bll)}.iigr{background:var(--sf3)}.iip{background:var(--pul)}
-.ill{font-size:12px;font-weight:600;color:var(--t1)}.ils{font-size:10px;color:var(--t2);line-height:1.4;margin-top:1px}
-/* chips */
-.chips{display:flex;gap:5px;margin-bottom:12px}
-.chip{flex:1;padding:8px 3px;border-radius:7px;border:1.5px solid var(--bd);background:var(--sf);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;cursor:pointer;text-align:center;color:var(--t2);transition:all .12s}
-.chip.on{border-color:var(--g);color:var(--g);background:var(--gl)}
-/* reason */
-.ri{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--bd);cursor:pointer;transition:background .1s}
-.ri:last-child{border-bottom:none}.ri:hover{background:var(--sf2)}.ri.on{background:#f0fdf4}
-.ril{font-size:12px;font-weight:600;color:var(--t1)}.ris{font-size:10px;color:var(--t3);margin-top:1px}
-.radio{width:17px;height:17px;border-radius:50%;border:2px solid var(--bd2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.radio.on{border-color:var(--g);background:var(--g)}.radio.on::after{content:'';width:5px;height:5px;border-radius:50%;background:#fff}
-/* checkbox */
-.chk{width:19px;height:19px;border-radius:5px;border:2px solid var(--bd2);flex-shrink:0;display:flex;align-items:center;justify-content:center}
-.chk.on{border-color:var(--g);background:var(--g)}.chk.on::after{content:'✓';font-size:10px;color:#fff;font-weight:700}
-/* alert */
-.alert{border-radius:var(--r12);padding:11px 12px;display:flex;gap:9px;align-items:flex-start}
-.al-a{background:var(--aml);border:1px solid var(--amb)}.al-r{background:var(--rdl);border:1px solid var(--rdb)}
-.al-b{background:var(--bll);border:1px solid var(--blb)}.al-g{background:#f0fdf4;border:1px solid #bbf7d0}
-.al-p{background:var(--pul);border:1px solid var(--pub)}
-.al-ic{font-size:13px;flex-shrink:0;margin-top:1px}
-.al-tx{font-size:11px;font-weight:700;color:var(--t1);line-height:1.5}
-.al-sb{font-size:10px;color:var(--t2);margin-top:2px;line-height:1.45}
-
-/* ⚠ GAP BADGE — shows real-world operational gaps inline */
-.gap-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:800;background:var(--gap-bg);border:1px solid var(--gap-bd);color:var(--gap-tx);letter-spacing:.04em;text-transform:uppercase}
-.risk-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:100px;font-size:9px;font-weight:800;background:var(--risk-bg);border:1px solid var(--risk-bd);color:var(--risk-tx);letter-spacing:.04em;text-transform:uppercase}
-
-/* operational gap card */
-.gap-card{background:var(--gap-bg);border:1px solid var(--gap-bd);border-radius:var(--r12);padding:11px 12px;margin-bottom:9px}
-.gap-card-title{font-size:10px;font-weight:800;color:var(--gap-tx);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:5px}
-.gap-card-text{font-size:11px;color:#92400e;line-height:1.5}
-
-/* risk card */
-.risk-card{background:var(--risk-bg);border:1px solid var(--risk-bd);border-radius:var(--r12);padding:11px 12px;margin-bottom:9px}
-.risk-card-title{font-size:10px;font-weight:800;color:var(--risk-tx);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:5px}
-.risk-card-text{font-size:11px;color:#991b1b;line-height:1.5}
-
-/* ambiguity flag */
-.amb-flag{background:#fdf4ff;border:1px solid #e9d5ff;border-radius:var(--r12);padding:10px 12px;margin-bottom:9px}
-.amb-flag-title{font-size:10px;font-weight:800;color:#6b21a8;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.amb-flag-text{font-size:11px;color:#6b21a8;line-height:1.5}
-
-/* timeline */
-.tls{display:flex;gap:10px;align-items:flex-start}
-.tl-d{width:9px;height:9px;border-radius:50%;border:2px solid var(--bd);background:var(--sf);flex-shrink:0;margin-top:3px}
-.tl-d.dn{background:var(--g);border-color:var(--g)}.tl-d.ac{background:var(--bl);border-color:var(--bl);box-shadow:0 0 0 3px rgba(37,99,235,.15)}.tl-d.ma{background:var(--am);border-color:var(--am)}
-.tl-l{width:2px;flex:1;min-height:18px;background:var(--bd);margin:3px 0}.tl-l.dn{background:var(--g)}.tl-l.ma{background:var(--am)}
-.tl-b{padding-bottom:16px}.tl-lb{font-size:12px;font-weight:600;color:var(--t1)}.tl-sb{font-size:10px;color:var(--t3);margin-top:2px}
-.tl-dim .tl-lb{color:var(--t3)}
-
-/* note */
-.note{font-size:11px;color:var(--t2);line-height:1.5;padding:9px 12px;background:var(--sf2);border-radius:7px;border-left:3px solid var(--bd2);margin-bottom:10px}
-
-/* stat grid */
-.sg{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.sbox{background:var(--sf2);border-radius:7px;padding:10px 12px}
-.sl{font-size:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3);margin-bottom:3px}
-.sv{font-size:14px;font-weight:800;color:var(--t1)}.ss{font-size:9px;color:var(--t3);margin-top:1px}
-
-/* success screen */
-.scs{display:flex;flex-direction:column;align-items:center;text-align:center;padding:26px 20px 20px}
-.scs-ic{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px}
-.scs-t{font-size:18px;font-weight:800;color:var(--t1);margin-bottom:5px;letter-spacing:-.01em}
-.scs-s{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:20px}
-
-/* order item */
-.oi{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-bottom:1px solid var(--bd)}
-.oi:last-child{border-bottom:none}
-.oi-img{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#e8f5f0,#d1fae5);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
-.oi-n{font-size:12px;font-weight:700;color:var(--t1);margin-bottom:2px}.oi-s{font-size:10px;color:var(--t2)}
-.oi-p{font-size:12px;font-weight:700;color:var(--t1);text-align:right;white-space:nowrap}
-
-/* condition chips small */
-.cc-row{display:flex;gap:5px;margin-top:7px}
-.cc{flex:1;padding:6px 3px;border-radius:6px;border:1.5px solid var(--bd);font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;cursor:pointer;text-align:center;color:var(--t2);background:var(--sf);transition:all .12s}
-.cc.on{border-color:var(--g);color:var(--g);background:var(--gl)}.cc.on-r{border-color:var(--rd);color:var(--rd);background:var(--rdl)}
-
-/* scenario cards */
-.sc-c{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r12);padding:12px 13px;display:flex;align-items:center;gap:10px;cursor:pointer;margin-bottom:7px;box-shadow:0 1px 3px rgba(0,0,0,.04);transition:all .12s}
-.sc-c:hover{border-color:var(--g)}.sc-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.sc-n{font-size:12px;font-weight:700;color:var(--t1)}.sc-d{font-size:10px;color:var(--t3);margin-top:1px}
-
-/* return type choice */
-.rtype{background:var(--sf);border:1.5px solid var(--bd);border-radius:var(--r16);padding:14px;margin-bottom:9px;cursor:pointer;display:flex;gap:12px;align-items:flex-start;transition:all .14s;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.rtype:hover{border-color:var(--g)}
-.rtype-ic{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.rtype-t{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:3px}
-.rtype-s{font-size:11px;color:var(--t2);line-height:1.4}
-.rtype-tag{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;border-radius:100px;margin-top:5px}
-
-/* download card */
-.dlc{background:var(--bll);border:1px solid var(--blb);border-radius:var(--r12);padding:13px;display:flex;gap:10px;align-items:center;cursor:pointer;margin-bottom:9px}
-
-/* select / textarea */
-select,textarea{width:100%;padding:9px 11px;border-radius:8px;border:1.5px solid var(--bd);font-family:'DM Sans',sans-serif;font-size:12px;color:var(--t1);background:var(--sf);margin-top:7px}
-textarea{resize:none;min-height:64px;line-height:1.5}
-
-/* cycle rows */
-.cy{display:flex;align-items:center;padding:10px 14px;border-bottom:1px solid var(--bd);gap:9px}.cy:last-child{border-bottom:none}
-.cy-n{width:26px;height:26px;border-radius:7px;background:var(--gl);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:800;color:var(--g);flex-shrink:0}
-.cy-d{font-size:12px;font-weight:600;color:var(--t1);flex:1}.cy-s{font-size:10px;color:var(--t3)}
-
-/* withdrawal info box */
-.wd-info-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:var(--r16);padding:14px;margin-bottom:12px}
-.wd-info-title{font-size:12px;font-weight:700;color:var(--g);margin-bottom:10px}
-.wd-info-row{display:flex;gap:8px;align-items:flex-start;margin-bottom:8px}
-.wd-info-row:last-child{margin-bottom:0}
-.wd-dot{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0;margin-top:5px}
-.wd-info-text{font-size:11px;color:var(--t1);line-height:1.5}
-.wd-info-text strong{color:var(--g)}
-
-/* section separator */
-.ssep{padding:5px 14px 3px;font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--t3)}
-
-/* refund breakdown */
-.refund-row{display:flex;justify-content:space-between;padding:9px 14px;border-bottom:1px solid var(--bd)}
-.refund-row:last-child{border-bottom:none}
-.refund-k{font-size:12px;color:var(--t2);font-weight:500}
-.refund-v{font-size:12px;font-weight:700;color:var(--t1)}
-.refund-v.pos{color:#15803d}.refund-v.neg{color:var(--rd)}
-
-/* manual step */
-.manual-step{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--bd)}
-.manual-step:last-child{border-bottom:none}
-.manual-num{width:22px;height:22px;border-radius:50%;background:var(--sf3);border:1px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:var(--t2);flex-shrink:0;margin-top:1px}
-.manual-t{font-size:12px;font-weight:600;color:var(--t1)}.manual-s{font-size:10px;color:var(--t2);margin-top:1px;line-height:1.4}
-
-/* opened-item blocked notice inline */
-.blocked-notice{background:var(--rdl);border-left:3px solid var(--rd);border-radius:0 8px 8px 0;padding:8px 10px;margin:6px 0 0;font-size:10px;color:var(--rd);font-weight:600;line-height:1.4}
-
-.dvd{height:1px;background:var(--bd);margin:10px 0}
+/* Steps */
+.steps{display:flex;justify-content:center;gap:6px;padding:16px 0 6px}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--k-gray2);transition:all .2s}
+.dot.active{background:var(--k-black);width:18px;border-radius:100px}
+.dot.done{background:var(--k-gray3)}
+.steplbl{font-size:11px;color:var(--k-gray3);text-align:center;margin-bottom:16px;font-weight:500}
+/* Card */
+.kcard{background:#fff;border-radius:var(--radius);border:1px solid var(--k-gray2);margin-bottom:10px;overflow:hidden}
+.cr{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--k-gray2)}.cr:last-child{border-bottom:none}
+.ck{font-size:13px;color:var(--k-gray4);font-weight:500}.cv{font-size:13px;color:var(--k-black);font-weight:600}
+/* Buttons */
+.btn{width:100%;padding:16px 20px;border-radius:100px;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer;border:none;margin-bottom:10px;transition:opacity .1s,transform .1s;letter-spacing:-.01em}
+.btn:active{transform:scale(.98);opacity:.85}
+.btn-black{background:var(--k-black);color:#fff}
+.btn-outline{background:#fff;color:var(--k-black);border:2px solid var(--k-black)}
+.btn-ghost{background:transparent;color:var(--k-gray3);font-size:13px;font-weight:600;text-decoration:underline;text-decoration-color:var(--k-gray2)}
+/* Product row */
+.prod-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--k-gray2)}.prod-row:last-child{border-bottom:none}
+.prod-img{width:46px;height:46px;border-radius:12px;background:var(--k-gray1);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.prod-name{font-size:13px;font-weight:700;color:var(--k-black);margin-bottom:2px}.prod-sub{font-size:11px;color:var(--k-gray3)}
+.prod-price{font-size:13px;font-weight:700;color:var(--k-black);white-space:nowrap;margin-left:auto}
+/* Checkbox */
+.chk{width:22px;height:22px;border-radius:6px;border:2px solid var(--k-gray2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .12s;cursor:pointer;background:#fff}
+.chk.on{border-color:var(--k-black);background:var(--k-black)}.chk.on::after{content:'✓';font-size:12px;color:#fff;font-weight:700}
+/* Condition chips */
+.ccs{display:flex;gap:7px;margin-top:10px}
+.cc{flex:1;padding:9px 4px;border-radius:100px;border:1.5px solid var(--k-gray2);font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-align:center;color:var(--k-gray4);background:#fff;transition:all .12s}
+.cc.on{border-color:var(--k-black);color:var(--k-black);background:var(--k-gray1)}.cc.on-r{border-color:var(--k-red);color:var(--k-red);background:var(--k-red-bg)}
+.note-ok{background:var(--k-gray1);border-radius:10px;padding:10px 13px;margin-top:9px;font-size:12px;color:var(--k-black);font-weight:600;line-height:1.4}
+.note-warn{background:var(--k-red-bg);border-radius:10px;padding:10px 13px;margin-top:9px;font-size:12px;color:var(--k-red);font-weight:600;line-height:1.4}
+/* Radio */
+.ri{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--k-gray2);cursor:pointer;transition:background .1s}
+.ri:last-child{border-bottom:none}.ri:hover{background:var(--k-gray1)}.ri.on{background:var(--k-gray1)}
+.ril{font-size:14px;font-weight:600;color:var(--k-black)}
+.radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--k-gray2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .13s}
+.radio.on{border-color:var(--k-black);background:var(--k-black)}.radio.on::after{content:'';width:7px;height:7px;border-radius:50%;background:#fff}
+/* Suggest */
+.suggest-card{background:var(--k-gray1);border-radius:var(--radius);padding:16px;margin-bottom:12px;border:1.5px solid var(--k-gray2)}
+/* Refund rows */
+.rfr{display:flex;justify-content:space-between;padding:12px 18px;border-bottom:1px solid var(--k-gray2)}.rfr:last-child{border-bottom:none}
+.rfk{font-size:13px;color:var(--k-gray4);font-weight:500}.rfv{font-size:13px;font-weight:700;color:var(--k-black)}.rfv.neg{color:var(--k-red)}
+/* Timeline */
+.tls{display:flex;gap:12px;align-items:flex-start}
+.tl-d{width:10px;height:10px;border-radius:50%;border:2px solid var(--k-gray2);background:#fff;flex-shrink:0;margin-top:3px}
+.tl-d.ac{background:var(--k-black);border-color:var(--k-black)}
+.tl-l{width:2px;flex:1;min-height:18px;background:var(--k-gray2);margin:3px 0}
+.tl-b{padding-bottom:16px}
+.tl-label{font-size:13px;font-weight:600;color:var(--k-black)}.tl-sub{font-size:11px;color:var(--k-gray3);margin-top:2px}
+.tls.dim .tl-label{color:var(--k-gray3)}
+/* Success */
+.scs{display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 22px 24px}
+.label-card{background:var(--k-black);border-radius:var(--radius);padding:16px;display:flex;gap:13px;align-items:center;cursor:pointer;margin-bottom:12px;width:100%}
+.section-lbl{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--k-gray3);padding:14px 18px 8px}
+textarea{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--k-gray2);font-family:'Inter',sans-serif;font-size:13px;color:var(--k-black);background:#fff;resize:none;min-height:72px;line-height:1.5;margin-top:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-<div class="dlabel">Zinzino · Subscription & Orders · Light mode</div>
+<div class="dlabel">Zinzino · Right of Withdrawal</div>
 <div class="phone">
-  <!-- Status bar -->
   <div class="sbar">
     <span id="clk">09:41</span>
     <div style="display:flex;gap:4px;align-items:center">
       <svg width="13" height="9" viewBox="0 0 13 9"><rect x="0" y="3.5" width="2.5" height="5.5" rx=".8" fill="currentColor"/><rect x="3.5" y="2" width="2.5" height="7" rx=".8" fill="currentColor"/><rect x="7" y=".5" width="2.5" height="8.5" rx=".8" fill="currentColor"/><rect x="10.5" y="0" width="2" height="9" rx=".8" fill="currentColor" opacity=".3"/></svg>
-      <svg width="12" height="9" viewBox="0 0 12 9"><path d="M6 2C7.7 2 9.2 2.7 10.3 3.8L11.5 2.6C10.1 1.3 8.1.4 6 .4 3.9.4 1.9 1.3.5 2.6L1.7 3.8C2.8 2.7 4.3 2 6 2Z" fill="currentColor"/><path d="M6 4.5C7 4.5 7.8 4.9 8.5 5.5L9.7 4.3C8.6 3.4 7.4 2.9 6 2.9 4.6 2.9 3.4 3.4 2.3 4.3L3.5 5.5C4.2 4.9 5 4.5 6 4.5Z" fill="currentColor"/><circle cx="6" cy="7.8" r="1.3" fill="currentColor"/></svg>
-      <svg width="21" height="9" viewBox="0 0 21 9"><rect x="0" y=".8" width="17" height="7.2" rx="2" stroke="currentColor" stroke-width="1.1" fill="none"/><rect x="17.4" y="2.7" width="1.8" height="3.6" rx=".9" fill="currentColor" opacity=".4"/><rect x="1.1" y="2" width="12" height="5" rx="1.3" fill="currentColor"/></svg>
+      <svg width="12" height="9" viewBox="0 0 12 9"><path d="M6 2C7.7 2 9.2 2.7 10.3 3.8L11.5 2.6C10.1 1.3 8.1.4 6 .4 3.9.4 1.9 1.3.5 2.6L1.7 3.8C2.8 2.7 4.3 2 6 2Z" fill="currentColor"/><circle cx="6" cy="7.8" r="1.3" fill="currentColor"/></svg>
+      <svg width="21" height="9" viewBox="0 0 21 9"><rect x="0" y=".8" width="17" height="7.2" rx="2" stroke="currentColor" stroke-width="1.1" fill="none"/><rect x="1.1" y="2" width="12" height="5" rx="1.3" fill="currentColor"/></svg>
     </div>
   </div>
-  <!-- Nav -->
   <div class="nav">
-    <div class="nav-back h" id="nav-back" onclick="goBack()">‹</div>
-    <div class="nav-title" id="nav-title">Subscription & Orders</div>
+    <button class="back-btn h" id="nb" onclick="goBack()">‹</button>
+    <div class="nav-title" id="nt">My Orders</div>
     <div class="nav-ghost"></div>
   </div>
-  <!-- Screen -->
   <div class="scr" id="scr"></div>
-  <!-- Bottom nav -->
   <div class="bnav">
-    <div class="bni"><div class="bni-ic">🏠</div><div class="bni-lb">Home</div></div>
-    <div class="bni on"><div class="bni-ic">📦</div><div class="bni-lb">Orders</div></div>
-    <div class="bni"><div class="bni-ic">👤</div><div class="bni-lb">Account</div></div>
-    <div class="bni"><div class="bni-ic">💬</div><div class="bni-lb">Support</div></div>
+    <div class="bni"><div class="bni-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div><div class="bni-l">Home</div></div>
+    <div class="bni on"><div class="bni-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg></div><div class="bni-l">Orders</div></div>
+    <div class="bni"><div class="bni-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="bni-l">Account</div></div>
+    <div class="bni"><div class="bni-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="bni-l">Support</div></div>
   </div>
 </div>
-<div class="sid" id="sid">HUB</div>
+<div class="pid" id="pid">ORDER</div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-// STATE MACHINE
-// ══════════════════════════════════════════════════════
-let hist = [], cur = 'HUB';
-let selItems = {}, itemConds = {}, wdReturnReason = null, pauseSel = 0, cancelReasonSel = null;
-
-const ORDERS = [
-  {id:1, n:'Balance Oil+',      q:'250ml × 1', p:89,  e:'🫙'},
-  {id:2, n:'Xtend+',            q:'100 caps × 1', p:59, e:'💊'},
-  {id:3, n:'Balance Oil+ Lemon',q:'300ml × 1', p:89,  e:'🍋'},
+let hist=[], cur='ORDER', sel={}, cond={};
+const ICONS={
+  clock:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  pause:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>`,
+  box:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`,
+  tag:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
+  pin:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+  check:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`,
+  pen:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>`,
+  bottle:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"/><path d="M10 3v2.5c0 .5-.2 1-.6 1.4L7 9.5V19a2 2 0 002 2h6a2 2 0 002-2V9.5l-2.4-2.6c-.4-.4-.6-.9-.6-1.4V3"/><line x1="7" y1="14" x2="17" y2="14"/></svg>`,
+  vial:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2v9.5L20 18a2 2 0 01-1.73 3H5.73A2 2 0 014 18l5.5-6.5V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/><path d="M7 13h10"/></svg>`,
+  hourglass:`<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 00-.586-1.414L12 12l-4.414 4.414A2 2 0 007 17.828V22"/><path d="M7 2v4.172a2 2 0 00.586 1.414L12 12l4.414-4.414A2 2 0 0017 6.172V2"/></svg>`,
+  label:`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
+};
+const ITEMS=[
+  {id:1, n:'BalanceOil+', sub:'300ml · Lemon', p:79, ic:'bottle'},
+  {id:2, n:'BalanceTest', sub:'Blood spot test · Take now', p:19, ic:'vial'},
 ];
+const TITLES={ORDER:'My Orders',WD_SELECT:'Select items',WD_SUMMARY:'Return summary',WD_REASON:'One more thing',WD_DONE:''};
 
-const TITLES = {
-  HUB:'Subscription & Orders',
-  ACTIVE:'My Subscription', PAUSE_C:'Pause Subscription', PAUSE_D:'Subscription Paused',
-  PAUSED:'My Subscription', SKIP_C:'Skip Delivery', SKIP_D:'Delivery Skipped',
-  CANCEL_D:'Cancel Subscription', CANCEL_CF:'Confirm Cancellation',
-  CANCEL_N:'My Subscription', CANCELLED:'Subscription',
-  TEST2:'My Subscription', TEST2_C:'Cancel Subscription',
-  BIMO:'My Subscription', WK:'Return Eligible', WP:'Return Status',
-  UNC:'Delivery Issue', PF:'Payment Failed',
-  RH:'Returns & Complaints',
-  WD_INFO:'Right of Withdrawal',
-  WD_S:'Select Items', WD_SUM:'Return Summary', WD_R:'Why returning?', WD_CF:'Return Confirmed',
-  CO_S:'Select Items', CO_D:'Complaint Details', CO_CF:'Complaint Registered',
+function go(s){hist.push(cur);cur=s;render()}
+function goBack(){if(hist.length){cur=hist.pop();render()}}
+function render(){
+  const el=document.getElementById('scr');el.scrollTop=0;
+  document.getElementById('nt').textContent=TITLES[cur]||'';
+  document.getElementById('pid').textContent=cur;
+  const nb=document.getElementById('nb');
+  hist.length?nb.classList.remove('h'):nb.classList.add('h');
+  el.innerHTML='';(SC[cur]||SC.ORDER)(el);
+}
+const B=(l,c,a)=>`<button class="btn ${c}" onclick="${a}">${l}</button>`;
+function stps(n,t){return`<div class="steps">${Array.from({length:t},(_,i)=>`<div class="dot ${i<n-1?'done':i===n-1?'active':''}"></div>`).join('')}</div><div class="steplbl">Step ${n} of ${t}</div>`;}
+
+const SC={
+
+ORDER(el){el.innerHTML=`<div style="animation:fs .18s ease">
+<div style="padding:20px 18px 14px">
+  <div style="font-size:12px;font-weight:600;color:var(--k-gray3);margin-bottom:4px">#ZIN-20260310 · 10 Mar 2026</div>
+  <div style="font-size:24px;font-weight:900;color:var(--k-black);letter-spacing:-.04em;line-height:1.2;margin-bottom:2px">Premier Kit —<br>Balance</div>
+  <div style="font-size:14px;color:var(--k-gray4);margin-top:4px">Delivered ✓</div>
+</div>
+<div class="kcard" style="margin:0 16px 14px">
+  <div class="prod-row"><div class="prod-img">${ICONS.bottle}</div><div style="flex:1"><div class="prod-name">BalanceOil+</div><div class="prod-sub">300ml · Lemon</div></div><div class="prod-price">€79.00</div></div>
+  <div class="prod-row"><div class="prod-img">${ICONS.vial}</div><div style="flex:1"><div class="prod-name">BalanceTest × 2</div><div class="prod-sub">Test now + after 120 days</div></div><div class="prod-price">€19.00</div></div>
+  <div style="padding:13px 18px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--k-gray2)">
+    <span style="font-size:13px;color:var(--k-gray4)">Total</span>
+    <span style="font-size:17px;font-weight:800;color:var(--k-black)">€98.00</span>
+  </div>
+</div>
+<div style="padding:0 16px">
+  <div style="background:var(--k-gray1);border:1px solid var(--k-gray2);border-radius:14px;padding:14px 16px;display:flex;gap:11px;align-items:flex-start;margin-bottom:14px">
+    <span style="flex-shrink:0;color:var(--k-black)">${ICONS.clock}</span>
+    <div>
+      <div style="font-size:14px;font-weight:700;color:var(--k-black)">22 days left to return</div>
+      <div style="font-size:12px;color:var(--k-gray4);margin-top:2px">Must be initiated by 24 Mar 2026</div>
+    </div>
+  </div>
+  ${B('Return this order','btn-black',"go('WD_SELECT')")}
+</div>
+</div>`},
+
+WD_SELECT(el){
+ITEMS.forEach(o=>{if(sel[o.id]===undefined){sel[o.id]=false;cond[o.id]=null;}});
+el.innerHTML=`<div style="animation:fs .18s ease;padding-bottom:24px">
+<div style="padding:18px 18px 8px">
+${stps(1,3)}
+<div style="font-size:26px;font-weight:900;color:var(--k-black);letter-spacing:-.04em;line-height:1.2;margin-bottom:6px">What would you<br>like to return?</div>
+</div>
+<div class="kcard" style="margin:0 16px" id="ilist">
+  <div style="display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid var(--k-gray2);cursor:pointer;background:var(--k-gray1)" onclick="toggleWholeKit()">
+    <div class="chk" id="chk-whole"></div>
+    <div style="flex:1">
+      <div style="font-size:14px;font-weight:700;color:var(--k-black)">Select all items</div>
+      <div style="font-size:12px;color:var(--k-gray3);margin-top:1px">Premier Kit — Balance (2 items)</div>
+    </div>
+  </div>
+  ${ITEMS.map(o=>iRow(o)).join('')}
+</div>
+<div id="warnbox" style="margin:9px 16px 0;display:none;background:var(--k-red-bg);border:1px solid #FECACA;border-radius:10px;padding:10px 13px;font-size:12px;color:var(--k-red);font-weight:600;line-height:1.5"></div>
+<div style="padding:0 16px;margin-top:12px">
+  ${B('Continue','btn-black','proceed()')}
+  ${B('Cancel','btn-ghost','goBack()')}
+</div>
+</div>`},
+
+WD_SUMMARY(el){
+const un=ITEMS.filter(o=>sel[o.id]&&cond[o.id]==='u');
+const op=ITEMS.filter(o=>sel[o.id]&&cond[o.id]==='o');
+const full=un.reduce((a,o)=>a+o.p,0),ded=op.reduce((a,o)=>a+o.p,0),ref=full-ded;
+el.innerHTML=`<div style="animation:fs .18s ease;padding-bottom:24px">
+<div style="padding:18px 18px 8px">
+${stps(2,3)}
+<div style="font-size:26px;font-weight:900;color:var(--k-black);letter-spacing:-.04em;line-height:1.2;margin-bottom:6px">Review your<br>return</div>
+</div>
+<div style="padding:0 16px 4px">
+  <div style="background:var(--k-gray1);border:1px solid var(--k-gray2);border-radius:14px;padding:14px 15px;display:flex;gap:11px;align-items:flex-start;margin-bottom:12px">
+    <div style="width:34px;height:34px;border-radius:50%;background:var(--k-gray2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--k-black)">${ICONS.pause}</div>
+    <div>
+      <div style="font-size:13px;font-weight:700;color:var(--k-black)">Subscription paused immediately</div>
+      <div style="font-size:12px;color:var(--k-gray4);margin-top:2px">No further charges while we process your return</div>
+    </div>
+  </div>
+</div>
+<div class="section-lbl">Items being returned</div>
+<div class="kcard" style="margin:0 16px 12px">
+  ${[...un,...op].map(o=>`<div class="prod-row"><div class="prod-img" style="color:var(--k-gray4)">${ICONS[o.ic]||''}</div><div style="flex:1"><div class="prod-name">${o.n}</div><div style="font-size:11px;font-weight:600;color:var(--k-gray4)">${cond[o.id]==='o'?'Opened':'Unopened'}</div></div><div class="prod-price">€${o.p.toFixed(2)}</div></div>`).join('')}
+  ${ded>0?`<div class="rfr"><span class="rfk">Opened items deducted</span><span class="rfv neg">−€${ded.toFixed(2)}</span></div>`:''}
+  <div style="padding:14px 18px;display:flex;justify-content:space-between;align-items:center;background:var(--k-gray1)">
+    <span style="font-size:15px;font-weight:800;color:var(--k-black)">Your refund</span>
+    <span style="font-size:24px;font-weight:900;color:var(--k-black);letter-spacing:-.04em">€${ref.toFixed(2)}</span>
+  </div>
+</div>
+<div class="kcard" style="margin:0 16px 16px">
+  <div style="padding:16px 18px 4px">
+    <div style="font-size:15px;font-weight:800;color:var(--k-black);margin-bottom:3px">Return Instructions</div>
+    <div style="font-size:13px;color:var(--k-gray3);margin-bottom:12px">Everything you need to know</div>
+  </div>
+  ${[
+    {id:'acc1', icon:ICONS.box,  title:'How to pack your return', body:'Pack the items securely in the original box if possible. If not, use any sturdy box. Make sure items are well protected to avoid damage in transit.'},
+    {id:'acc2', icon:ICONS.tag,  title:'Shipping label & timeline', body:'A prepaid return label will be sent to your email within 1–3 business days. Print it and attach it to the outside of the box. Drop off at any DHL location.'},
+    {id:'acc3', icon:ICONS.pin,  title:'Return shipping address', body:'', bodyHtml:`<div style="font-size:13px;color:var(--k-gray4);line-height:1.6;margin-bottom:12px">Zinzino Returns<br>Lilla Bommen 1<br>411 04 Gothenburg<br>Sweden</div><button onclick="event.stopPropagation()" style="display:flex;align-items:center;gap:7px;background:var(--k-gray1);border:1.5px solid var(--k-gray2);border-radius:100px;padding:8px 14px;font-family:Inter,sans-serif;font-size:12px;font-weight:700;color:var(--k-black);cursor:pointer">${ICONS.pen} Change address</button>`},
+  ].map(a=>`
+  <div style="border-top:1px solid var(--k-gray2)">
+    <div onclick="toggleAcc('${a.id}')" style="display:flex;align-items:center;gap:13px;padding:15px 18px;cursor:pointer">
+      <div style="width:20px;flex-shrink:0;color:var(--k-gray4)">${a.icon}</div>
+      <span style="font-size:14px;font-weight:600;color:var(--k-black);flex:1">${a.title}</span>
+      <span id="${a.id}-arrow" style="font-size:12px;color:var(--k-gray3);transition:transform .2s;display:block">⌄</span>
+    </div>
+    <div id="${a.id}" style="display:none;padding:0 18px 15px 48px">${a.bodyHtml || `<span style="font-size:13px;color:var(--k-gray4);line-height:1.6;white-space:pre-line">${a.body}</span>`}</div>
+  </div>`).join('')}
+</div>
+<div style="padding:0 16px">
+  ${B('Confirm return','btn-black',"go('WD_REASON')")}
+  ${B('Back','btn-ghost','goBack()')}
+</div>
+</div>`},
+
+WD_REASON(el){
+const rs=[
+  {l:"I changed my mind",suggestion:null},
+  {l:"I won't start using it",suggestion:{title:'Pause instead?',body:"Pause your subscription and come back when you're ready. No charges, no commitment.",cta:'Pause subscription'}},
+  {l:"The price is too high",suggestion:{title:'There\'s a smaller option',body:'BalanceOil+ also comes in 100ml at a lower price. Switch instead of returning?',cta:'See lower-cost option'}},
+  {l:"Delivery took too long",suggestion:{title:'Skip the next delivery',body:"We're sorry for the wait. Would you like to skip the next delivery instead?",cta:'Skip next delivery'}},
+  {l:"Other reason",suggestion:null},
+];
+el.innerHTML=`<div style="animation:fs .18s ease;padding-bottom:24px">
+<div style="padding:18px 18px 8px">
+${stps(3,3)}
+<div style="font-size:26px;font-weight:900;color:var(--k-black);letter-spacing:-.04em;line-height:1.2;margin-bottom:6px">Why are you<br>returning?</div>
+<div style="font-size:14px;color:var(--k-gray4);margin-bottom:16px">Optional — you can skip this step.</div>
+</div>
+<div class="kcard" style="margin:0 16px 12px">
+${rs.map((r,i)=>`<div class="ri" id="r${i}" onclick="selR(${i})"><div class="ril" id="rl${i}">${r.l}</div><div class="radio" id="rr${i}"></div></div>`).join('')}
+</div>
+<div id="suggestion-block" style="margin:0 16px 12px;display:none"></div>
+<div id="other-wrap" style="margin:0 16px 12px;display:none"><textarea placeholder="Tell us more..."></textarea></div>
+<div style="padding:0 16px">
+  ${B('Submit and confirm return','btn-black',"go('WD_DONE')")}
+  ${B('Skip','btn-ghost',"go('WD_DONE')")}
+</div>
+</div>`;
+window._reasons=rs;},
+
+WD_DONE(el){el.innerHTML=`<div class="scs" style="animation:fs .18s ease">
+<div style="width:72px;height:72px;border-radius:50%;background:var(--k-gray1);border:2px solid var(--k-gray2);display:flex;align-items:center;justify-content:center;color:var(--k-black);margin-bottom:18px">${ICONS.check}</div>
+<div style="font-size:28px;font-weight:900;color:var(--k-black);letter-spacing:-.04em;margin-bottom:8px">Return<br>confirmed</div>
+<div style="font-size:14px;color:var(--k-gray4);line-height:1.65;margin-bottom:26px">Your return is registered.<br>We'll email a return label within 1–3 business days.</div>
+<div class="kcard" style="width:100%;text-align:left;margin-bottom:14px">
+<div class="cr"><span class="ck">Case ID</span><span class="cv">WD-2026-04821</span></div>
+<div class="cr"><span class="ck">Refund</span><span style="font-size:15px;font-weight:800;color:var(--k-black)">€79.00</span></div>
+<div class="cr"><span class="ck">Return by</span><span style="font-size:13px;font-weight:700;color:var(--k-black)">24 Mar 2026</span></div>
+<div class="cr"><span class="ck">Subscription</span><span style="display:flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--k-gray4)"><span style="color:var(--k-gray3)">${ICONS.pause}</span> Paused</span></div>
+<div class="cr"><span class="ck">Return label</span><span style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--k-gray3)"><span>${ICONS.hourglass}</span> Sent to email</span></div>
+</div>
+<div class="label-card">
+  <div style="width:42px;height:42px;background:rgba(255,255,255,.15);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">${ICONS.label}</div>
+  <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#fff">Return label — check your email</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Prepaid · Sent within 1–3 business days</div></div>
+</div>
+<div style="width:100%;text-align:left;margin-bottom:6px">
+  <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--k-gray3);margin-bottom:12px">What happens next</div>
+  ${[{l:'Support creates return label',d:'1–3 business days',s:'ac'},{l:'Label sent to your email',d:'',s:''},{l:'You return the package',d:'By 24 Mar 2026',s:''},{l:'Warehouse confirms receipt',d:'',s:''},{l:'Refund processed',d:'5–10 business days',s:''}].map((s,i,arr)=>`<div class="tls ${!s.s?'dim':''}"><div style="display:flex;flex-direction:column;align-items:center"><div class="tl-d ${s.s}"></div>${i<arr.length-1?'<div class="tl-l"></div>':''}</div><div class="tl-b"><div class="tl-label">${s.l}</div>${s.d?`<div class="tl-sub">${s.d}</div>`:''}</div></div>`).join('')}
+</div>
+<div style="width:100%;margin-top:8px">${B('Back to my orders','btn-black',"go('ORDER')")}</div>
+</div>`},
 };
 
-function go(s){ hist.push(cur); cur=s; render(); }
-function goBack(){ if(hist.length){ cur=hist.pop(); render(); } }
+function iRow(o){const s=sel[o.id],c=cond[o.id];
+return`<div id="irow${o.id}">
+<div style="display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid var(--k-gray2);cursor:pointer" onclick="tI(${o.id})">
+  <div class="chk ${s?'on':''}" id="chk${o.id}"></div>
+  <div class="prod-img" style="color:var(--k-gray4)">${ICONS[o.ic]||''}</div>
+  <div style="flex:1"><div class="prod-name">${o.n}</div><div class="prod-sub">${o.sub}</div></div>
+  <div class="prod-price">€${o.p.toFixed(2)}</div>
+</div>
+${s?`<div style="padding:10px 18px 14px;background:var(--k-gray1);border-bottom:1px solid var(--k-gray2)">
+  <div style="font-size:11px;font-weight:700;color:var(--k-gray3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:7px">Condition</div>
+  <div class="ccs">
+    <div class="cc ${c==='u'?'on':''}" onclick="sC(${o.id},'u',event)">Unopened</div>
+    <div class="cc ${c==='o'?'on-r':''}" onclick="sC(${o.id},'o',event)">Opened</div>
+  </div>
+  ${c==='u'?`<div class="note-ok">✓ Full refund of €${o.p.toFixed(2)}</div>`:''}
+  ${c==='o'?`<div class="note-warn">⚠ €${o.p.toFixed(2)} will be deducted — opened items cannot be fully refunded.</div>`:''}
+</div>`:''}
+</div>`;}
 
-function render(){
-  const el = document.getElementById('scr');
-  el.scrollTop = 0;
-  el.style.animation = 'none'; el.offsetHeight; el.style.animation = '';
-  document.getElementById('nav-title').textContent = TITLES[cur] || '';
-  document.getElementById('sid').textContent = cur;
-  const nb = document.getElementById('nav-back');
-  hist.length ? nb.classList.remove('h') : nb.classList.add('h');
-  el.innerHTML = '';
-  (SC[cur] || SC.HUB)(el);
+function tI(id){sel[id]=!sel[id];if(!sel[id])cond[id]=null;rL();uW();}
+function sC(id,c,e){e.stopPropagation();cond[id]=c;rL();uW();}
+function toggleWholeKit(){
+  const all=ITEMS.every(o=>sel[o.id]);
+  ITEMS.forEach(o=>{sel[o.id]=!all;if(!sel[o.id])cond[o.id]=null;});
+  rL();uW();
 }
-
-function btn(l,c,a){ return `<button class="btn ${c}" onclick="${a}">${l}</button>`; }
-function bdg(l,c){ return `<span class="bdg ${c}">${l}</span>`; }
-function gapTag(l='⚠ Operational Gap'){ return `<span class="gap-tag">${l}</span>`; }
-function riskTag(l='⚡ Risk'){ return `<span class="risk-tag">${l}</span>`; }
-
-// ══════════════════════════════════════════════════════
-// SCREENS
-// ══════════════════════════════════════════════════════
-const SC = {
-
-// ── HUB ──────────────────────────────────────────────
-HUB(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">
-    Full prototype with real-world operational gaps shown inline.
-    <span class="gap-tag" style="vertical-align:middle">⚠ Gap</span> = system limitation.
-    <span class="risk-tag" style="vertical-align:middle">⚡ Risk</span> = user impact.
-  </p>
-  <div class="ssep">Subscription states</div>
-  ${[
-    {k:'ACTIVE',  e:'✅',bg:'#dcfce7',     n:'Active',           d:'Running normally'},
-    {k:'PAUSED',  e:'⏸', bg:'var(--pul)',  n:'Paused',           d:'Billing & deliveries halted'},
-    {k:'TEST2',   e:'⭐',bg:'var(--aml)',   n:'120-Day Program',  d:'Test 2 unlocked on 4th payment'},
-    {k:'BIMO',    e:'🔄',bg:'#dcfce7',     n:'Bi-Monthly Plan',  d:'Monthly billing, delivery every 2 months'},
-    {k:'CANCEL_N',e:'⏳',bg:'var(--orl)',  n:'Cancellation Notice',d:'30-day notice running'},
-    {k:'CANCELLED',e:'—',bg:'var(--sf3)', n:'Cancelled',         d:'Subscription fully ended'},
-    {k:'WK',      e:'↩', bg:'var(--bll)',  n:'Withdrawal Eligible',d:'Return window open'},
-    {k:'UNC',     e:'📭',bg:'var(--rdl)',  n:'Uncollected Package',d:'Carrier could not deliver'},
-    {k:'PF',      e:'💳',bg:'var(--rdl)',  n:'Payment Failed',   d:'Grace period active'},
-  ].map(s=>`<div class="sc-c" onclick="go('${s.k}')">
-    <div class="sc-ic" style="background:${s.bg}">${s.e}</div>
-    <div style="flex:1"><div class="sc-n">${s.n}</div><div class="sc-d">${s.d}</div></div>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none"><path d="M1 1l3 3.5-3 3.5" stroke="#d1d5db" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>`).join('')}
-  <div class="ssep" style="margin-top:6px">Returns & Complaints</div>
-  <div class="sc-c" onclick="go('RH')" style="border-color:var(--g)">
-    <div class="sc-ic" style="background:#fef9c3;font-size:16px">↩</div>
-    <div style="flex:1">
-      <div class="sc-n">Returns & Complaints</div>
-      <div class="sc-d">Withdrawal (ångerrätt) + Complaint (reklamation) — with real ops gaps</div>
-    </div>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none"><path d="M1 1l3 3.5-3 3.5" stroke="#1a6b4a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  </div>`;
-},
-
-// ── ACTIVE ───────────────────────────────────────────
-ACTIVE(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div class="hero">
-    <div style="position:absolute;top:14px;right:14px">${bdg('<span class="dot-s"></span> Active','bg')}</div>
-    <div class="hey">Zinzino Health Partner</div>
-    <div class="hpd">Balance Oil+ <span style="font-size:12px;font-weight:500;opacity:.55">· Standard</span></div>
-    <div class="hgr">
-      <div><div class="hgl">Next billing</div><div class="hgv">15 Apr</div><div class="hgs">€89.00 · Visa ••4829</div></div>
-      <div><div class="hgl">Next delivery</div><div class="hgv">17 Apr</div><div class="hgs">SE PostNord</div></div>
-    </div>
-  </div>
-  <div style="margin:9px 14px 0" class="card cb">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-      <div><div style="font-size:12px;font-weight:700">120-Day Program</div><div style="font-size:10px;color:var(--t2);margin-top:1px">Unlocks on 4th payment</div></div>
-      <span style="font-size:10px;font-weight:700;color:var(--am)">3 / 4</span>
-    </div>
-    <div class="pss"><div class="ps psd"></div><div class="ps psd"></div><div class="ps psd"></div><div class="ps psf"></div></div>
-    <div style="font-size:10px;color:var(--t3);margin-top:5px">One more payment unlocks Test 2 access</div>
-  </div>
-  <div class="sh"><span class="sht">Quick Actions</span></div>
-  <div style="margin:0 14px;display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:10px">
-    ${[{e:'⏸',l:'Pause',f:"go('PAUSE_C')"},{e:'⏭',l:'Skip delivery',f:"go('SKIP_C')"},{e:'🔄',l:'Change product',f:''},{e:'📍',l:'Edit address',f:''}]
-    .map(a=>`<div onclick="${a.f}" style="background:var(--sf);border:1px solid var(--bd);border-radius:11px;padding:12px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.04)">
-      <div style="font-size:18px;margin-bottom:5px">${a.e}</div>
-      <div style="font-size:11px;font-weight:700;color:var(--t1)">${a.l}</div>
-    </div>`).join('')}
-  </div>
-  <div style="margin:0 14px">
-    ${btn('Return a product','btn-s',"go('RH')")}
-    ${btn('Cancel subscription','btn-g',"go('CANCEL_D')")}
-  </div>
-  <div class="sh"><span class="sht">Recent Orders</span></div>
-  <div class="card" style="margin:0 14px 20px">
-    ${['15 Mar 2026','15 Feb 2026','15 Jan 2026'].map(d=>`
-    <div class="cr"><div><div style="font-size:12px;font-weight:600">${d}</div><div style="font-size:10px;color:var(--t3);margin-top:1px">Balance Oil+</div></div>
-    <div style="text-align:right"><div class="cv">€89.00</div><div style="font-size:10px;color:#15803d;font-weight:600;margin-top:1px">Delivered ✓</div></div></div>`).join('')}
-  </div></div>`;
-},
-
-// ── PAUSE CONFIG ─────────────────────────────────────
-PAUSE_C(el){
-  const opts=['1 month','2 months','3 months'], rd=['15 May','15 Jun','15 Jul'];
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">Billing and deliveries pause. Your 120-day program progress is fully preserved.</p>
-  <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:7px">Pause duration</div>
-  <div class="chips">${opts.map((o,i)=>`<div class="chip ${i===0?'on':''}" id="pc${i}" onclick="selP(${i})">${o}</div>`).join('')}</div>
-  <div class="card cb" style="margin-bottom:12px">
-    <div class="sg" style="margin-bottom:12px">
-      <div class="sbox"><div class="sl">Pausing from</div><div class="sv">15 Apr</div><div class="ss">2026</div></div>
-      <div class="sbox"><div class="sl">Resuming</div><div class="sv" id="pr">15 May</div><div class="ss">2026</div></div>
-    </div>
-    <div class="dvd"></div>
-    <div class="il" style="margin-top:12px">
-      <div class="ir"><div class="ii iig">✓</div><div><div class="ill">Progress preserved</div><div class="ils">Payment count frozen at 3 of 4</div></div></div>
-      <div class="ir"><div class="ii iigr">💰</div><div><div class="ill">No charges during pause</div><div class="ils">Next billing on resume date</div></div></div>
-      <div class="ir"><div class="ii iib">↺</div><div><div class="ill">Resume early anytime</div></div></div>
-    </div>
-  </div>
-  ${btn('Confirm pause','btn-p',"go('PAUSE_D')")}
-  ${btn('Cancel','btn-g','goBack()')}
-  </div>`;
-},
-
-PAUSE_D(el){
-  el.innerHTML = `<div class="scs" style="animation:fs .18s ease">
-    <div class="scs-ic" style="background:#dcfce7">⏸</div>
-    <div class="scs-t">Subscription paused</div>
-    <div class="scs-s">Paused until <strong>15 May 2026</strong>.<br>Reminder sent 7 days before it resumes.</div>
-    <div class="card" style="width:100%;text-align:left;margin-bottom:14px">
-      <div class="cr"><span class="ck">Status</span>${bdg('⏸ Paused','bp')}</div>
-      <div class="cr"><span class="ck">Resumes</span><span class="cv">15 May 2026</span></div>
-      <div class="cr"><span class="ck">Next billing</span><span class="cv">€89.00 · 15 May</span></div>
-      <div class="cr"><span class="ck">Email sent</span><span style="font-size:11px;color:var(--g);font-weight:600">Confirmation ✓</span></div>
-    </div>
-    ${btn('View subscription','btn-p',"go('PAUSED')")}
-  </div>`;
-},
-
-PAUSED(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div style="margin:11px 14px 0" class="card" style="background:var(--pul);border-color:var(--pub)">
-    <div class="cb" style="background:var(--pul)">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-        <div><div style="font-size:10px;font-weight:700;color:var(--pu);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">Paused</div>
-        <div style="font-size:17px;font-weight:800;color:var(--t1)">Balance Oil+</div></div>
-        ${bdg('⏸ Paused','bp')}
-      </div>
-      <div class="sg">
-        <div class="sbox" style="background:rgba(255,255,255,.6)"><div class="sl">Resumes</div><div class="sv">15 May</div><div class="ss">2026</div></div>
-        <div class="sbox" style="background:rgba(255,255,255,.6)"><div class="sl">Next charge</div><div class="sv">€89.00</div><div class="ss">On resume</div></div>
-      </div>
-    </div>
-  </div>
-  <div style="margin:9px 14px 0" class="card cb">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:7px">
-      <div style="font-size:12px;font-weight:700">120-Day Progress</div>
-      <span style="font-size:10px;font-weight:700;color:var(--g)">Preserved ✓</span>
-    </div>
-    <div class="pss"><div class="ps psd"></div><div class="ps psd"></div><div class="ps psd"></div><div class="ps psf"></div></div>
-    <div style="font-size:10px;color:var(--t3);margin-top:5px">Payment count frozen at 3 — resumes after billing</div>
-  </div>
-  <div class="sh"><span class="sht">Options</span></div>
-  <div style="margin:0 14px">
-    ${btn('Resume now','btn-p',"go('ACTIVE')")}
-    ${btn('Change resume date','btn-s','')}
-    ${btn('Cancel subscription','btn-d',"go('CANCEL_D')")}
-  </div></div>`;
-},
-
-SKIP_C(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div style="margin-bottom:16px"><div style="font-size:30px;margin-bottom:8px">📦</div>
-    <div style="font-size:14px;font-weight:700">Skip delivery on 17 Apr 2026</div>
-    <div style="font-size:12px;color:var(--t2);margin-top:3px">Balance Oil+ · SE PostNord</div>
-  </div>
-  <div class="card" style="margin-bottom:11px">
-    <div class="cr"><span class="ck">Current date</span><span class="cv">17 Apr 2026</span></div>
-    <div class="cr"><span class="ck">After skipping</span><span class="cv">17 May 2026</span></div>
-    <div class="cr"><span class="ck">Billing 15 Apr</span><span class="cv">Unchanged · €89.00</span></div>
-  </div>
-  <div class="note">Skipping a delivery does not affect billing or your 120-day program.</div>
-  ${btn('Confirm — skip this delivery','btn-p',"go('SKIP_D')")}
-  ${btn('Keep my delivery','btn-g','goBack()')}
-  </div>`;
-},
-
-SKIP_D(el){
-  el.innerHTML = `<div class="scs" style="animation:fs .18s ease">
-    <div class="scs-ic" style="background:#dcfce7">✓</div>
-    <div class="scs-t">Delivery skipped</div>
-    <div class="scs-s">17 Apr delivery skipped.<br>Next delivery: <strong>17 May 2026</strong></div>
-    ${btn('Back to subscription','btn-p',"go('ACTIVE')")}
-  </div>`;
-},
-
-// ── CANCEL DECISION ──────────────────────────────────
-CANCEL_D(el){
-  const reasons = [
-    {k:'cost',l:'Too expensive',s:'We can offer a pause instead',o:'Pause 1 month — no charge'},
-    {k:'unused',l:'Not using it enough',s:'Skip next 2 deliveries',o:'Skip 2 deliveries'},
-    {k:'moving',l:'Moving address',s:'Update delivery address',o:'Update address'},
-    {k:'other',l:'Something else',s:'Tell us more',o:'Pause instead'},
-  ];
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">Help us understand why — you might qualify for a better option.</p>
-  <div class="card" style="margin-bottom:11px">
-    ${reasons.map(r=>`<div class="ri" id="ri_${r.k}" onclick="selCR('${r.k}','${r.o}')">
-      <div><div class="ril">${r.l}</div><div class="ris">${r.s}</div></div>
-      <div class="radio" id="rr_${r.k}"></div>
-    </div>`).join('')}
-  </div>
-  <div id="offer-blk" style="display:none;margin-bottom:11px"></div>
-  <div class="dvd"></div>
-  ${btn('Continue with cancellation','btn-d',"go('CANCEL_CF')")}
-  ${btn('Keep my subscription','btn-g',"go('ACTIVE')")}
-  </div>`;
-},
-
-CANCEL_CF(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="alert al-a" style="margin-bottom:14px">
-    <div class="al-ic">⚠️</div>
-    <div><div class="al-tx">30-day notice period applies</div><div class="al-sb">Subscription continues until 17 Apr 2026. One final charge may occur.</div></div>
-  </div>
-  <div class="card" style="margin-bottom:11px">
-    <div class="cr"><span class="ck">Requested</span><span class="cv">18 Mar 2026</span></div>
-    <div class="cr"><span class="ck">Ends on</span><span style="font-size:12px;font-weight:700;color:var(--or)">17 Apr 2026</span></div>
-    <div class="cr"><span class="ck">Final charge</span><span class="cv">€89.00 on 15 Apr</span></div>
-    <div class="cr"><span class="ck">Final delivery</span><span class="cv">~17 Apr 2026</span></div>
-  </div>
-  <div class="note">You can withdraw this cancellation any time before 17 Apr by tapping "Keep my subscription."</div>
-  ${btn('Confirm cancellation','btn-d',"go('CANCEL_N')")}
-  ${btn('Keep my subscription','btn-s',"go('ACTIVE')")}
-  </div>`;
-},
-
-CANCEL_N(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div style="margin:11px 14px 0" class="card">
-    <div class="cb" style="background:var(--orl)">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-        <div><div style="font-size:10px;font-weight:700;color:var(--or);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">Cancellation In Progress</div>
-        <div style="font-size:17px;font-weight:800">Ending 17 Apr 2026</div></div>
-        ${bdg('⏳ Ending','bo')}
-      </div>
-      <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-        <span style="font-size:11px;color:var(--t2);font-weight:500">Notice period</span>
-        <span style="font-size:11px;font-weight:700;color:var(--or)">24 days left</span>
-      </div>
-      <div class="pt2"><div class="pf" style="width:20%;background:var(--or)"></div></div>
-      <div style="font-size:10px;color:var(--t3);margin-top:5px">6 of 30 days elapsed</div>
-    </div>
-  </div>
-  <div style="margin:9px 14px 0" class="card">
-    <div class="cr"><span class="ck">Final delivery</span><span class="cv">~17 Apr 2026</span></div>
-    <div class="cr"><span class="ck">Last charge</span><span class="cv">€89.00 on 15 Apr</span></div>
-    <div class="cr"><span class="ck">Confirmation</span><span style="font-size:10px;color:var(--g);font-weight:600">Sent 18 Mar ✓</span></div>
-  </div>
-  <div class="sh"><span class="sht">Changed your mind?</span></div>
-  <div style="margin:0 14px">
-    ${btn('Keep my subscription','btn-p',"go('ACTIVE')")}
-    ${btn('View details','btn-g',"go('CANCELLED')")}
-  </div></div>`;
-},
-
-CANCELLED(el){
-  el.innerHTML = `<div class="scs" style="animation:fs .18s ease">
-    <div class="scs-ic" style="background:var(--sf3);color:var(--t3);font-size:22px">○</div>
-    <div class="scs-t">Subscription cancelled</div>
-    <div class="scs-s">Ended 17 Apr 2026.<br>No further charges.</div>
-    <div class="card" style="width:100%;text-align:left;margin-bottom:14px">
-      <div class="cr"><span class="ck">Final delivery</span><span class="cv">Delivered 17 Apr</span></div>
-      <div class="cr"><span class="ck">Last charge</span><span class="cv">€89.00</span></div>
-      <div class="cr"><span class="ck">Status</span>${bdg('Closed','bgr')}</div>
-    </div>
-    ${btn('Reactivate subscription','btn-p',"go('ACTIVE')")}
-    ${btn('Return a product','btn-s',"go('RH')")}
-  </div>`;
-},
-
-// ── TEST2 ────────────────────────────────────────────
-TEST2(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div style="margin:11px 14px 0" class="card">
-    <div class="cb" style="background:var(--aml)">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
-        <div><div style="font-size:10px;font-weight:700;color:var(--am);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px">★ 120-Day Program</div>
-        <div style="font-size:17px;font-weight:800">Test 2 Active</div></div>
-        ${bdg('★ Active','ba')}
-      </div>
-      <div class="pt2" style="margin-bottom:6px"><div class="pf" style="width:35%;background:var(--am)"></div></div>
-      <div style="display:flex;justify-content:space-between">
-        <span style="font-size:10px;color:var(--t2)">Day 42 of 120</span>
-        <span style="font-size:10px;font-weight:700;color:var(--am)">78 days remaining</span>
-      </div>
-    </div>
-  </div>
-  <div style="margin:9px 14px 0" class="card">
-    <div class="cr"><span class="ck">Next billing</span><span class="cv">15 Apr 2026 · €89.00</span></div>
-    <div class="cr"><span class="ck">Next delivery</span><span class="cv">17 Apr 2026</span></div>
-    <div class="cr"><span class="ck">Program unlocked</span><span class="cv">5 Feb 2026</span></div>
-  </div>
-  <div class="sh"><span class="sht">Manage</span></div>
-  <div style="margin:0 14px">
-    ${btn('Pause subscription','btn-p',"go('PAUSE_C')")}
-    ${btn('Skip delivery','btn-s',"go('SKIP_C')")}
-    ${btn('Cancel subscription','btn-d',"go('TEST2_C')")}
-  </div></div>`;
-},
-
-TEST2_C(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="alert al-a" style="margin-bottom:12px">
-    <div class="al-ic">⚠️</div>
-    <div><div class="al-tx">You're in your 120-Day Program</div><div class="al-sb">Day 42 of 120. Cancelling ends Test 2 access on 17 Apr 2026.</div></div>
-  </div>
-  <div class="card cb" style="margin-bottom:11px">
-    <div style="font-size:12px;font-weight:700;margin-bottom:9px">Better option: Pause instead</div>
-    <div class="il">
-      <div class="ir"><div class="ii iig">✓</div><div><div class="ill">Preserves your Test 2 progress</div><div class="ils">120-day clock pauses with subscription</div></div></div>
-      <div class="ir"><div class="ii iig">✓</div><div><div class="ill">No charges while paused</div></div></div>
-    </div>
-    <div style="margin-top:11px">${btn('Pause instead','btn-p',"go('PAUSE_C')")}</div>
-  </div>
-  ${btn('Continue with cancellation','btn-d',"go('CANCEL_CF')")}
-  </div>`;
-},
-
-// ── BI-MONTHLY ───────────────────────────────────────
-BIMO(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div class="hero">
-    <div style="position:absolute;top:14px;right:14px">${bdg('<span class="dot-s"></span> Active','bg')}</div>
-    <div class="hey">Bi-Monthly Plan</div>
-    <div class="hpd">Balance Oil+</div>
-    <div class="hgr">
-      <div><div class="hgl">Billing</div><div class="hgv">Monthly</div><div class="hgs">1st of each month</div></div>
-      <div><div class="hgl">Delivery</div><div class="hgv">Every 2 mo</div><div class="hgs">Odd payments</div></div>
-    </div>
-  </div>
-  <div class="sh"><span class="sht">Upcoming Cycle</span></div>
-  <div class="card" style="margin:0 14px">
-    ${[{p:5,d:'1 Apr 2026',del:true},{p:6,d:'1 May 2026',del:false},{p:7,d:'1 Jun 2026',del:true}].map(m=>`
-    <div class="cy">
-      <div class="cy-n">P${m.p}</div>
-      <div style="flex:1"><div class="cy-d">${m.d}</div><div class="cy-s">€89.00</div></div>
-      ${m.del?bdg('📦 Delivery','bg'):bdg('No delivery','bgr')}
-    </div>`).join('')}
-  </div>
-  <div class="sh"><span class="sht">Manage</span></div>
-  <div style="margin:0 14px">
-    ${btn('Pause subscription','btn-p',"go('PAUSE_C')")}
-    ${btn('Cancel subscription','btn-d',"go('CANCEL_D')")}
-  </div></div>`;
-},
-
-// ── WITHDRAWAL ELIGIBLE ──────────────────────────────
-WK(el){
-  el.innerHTML = `<div style="animation:fs .18s ease">
-  <div style="margin:11px 14px 0" class="card">
-    <div class="cb" style="background:var(--bll)">
-      <div style="font-size:10px;font-weight:700;color:var(--bl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px">30-Day Return Window</div>
-      <div style="font-size:17px;font-weight:800;margin-bottom:11px">Right of withdrawal open</div>
-      <div class="pt2" style="margin-bottom:5px"><div class="pf" style="width:53%;background:var(--bl)"></div></div>
-      <div style="display:flex;justify-content:space-between">
-        <span style="font-size:10px;color:var(--t2)">Day 16 of 30</span>
-        <span style="font-size:10px;font-weight:700;color:var(--bl)">14 days remaining</span>
-      </div>
-    </div>
-  </div>
-  <div style="margin:9px 14px 0" class="card">
-    <div class="il cb">
-      <div class="ir"><div class="ii iib">↩</div><div><div class="ill">Return initial kit for refund</div><div class="ils">€89.00 returned once received by warehouse</div></div></div>
-      <div class="ir"><div class="ii iigr">📌</div><div><div class="ill">Initial kit only</div><div class="ils">Opened items deducted from refund</div></div></div>
-      <div class="ir"><div class="ii iir">⚠</div><div><div class="ill">Subscription paused on confirmation</div></div></div>
-    </div>
-  </div>
-  <div style="margin:0 14px">
-    ${btn('Start return process','btn-p',"go('RH')")}
-    ${btn('Keep subscription','btn-s',"go('ACTIVE')")}
-  </div></div>`;
-},
-
-WP(el){
-  const steps=[{l:'Return initiated',d:'18 Mar 2026',s:'dn'},{l:'Label sent to email',d:'18 Mar 2026',s:'dn'},{l:'In transit to warehouse',d:'Expected 21 Mar',s:'ac'},{l:'Warehouse confirms receipt',d:'Pending',s:''},{l:'Refund processed',d:'Pending',s:''}];
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="card" style="background:var(--bll);border-color:var(--blb);margin-bottom:10px">
-    <div class="cb">
-      <div style="font-size:10px;font-weight:700;color:var(--bl);letter-spacing:.08em;text-transform:uppercase;margin-bottom:11px">Return Tracker</div>
-      ${steps.map((s,i)=>`<div class="tls ${!s.s?'tl-dim':''}">
-        <div style="display:flex;flex-direction:column;align-items:center">
-          <div class="tl-d ${s.s}"></div>
-          ${i<steps.length-1?`<div class="tl-l ${s.s==='dn'?'dn':''}"></div>`:''}
-        </div>
-        <div class="tl-b"><div class="tl-lb">${s.l}</div><div class="tl-sb">${s.d}</div></div>
-      </div>`).join('')}
-    </div>
-  </div>
-  <div class="alert al-b" style="margin-bottom:10px">
-    <div class="al-ic">💰</div>
-    <div><div class="al-tx">Refund of €89.00 pending</div><div class="al-sb">Issued once warehouse confirms receipt.</div></div>
-  </div>
-  ${btn('Contact support','btn-g','')}
-  </div>`;
-},
-
-// ── UNCOLLECTED ──────────────────────────────────────
-UNC(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="alert al-r" style="margin-bottom:14px">
-    <div class="al-ic">📭</div>
-    <div><div class="al-tx">Package could not be delivered</div><div class="al-sb">17 Mar delivery of Balance Oil+ not collected. Returns to sender 23 Mar.</div></div>
-  </div>
-  <div class="card" style="margin-bottom:11px">
-    <div class="cr"><span class="ck">Carrier</span><span class="cv">DHL · DHL-8821049</span></div>
-    <div class="cr"><span class="ck">Return to sender</span><span style="font-size:12px;font-weight:700;color:var(--rd)">23 Mar 2026</span></div>
-  </div>
-  <div class="gap-card">
-    <div class="gap-card-title">⚠ Operational Gap</div>
-    <div class="gap-card-text">Uncollected packages are not automatically linked to the withdrawal flow. Customer must manually contact support to initiate return even though the product was never accepted.</div>
-  </div>
-  <div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--t3);margin-bottom:8px">How to proceed?</div>
-  ${btn('Redeliver to same address','btn-p',"go('ACTIVE')")}
-  ${btn('Update address + redeliver','btn-s','')}
-  ${btn('Initiate withdrawal instead','btn-s',"go('RH')")}
-  ${btn('Cancel subscription','btn-d',"go('CANCEL_D')")}
-  </div>`;
-},
-
-// ── PAYMENT FAILED ───────────────────────────────────
-PF(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="alert al-r" style="margin-bottom:14px">
-    <div class="al-ic">💳</div>
-    <div><div class="al-tx">Payment of €89.00 failed</div><div class="al-sb">15 Mar 2026 · Visa ••4829. Delivery held.</div></div>
-  </div>
-  <div class="card cb" style="margin-bottom:11px">
-    <div style="display:flex;justify-content:space-between;margin-bottom:5px">
-      <span style="font-size:11px;color:var(--t2);font-weight:500">Grace period</span>
-      <span style="font-size:11px;font-weight:700;color:var(--rd)">4 days left</span>
-    </div>
-    <div class="pt2" style="margin-bottom:7px"><div class="pf" style="width:43%;background:var(--rd)"></div></div>
-    <div style="font-size:10px;color:var(--t3)">Day 3 of 7 · Suspends if unpaid</div>
-  </div>
-  ${btn('Update payment method','btn-p',"go('ACTIVE')")}
-  ${btn('Retry with current card','btn-s','')}
-  ${btn('Contact support','btn-g','')}
-  </div>`;
-},
-
-// ════════════════════════════════════════════════════
-// RETURNS & COMPLAINTS
-// ════════════════════════════════════════════════════
-
-RH(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:16px">Select the type of case. The rules and process differ significantly.</p>
-  <div class="rtype" onclick="go('WD_INFO')">
-    <div class="rtype-ic" style="background:var(--bll)">↩</div>
-    <div style="flex:1">
-      <div class="rtype-t">Withdrawal (Ångerrätt)</div>
-      <div class="rtype-s">Changed your mind. Applies within <strong>30 days</strong> of receiving your order. Opened items deducted from refund.</div>
-      <span class="rtype-tag" style="background:var(--bll);color:var(--bl)">≤ 30 days · Partial returns allowed</span>
-    </div>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" style="flex-shrink:0;margin-top:4px"><path d="M1 1l3 3.5-3 3.5" stroke="#d1d5db" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="rtype" onclick="go('CO_S')">
-    <div class="rtype-ic" style="background:var(--rdl)">🔍</div>
-    <div style="flex:1">
-      <div class="rtype-t">Complaint (Reklamation)</div>
-      <div class="rtype-s">Product appears defective, damaged, or abnormal. Opened and unopened both accepted.</div>
-      <span class="rtype-tag" style="background:var(--rdl);color:var(--rd)">Defective · Opened or unopened</span>
-    </div>
-    <svg width="5" height="9" viewBox="0 0 5 9" fill="none" style="flex-shrink:0;margin-top:4px"><path d="M1 1l3 3.5-3 3.5" stroke="#d1d5db" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </div>
-  <div class="gap-card" style="margin-top:4px">
-    <div class="gap-card-title">⚠ Real-World Constraint</div>
-    <div class="gap-card-text">UI states 30 days. Contract may reference 14 days. Support may allow exceptions. No single source of truth in current system.</div>
-  </div>
-  </div>`;
-},
-
-// ── WITHDRAWAL INFO (Right of Withdrawal communication) ──
-WD_INFO(el){
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">Please read this carefully before proceeding.</p>
-
-  <div class="wd-info-box">
-    <div class="wd-info-title">📋 Right of Withdrawal</div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text">You have <strong>30 days</strong> to change your mind from the day you received your order.</div></div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text"><strong>Unopened products</strong> — you'll receive a full refund (shipping costs are not refunded).</div></div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text"><strong>Opened products</strong> — the retail price of opened items will be deducted from your refund. You can still return any remaining unopened products.</div></div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text"><strong>Your subscription will be paused immediately</strong> so no further charges are made while your return is processed.</div></div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text">Our support team will send you a <strong>prepaid return label</strong> by email.</div></div>
-    <div class="wd-info-row"><div class="wd-dot"></div><div class="wd-info-text">Return deadline: <strong>24 Mar 2026</strong></div></div>
-  </div>
-
-  <div class="gap-card">
-    <div class="gap-card-title">⚠ System vs. Reality</div>
-    <div class="gap-card-text">
-      <strong>"Prepaid return label"</strong> — in reality, labels are created manually by support and sent via email. No automation. Delay of 1–3 business days possible.<br><br>
-      <strong>"Subscription paused immediately"</strong> — assumed behavior, but not confirmed by current system logic. Risk of extra charge if pause is not triggered before next billing date.<br><br>
-      <strong>"Shipping costs not refunded"</strong> — support may make exceptions. Policy inconsistent across cases.
-    </div>
-  </div>
-
-  <div class="risk-card">
-    <div class="risk-card-title">⚡ User Risk</div>
-    <div class="risk-card-text">If the return label is delayed by more than 1–2 days and the billing date passes before the subscription is paused, the customer will be charged again — creating a dispute and trust issue.</div>
-  </div>
-
-  ${btn('I understand — select items to return','btn-p',"go('WD_S')")}
-  ${btn('Cancel','btn-g','goBack()')}
-  </div>`;
-},
-
-// ── WITHDRAWAL ITEM SELECT ───────────────────────────
-WD_S(el){
-  ORDERS.forEach(o=>{ if(selItems[o.id]===undefined){ selItems[o.id]=false; itemConds[o.id]=null; } });
-  el.innerHTML = `<div style="animation:fs .18s ease;padding-bottom:24px">
-  <div class="alert al-b" style="margin:11px 14px 0">
-    <div class="al-ic">📅</div>
-    <div><div class="al-tx">Order #ZIN-20260310 · 10 Mar 2026</div><div class="al-sb">Return window closes <strong>24 Mar 2026</strong> — 4 days remaining</div></div>
-  </div>
-  <div class="sh"><span class="sht">Select items to return</span></div>
-  <div class="card" style="margin:0 14px" id="wd-item-list">
-    ${ORDERS.map(o=>wdRow(o)).join('')}
-  </div>
-  <div id="wd-warn-block" style="margin:9px 14px 0;display:none" class="risk-card">
-    <div class="risk-card-title">⚡ Opened items — refund adjusted</div>
-    <div class="risk-card-text" id="wd-warn-text"></div>
-  </div>
-  <div style="margin:11px 14px 0">
-    ${btn('Continue to summary','btn-p','wdProceed()')}
-    ${btn('Back','btn-g','goBack()')}
-  </div>
-  </div>`;
-},
-
-// ── WITHDRAWAL SUMMARY ───────────────────────────────
-WD_SUM(el){
-  const unopened = ORDERS.filter(o=>selItems[o.id]&&itemConds[o.id]==='unopened');
-  const opened   = ORDERS.filter(o=>selItems[o.id]&&itemConds[o.id]==='opened');
-  const fullRef  = unopened.reduce((a,o)=>a+o.p,0);
-  const deduct   = opened.reduce((a,o)=>a+o.p,0);
-  const totalRef = fullRef - deduct;
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <div class="sh" style="padding:0 0 8px"><span class="sht">Items being returned</span></div>
-  <div class="card" style="margin-bottom:11px">
-    ${[...unopened,...opened].map(o=>`
-    <div class="oi">
-      <div class="oi-img">${o.e}</div>
-      <div style="flex:1"><div class="oi-n">${o.n}</div>
-        <div class="oi-s">${o.q} · ${itemConds[o.id]==='opened'?'<span style="color:var(--or);font-weight:700">Opened — deducted</span>':'<span style="color:var(--g);font-weight:700">Unopened</span>'}</div>
-      </div>
-      <div class="oi-p ${itemConds[o.id]==='opened'?'':''}">€${o.p.toFixed(2)}</div>
-    </div>`).join('')}
-    <div class="refund-row" style="background:var(--sf2)">
-      <span style="font-size:11px;font-weight:700;color:var(--t1)">Full refund value</span>
-      <span style="font-size:12px;font-weight:700">€${fullRef.toFixed(2)}</span>
-    </div>
-    ${deduct>0?`<div class="refund-row"><span class="refund-k">Opened items deducted</span><span class="refund-v neg">−€${deduct.toFixed(2)}</span></div>`:''}
-    <div class="refund-row" style="background:var(--sf2)">
-      <span style="font-size:12px;font-weight:800;color:var(--t1)">Your refund</span>
-      <span style="font-size:15px;font-weight:800;color:var(--g)">€${totalRef.toFixed(2)}</span>
-    </div>
-  </div>
-
-  ${deduct>0?`<div class="amb-flag">
-    <div class="amb-flag-title">ℹ Opened item policy</div>
-    <div class="amb-flag-text">The retail price of opened items is deducted. This is stated in policy but the exact calculation may vary per support agent. Recommend requesting clarification if unsure.</div>
-  </div>`:''}
-
-  <div class="sh" style="padding:0 0 8px"><span class="sht">Return instructions</span></div>
-  <div class="card" style="margin-bottom:11px">
-    <div class="il cb">
-      <div class="ir"><div class="ii iigr">📦</div><div><div class="ill">Pack in original packaging if possible</div></div></div>
-      <div class="ir"><div class="ii iib">📍</div><div><div class="ill">Zinzino Returns, Lilla Bommen 1, 411 04 Gothenburg, Sweden</div></div></div>
-      <div class="ir"><div class="ii iib">🚚</div><div><div class="ill">Prepaid return label</div><div class="ils">Sent by support via email — see below</div></div></div>
-    </div>
-  </div>
-
-  <div class="gap-card">
-    <div class="gap-card-title">⚠ Manual Label Process</div>
-    <div class="gap-card-text">
-      No automated label generation. After you confirm, a support agent will manually create and email the label. Expected delay: 1–3 business days.
-      <br><br>
-      <strong>Country note:</strong> In some countries, no prepaid label is available. Customer pays return shipping and is reimbursed later — timeline unclear.
-    </div>
-  </div>
-
-  ${btn('Confirm return','btn-p',"go('WD_R')")}
-  ${btn('Back','btn-g','goBack()')}
-  </div>`;
-},
-
-// ── WITHDRAWAL REASON ────────────────────────────────
-WD_R(el){
-  const opts=['I changed my mind','I will not start using the product','Price is too high','Delivery was too slow','Other'];
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">Optional — helps us improve. You can skip this step.</p>
-  <div class="card" style="margin-bottom:11px">
-    ${opts.map((o,i)=>`<div class="ri" id="wdr${i}" onclick="selWR(${i})">
-      <div class="ril">${o}</div><div class="radio" id="wdrr${i}"></div>
-    </div>`).join('')}
-  </div>
-  <div id="wd-other" style="display:none;margin-bottom:11px"><textarea placeholder="Tell us more (optional)..."></textarea></div>
-  ${btn('Submit & confirm return','btn-p',"go('WD_CF')")}
-  ${btn('Skip — continue without feedback','btn-g',"go('WD_CF')")}
-  </div>`;
-},
-
-// ── WITHDRAWAL CONFIRMED ─────────────────────────────
-WD_CF(el){
-  el.innerHTML = `<div class="scs" style="animation:fs .18s ease">
-    <div class="scs-ic" style="background:#dcfce7">✓</div>
-    <div class="scs-t">Return confirmed</div>
-    <div class="scs-s">Your withdrawal has been registered. Pack your items and send them back using the label from our support team.</div>
-
-    <div class="card" style="width:100%;text-align:left;margin-bottom:11px">
-      <div class="cr"><span class="ck">Case ID</span><span class="cv">WD-2026-04821</span></div>
-      <div class="cr"><span class="ck">Refund amount</span><span style="font-size:12px;font-weight:700;color:var(--g)">€89.00</span></div>
-      <div class="cr"><span class="ck">Return by</span><span style="font-size:12px;font-weight:700;color:var(--or)">24 Mar 2026</span></div>
-      <div class="cr"><span class="ck">Subscription</span><span style="font-size:11px;font-weight:700;color:var(--pu)">⏸ Paused (assumed)</span></div>
-      <div class="cr"><span class="ck">Return label</span><span style="font-size:11px;font-weight:700;color:var(--am)">⏳ Being prepared by support</span></div>
-    </div>
-
-    <div class="gap-card" style="width:100%;text-align:left">
-      <div class="gap-card-title">⚠ What happens next — Manual Flow</div>
-      <div style="margin-top:8px">
-        ${[
-          {t:'Support creates return label',s:'Manual — 1–3 business days'},
-          {t:'Label sent to your email',s:'No in-app notification'},
-          {t:'You return the package',s:'No tracking in system'},
-          {t:'Warehouse confirms receipt',s:'No automated check — manual'},
-          {t:'Refund processed',s:'Timeline: unclear, contract says 14 days'},
-        ].map((s,i)=>`<div class="manual-step">
-          <div class="manual-num">${i+1}</div>
-          <div><div class="manual-t">${s.t}</div><div class="manual-s">${s.s} ${s.i? gapTag(s.i):''}</div></div>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <div class="risk-card" style="width:100%;text-align:left;margin-top:9px">
-      <div class="risk-card-title">⚡ No Return Tracking</div>
-      <div class="risk-card-text">System has no way to verify that the customer actually returns the product. No reminders sent. No enforcement mechanism. Risk of fraud and of customers never receiving their refund due to no follow-up.</div>
-    </div>
-
-    <div class="dlc" style="width:100%">
-      <div style="width:38px;height:38px;background:var(--bl);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏷</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--bl)">Return label (sent by support)</div><div style="font-size:10px;color:var(--t2);margin-top:1px">Check your email · DHL · Prepaid</div></div>
-    </div>
-
-    <div style="width:100%">${btn('Back to account','btn-p',"go('HUB')")}</div>
-  </div>`;
-},
-
-// ── COMPLAINT SELECT ─────────────────────────────────
-CO_S(el){
-  ORDERS.forEach(o=>{ selItems[o.id]=false; itemConds[o.id]=null; });
-  el.innerHTML = `<div style="animation:fs .18s ease;padding-bottom:24px">
-  <div class="alert al-a" style="margin:11px 14px 0">
-    <div class="al-ic">ℹ️</div>
-    <div><div class="al-tx">Opened and unopened both accepted</div><div class="al-sb">Use this for defective, damaged, or abnormal products.</div></div>
-  </div>
-  <div class="sh"><span class="sht">Order #ZIN-20260310</span></div>
-  <div class="card" style="margin:0 14px" id="co-list">
-    ${ORDERS.map(o=>`<div class="oi" style="cursor:pointer" onclick="toggleCO(${o.id})">
-      <div class="oi-img">${o.e}</div>
-      <div style="flex:1"><div class="oi-n">${o.n}</div><div class="oi-s">${o.q}</div></div>
-      <div class="oi-p" style="margin-right:10px">€${o.p.toFixed(2)}</div>
-      <div class="chk ${selItems[o.id]?'on':''}" id="coc${o.id}"></div>
-    </div>`).join('')}
-  </div>
-  <div style="margin:11px 14px 0">
-    ${btn('Continue to complaint details','btn-p','coProceed()')}
-    ${btn('Back','btn-g','goBack()')}
-  </div>
-  </div>`;
-},
-
-// ── COMPLAINT DETAILS ────────────────────────────────
-CO_D(el){
-  const picked = ORDERS.filter(o=>selItems[o.id]);
-  el.innerHTML = `<div class="pad pt" style="animation:fs .18s ease">
-  <p style="font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:14px">For each item, describe the issue as specifically as possible.</p>
-  ${picked.map(o=>`
-  <div class="sh" style="padding:12px 0 6px"><span class="sht" style="font-size:11px;color:var(--t1);text-transform:none;letter-spacing:0;font-weight:700">${o.e} ${o.n}</span></div>
-  <div class="card cb" style="margin-bottom:10px">
-    <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Condition</div>
-    <div class="cc-row">
-      <div class="cc" id="cc${o.id}u" onclick="setCCond(${o.id},'u')">Unopened</div>
-      <div class="cc" id="cc${o.id}o" onclick="setCCond(${o.id},'o')">Opened</div>
-    </div>
-    <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-top:10px;margin-bottom:2px">Issue</div>
-    <select id="iss${o.id}" onchange="setIss(${o.id},this.value)">
-      <option value="">Select issue...</option>
-      <option value="taste">Tastes strange or off</option>
-      <option value="smell">Smells bad / rancid</option>
-      <option value="damaged">Packaging damaged</option>
-      <option value="wrong">Wrong product delivered</option>
-      <option value="other">Other</option>
-    </select>
-    <div id="oth${o.id}" style="display:none"><textarea placeholder="Describe the issue in detail..."></textarea></div>
-  </div>`).join('')}
-  <div class="alert al-a" style="margin-bottom:11px">
-    <div class="al-ic">⏳</div>
-    <div><div class="al-tx">What happens next</div><div class="al-sb">Complaint reviewed within 3–5 business days. We may request the product back for analysis. Outcome: refund or replacement per EU consumer law.</div></div>
-  </div>
-  ${btn('Submit complaint','btn-p',"go('CO_CF')")}
-  ${btn('Back','btn-g','goBack()')}
-  </div>`;
-},
-
-// ── COMPLAINT CONFIRMED ──────────────────────────────
-CO_CF(el){
-  el.innerHTML = `<div class="scs" style="animation:fs .18s ease">
-    <div class="scs-ic" style="background:var(--aml);font-size:22px">🔍</div>
-    <div class="scs-t">Complaint registered</div>
-    <div class="scs-s">We've received your complaint and will review it within 3–5 business days.</div>
-
-    <div class="card" style="width:100%;text-align:left;margin-bottom:11px">
-      <div class="cr"><span class="ck">Case ID</span><span class="cv">RK-2026-00934</span></div>
-      <div class="cr"><span class="ck">Status</span>${bdg('Under review','ba')}</div>
-      <div class="cr"><span class="ck">Review by</span><span class="cv">23 Mar 2026</span></div>
-      <div class="cr"><span class="ck">Outcome</span><span class="cv">Refund or replacement</span></div>
-    </div>
-
-    <div class="gap-card" style="width:100%;text-align:left;margin-bottom:9px">
-      <div class="gap-card-title">⚠ Manual Review Process</div>
-      <div class="gap-card-text">Complaints are handled manually by support. No automated status updates. Customer receives no in-app updates — only email if support remembers to send one. No SLA enforcement in current system.</div>
-    </div>
-
-    <div class="risk-card" style="width:100%;text-align:left;margin-bottom:11px">
-      <div class="risk-card-title">⚡ Customer Risk</div>
-      <div class="risk-card-text">Customer has no visibility into complaint progress. No reminders, no timeline shown. High risk of customer frustration and repeat contacts to support.</div>
-    </div>
-
-    <div class="tl-section" style="width:100%;text-align:left;margin-bottom:11px">
-      ${[{l:'Complaint received',d:'18 Mar 2026',s:'dn'},{l:'Under review by support',d:'18–23 Mar',s:'ac'},{l:'Return requested (if needed)',d:'TBD',s:''},{l:'Refund or replacement issued',d:'TBD',s:''}].map((s,i,arr)=>`
-      <div class="tls ${!s.s?'tl-dim':''}">
-        <div style="display:flex;flex-direction:column;align-items:center">
-          <div class="tl-d ${s.s==='dn'?'dn':s.s==='ac'?'ac':''}"></div>
-          ${i<arr.length-1?`<div class="tl-l ${s.s==='dn'?'dn':''}"></div>`:''}
-        </div>
-        <div class="tl-b"><div class="tl-lb">${s.l}</div><div class="tl-sb">${s.d}</div></div>
-      </div>`).join('')}
-    </div>
-
-    <div class="dlc" style="width:100%">
-      <div style="width:38px;height:38px;background:var(--bl);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🏷</div>
-      <div style="flex:1"><div style="font-size:12px;font-weight:700;color:var(--bl)">Return label (if required)</div><div style="font-size:10px;color:var(--t2);margin-top:1px">Support will email it when needed</div></div>
-    </div>
-
-    <div style="width:100%;margin-top:4px">${btn('Back to account','btn-p',"go('HUB')")}</div>
-  </div>`;
-},
-
-}; // end SC
-
-// ══════════════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════════════
-function wdRow(o){
-  const cond = itemConds[o.id];
-  const sel  = selItems[o.id];
-  return `<div id="wdi${o.id}">
-    <div class="oi" style="cursor:pointer" onclick="toggleWD(${o.id})">
-      <div class="oi-img">${o.e}</div>
-      <div style="flex:1"><div class="oi-n">${o.n}</div><div class="oi-s">${o.q}</div></div>
-      <div class="oi-p" style="margin-right:10px">€${o.p.toFixed(2)}</div>
-      <div class="chk ${sel?'on':''}" id="wdchk${o.id}"></div>
-    </div>
-    ${sel?`
-    <div style="padding:0 14px 12px">
-      <div style="font-size:10px;font-weight:700;color:var(--t3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Condition of this item</div>
-      <div class="cc-row">
-        <div class="cc ${cond==='unopened'?'on':''}" id="wdcu${o.id}" onclick="setWDCond(${o.id},'unopened',event)">Unopened</div>
-        <div class="cc ${cond==='opened'?'on-r':''}" id="wdco${o.id}" onclick="setWDCond(${o.id},'opened',event)">Opened</div>
-      </div>
-      ${cond==='opened'?`<div class="blocked-notice">⚠ Opened item — retail price (€${o.p.toFixed(2)}) will be <strong>deducted from your refund</strong>. Product can still be returned.</div>`:''}
-    </div>`:''}
-  </div>`;
+function rL(){
+  const w=document.getElementById('ilist');if(!w)return;
+  const hdr=w.querySelector('[onclick="toggleWholeKit()"]');
+  w.innerHTML='';
+  if(hdr)w.appendChild(hdr);
+  ITEMS.forEach(o=>{const t=document.createElement('div');t.innerHTML=iRow(o);while(t.firstChild)w.appendChild(t.firstChild);});
+  const wc=document.getElementById('chk-whole');
+  if(wc)wc.className='chk '+(ITEMS.every(o=>sel[o.id])?'on':'');
 }
-
-function toggleWD(id){
-  selItems[id] = !selItems[id];
-  if(!selItems[id]) itemConds[id]=null;
-  rebuildWDList(); updateWDWarnings();
+function uW(){
+  const wb=document.getElementById('warnbox');if(!wb)return;
+  const op=ITEMS.filter(o=>sel[o.id]&&cond[o.id]==='o');
+  if(op.length){wb.style.display='block';const t=op.reduce((a,o)=>a+o.p,0);wb.textContent=`⚠ ${op.map(o=>o.n).join(', ')} marked as opened — €${t.toFixed(2)} will be deducted.`;}
+  else wb.style.display='none';
 }
-function setWDCond(id,c,e){
-  e.stopPropagation();
-  itemConds[id]=c;
-  rebuildWDList(); updateWDWarnings();
+function proceed(){
+  if(!ITEMS.some(o=>sel[o.id])){alert('Please select at least one item.');return;}
+  const nc=ITEMS.filter(o=>sel[o.id]&&!cond[o.id]);
+  if(nc.length){alert('Please mark the condition for: '+nc.map(o=>o.n).join(', '));return;}
+  go('WD_SUMMARY');
 }
-function rebuildWDList(){
-  const wrap = document.getElementById('wd-item-list');
-  if(wrap) wrap.innerHTML = ORDERS.map(o=>wdRow(o)).join('');
+function selR(i){
+  const rs=window._reasons||[];
+  for(let x=0;x<rs.length;x++){
+    const row=document.getElementById('r'+x),radio=document.getElementById('rr'+x),lbl=document.getElementById('rl'+x);
+    if(!row)continue;const active=x===i;
+    row.classList.toggle('on',active);
+    if(radio)radio.classList.toggle('on',active);
+    if(lbl)lbl.style.fontWeight=active?'700':'600';
+  }
+  const ow=document.getElementById('other-wrap');if(ow)ow.style.display=i===4?'block':'none';
+  const sb=document.getElementById('suggestion-block');if(!sb)return;
+  const r=rs[i];
+  if(r&&r.suggestion){
+    const s=r.suggestion;
+    sb.style.display='block';
+    sb.innerHTML=`<div class="suggest-card"><div style="font-size:14px;font-weight:800;color:var(--k-black);margin-bottom:5px">${s.title}</div><div style="font-size:12px;color:var(--k-gray4);line-height:1.55;margin-bottom:13px">${s.body}</div><button class="btn btn-outline" onclick="go('ORDER')" style="margin-bottom:0;font-size:13px;padding:12px 16px">${s.cta} →</button></div>`;
+  } else {sb.style.display='none';sb.innerHTML='';}
 }
-function updateWDWarnings(){
-  const wb = document.getElementById('wd-warn-block');
-  const wt = document.getElementById('wd-warn-text');
-  if(!wb||!wt) return;
-  const opened = ORDERS.filter(o=>selItems[o.id]&&itemConds[o.id]==='opened');
-  if(opened.length){
-    wb.style.display='block';
-    const tot = opened.reduce((a,o)=>a+o.p,0);
-    wt.textContent = `${opened.map(o=>o.n).join(', ')} — opened items. €${tot.toFixed(2)} will be deducted from your refund. These items can still be included in the return.`;
-  } else { wb.style.display='none'; }
+function toggleAcc(id){
+  const body=document.getElementById(id);
+  const arrow=document.getElementById(id+'-arrow');
+  if(!body)return;
+  const open=body.style.display==='block';
+  body.style.display=open?'none':'block';
+  if(arrow)arrow.style.transform=open?'':'rotate(180deg)';
 }
-function wdProceed(){
-  const anySelected = ORDERS.some(o=>selItems[o.id]);
-  if(!anySelected){ alert('Please select at least one item to return.'); return; }
-  const needsCond = ORDERS.filter(o=>selItems[o.id]&&!itemConds[o.id]);
-  if(needsCond.length){ alert(`Please select the condition for: ${needsCond.map(o=>o.n).join(', ')}`); return; }
-  go('WD_SUM');
-}
-function toggleCO(id){
-  selItems[id]=!selItems[id];
-  const c=document.getElementById('coc'+id);
-  if(c) c.className='chk '+(selItems[id]?'on':'');
-}
-function coProceed(){
-  if(!ORDERS.some(o=>selItems[o.id])){ alert('Please select at least one item.'); return; }
-  go('CO_D');
-}
-function setCCond(id,c){
-  document.getElementById('cc'+id+'u').className='cc '+(c==='u'?'on':'');
-  document.getElementById('cc'+id+'o').className='cc '+(c==='o'?'on':'');
-}
-function setIss(id,val){
-  const el=document.getElementById('oth'+id);
-  if(el) el.style.display=val==='other'?'block':'none';
-}
-function selP(i){
-  const d=['15 May','15 Jun','15 Jul'];
-  document.querySelectorAll('[id^="pc"]').forEach((c,idx)=>c.className='chip'+(idx===i?' on':''));
-  const pr=document.getElementById('pr'); if(pr) pr.textContent=d[i];
-}
-function selCR(key,offer){
-  document.querySelectorAll('[id^="ri_"]').forEach(el=>el.classList.remove('on'));
-  document.querySelectorAll('[id^="rr_"]').forEach(el=>el.classList.remove('on'));
-  document.getElementById('ri_'+key)?.classList.add('on');
-  document.getElementById('rr_'+key)?.classList.add('on');
-  const ob=document.getElementById('offer-blk');
-  if(ob){ ob.style.display='block'; ob.innerHTML=`<div class="alert al-g"><div class="al-ic">💡</div><div><div class="al-tx">Offer for you</div><div class="al-sb">${offer}</div></div></div><button class="btn btn-p" onclick="go('PAUSE_C')" style="margin-bottom:0">Accept this offer</button>`; }
-}
-function selWR(i){
-  document.querySelectorAll('[id^="wdr"]').forEach((el,idx)=>{ el.classList.toggle('on',idx===i); document.getElementById('wdrr'+idx)?.classList.toggle('on',idx===i); });
-  const ot=document.getElementById('wd-other'); if(ot) ot.style.display=i===4?'block':'none';
-}
-function tick(){
-  const n=new Date(), h=String(n.getHours()).padStart(2,'0'), m=String(n.getMinutes()).padStart(2,'0');
-  const c=document.getElementById('clk'); if(c) c.textContent=h+':'+m;
-}
-tick(); setInterval(tick,15000);
+function tick(){const n=new Date(),h=String(n.getHours()).padStart(2,'0'),m=String(n.getMinutes()).padStart(2,'0');const c=document.getElementById('clk');if(c)c.textContent=h+':'+m;}
+tick();setInterval(tick,15000);
 render();
 </script>
 </body>
