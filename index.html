@@ -7,70 +7,39 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;900&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
-  --bg: #EAEAEA;
-  --surface: #FFFFFF;
-  --surface-2: #F7F7F7;
-  --border: #E0E0E0;
-  --border-strong: #C8C8C8;
-  --text-primary: #111111;
-  --text-secondary: #666666;
-  --text-tertiary: #999999;
-  --red: #CC0000;
-  --red-bg: #FFF2F2;
-  --red-border: #F5C0C0;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 50px;
+  --bg: #EAEAEA; --surface: #FFFFFF; --surface-2: #F7F7F7;
+  --border: #E0E0E0; --border-strong: #C8C8C8;
+  --text-primary: #111111; --text-secondary: #666666; --text-tertiary: #999999;
+  --red: #CC0000; --red-bg: #FFF2F2; --red-border: #F5C0C0;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-pill: 50px;
 }
-
 html, body { min-height: 100%; background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text-primary); -webkit-font-smoothing: antialiased; }
-
 .proto-shell { min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 36px 16px 60px; }
-.proto-wordmark { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 24px; }
-
-.scenario-tabs { display: flex; background: #D8D8D8; border-radius: 12px; padding: 4px; gap: 3px; margin-bottom: 28px; }
-.scenario-tab { padding: 10px 24px; border-radius: 9px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; background: transparent; color: var(--text-tertiary); transition: all 0.18s; font-family: 'Inter', sans-serif; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
-.scenario-tab.active { background: var(--surface); color: var(--text-primary); box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
-.tab-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.tab-dot-green { background: #22C55E; }
-.tab-dot-red { background: #CC0000; }
-
+.proto-wordmark { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 28px; }
 .device-shell { width: 390px; border-radius: 50px; background: #1C1C1E; padding: 14px; box-shadow: 0 40px 100px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.16), inset 0 1px 0 rgba(255,255,255,0.07); }
 .device-inner { border-radius: 38px; overflow: hidden; background: var(--surface); }
 .device-frame { width: 362px; height: 772px; background: var(--surface); display: flex; flex-direction: column; overflow: hidden; }
-
-.scenario { display: none; }
-.scenario.active { display: block; }
-
 .status-bar { height: 50px; background: var(--surface); display: flex; align-items: flex-end; justify-content: space-between; padding: 0 24px 10px; flex-shrink: 0; }
 .status-time { font-size: 15px; font-weight: 700; color: var(--text-primary); }
 .status-icons { display: flex; gap: 6px; align-items: center; }
-
 .nav-bar { height: 50px; background: var(--surface); display: flex; align-items: center; padding: 0 16px; gap: 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .nav-back { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; }
 .nav-back:active { background: var(--surface-2); }
 .nav-title { font-size: 14px; font-weight: 600; color: var(--text-primary); flex: 1; }
-
 .progress-bar { height: 2px; background: var(--border); flex-shrink: 0; }
 .progress-fill { height: 100%; background: var(--text-primary); transition: width 0.3s ease; }
-
 .screen-content { flex: 1; overflow-y: auto; padding: 22px 18px 28px; display: flex; flex-direction: column; }
-
 .screen-headline { font-size: 24px; font-weight: 900; line-height: 1.15; letter-spacing: -0.4px; color: var(--text-primary); margin-bottom: 8px; }
 .screen-sub { font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 22px; }
 .section-label { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 10px; }
-
 .btn-primary { width: 100%; height: 50px; border-radius: var(--radius-pill); background: var(--text-primary); color: #FFF; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: opacity 0.15s; flex-shrink: 0; }
 .btn-primary:active { opacity: 0.8; }
 .btn-primary:disabled { background: var(--border-strong); cursor: not-allowed; }
 .btn-secondary { width: 100%; height: 50px; border-radius: var(--radius-pill); background: transparent; color: var(--text-primary); font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; border: 1.5px solid var(--border-strong); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .btn-secondary:active { background: var(--surface-2); }
 .btn-ghost { width: 100%; height: 42px; background: transparent; color: var(--text-secondary); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; }
-
-.option-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 22px; }
+.option-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 16px; }
 .option-item { display: flex; align-items: center; gap: 14px; padding: 15px 16px; background: var(--surface); cursor: pointer; border-bottom: 1px solid var(--border); transition: background 0.1s; -webkit-tap-highlight-color: transparent; }
 .option-item:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
 .option-item:last-child { border-bottom: none; border-radius: 0 0 var(--radius-md) var(--radius-md); }
@@ -82,8 +51,10 @@ html, body { min-height: 100%; background: var(--bg); font-family: 'Inter', sans
 .radio-outer.checked { border-color: var(--text-primary); }
 .radio-inner { width: 10px; height: 10px; border-radius: 50%; background: var(--text-primary); display: none; }
 .radio-outer.checked .radio-inner { display: block; }
-
-.product-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+.other-textarea { width: 100%; border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text-primary); background: var(--surface); resize: none; margin-bottom: 16px; line-height: 1.5; outline: none; }
+.other-textarea:focus { border-color: var(--border-strong); }
+.other-textarea::placeholder { color: var(--text-tertiary); }
+.product-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
 .product-card { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px; background: var(--surface); display: flex; align-items: center; gap: 12px; cursor: pointer; transition: border-color 0.15s; -webkit-tap-highlight-color: transparent; }
 .product-card.selected { border-color: var(--text-primary); }
 .product-card.disabled { opacity: 0.45; cursor: not-allowed; }
@@ -91,20 +62,17 @@ html, body { min-height: 100%; background: var(--bg); font-family: 'Inter', sans
 .product-info { flex: 1; min-width: 0; }
 .product-name { font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .product-qty { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
-.product-tag { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
-.tag-sealed { background: var(--surface-2); color: var(--text-tertiary); border: 1px solid var(--border); }
-.tag-opened { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
 .checkbox { width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--border-strong); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
 .checkbox.checked { border-color: var(--text-primary); background: var(--text-primary); }
-
+.opened-notice { border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 16px; background: var(--red-bg); border: 1.5px solid var(--red-border); }
+.opened-notice-title { font-size: 14px; font-weight: 700; color: var(--red); margin-bottom: 4px; display: flex; align-items: center; gap: 8px; }
+.opened-notice-body { font-size: 13px; color: var(--red); line-height: 1.5; opacity: 0.85; }
 .summary-card { border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 14px; }
 .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 14px; }
 .summary-row:first-child { border-radius: var(--radius-lg) var(--radius-lg) 0 0; }
 .summary-row:last-child { border-bottom: none; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
 .summary-label { color: var(--text-secondary); }
 .summary-value { font-weight: 600; color: var(--text-primary); }
-.summary-value.red { color: var(--red); }
-
 .alert { border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px; display: flex; gap: 10px; align-items: flex-start; }
 .alert-warning { background: #FFFBF0; border: 1px solid #EED88A; }
 .alert-info { background: var(--surface-2); border: 1px solid var(--border); }
@@ -112,21 +80,17 @@ html, body { min-height: 100%; background: var(--bg); font-family: 'Inter', sans
 .alert-icon { flex-shrink: 0; margin-top: 1px; }
 .alert-text { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
 .alert-text strong { color: var(--text-primary); font-weight: 600; }
-
-.email-field { border: 1px solid var(--border); border-radius: var(--radius-md); padding: 12px 14px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; background: var(--surface-2); }
-.email-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--text-tertiary); margin-bottom: 3px; }
-.email-value { font-size: 14px; color: var(--text-primary); font-weight: 500; }
-.email-change { font-size: 13px; color: var(--text-secondary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; flex-shrink: 0; }
-
-.accordion { border: 1px solid var(--border); border-radius: var(--radius-md); margin-bottom: 14px; }
-.accordion-header { display: flex; justify-content: space-between; align-items: center; padding: 13px 14px; cursor: pointer; background: var(--surface); border-radius: var(--radius-md); -webkit-tap-highlight-color: transparent; }
-.accordion-header.open { border-radius: var(--radius-md) var(--radius-md) 0 0; }
-.accordion-title { font-size: 13px; font-weight: 600; color: var(--text-primary); display: flex; gap: 8px; align-items: center; }
-.accordion-body { padding: 12px 14px 13px; font-size: 13px; color: var(--text-secondary); line-height: 1.6; display: none; border-top: 1px solid var(--border); }
-.accordion-body.open { display: block; }
-.accordion-body ol { padding-left: 16px; margin-top: 6px; }
-.accordion-body ol li { margin-bottom: 4px; }
-
+.email-field-primary { border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 20px; background: var(--surface); }
+.email-field-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--text-tertiary); margin-bottom: 6px; }
+.email-field-value { font-size: 16px; color: var(--text-primary); font-weight: 600; margin-bottom: 10px; }
+.email-field-change { font-size: 13px; color: var(--text-secondary); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; display: inline-block; }
+.deadline-info { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+.deadline-row { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
+.deadline-row:last-child { border-bottom: none; }
+.deadline-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.deadline-text { flex: 1; }
+.deadline-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.deadline-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
 .retention-block { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; }
 .retention-header { padding: 12px 14px 10px; background: var(--surface-2); }
 .retention-label { font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 4px; }
@@ -134,23 +98,16 @@ html, body { min-height: 100%; background: var(--bg); font-family: 'Inter', sans
 .retention-actions { display: flex; flex-direction: column; }
 .retention-btn { display: flex; align-items: center; justify-content: space-between; padding: 13px 14px; font-size: 14px; font-weight: 500; color: var(--text-primary); background: var(--surface); border: none; border-top: 1px solid var(--border); cursor: pointer; font-family: 'Inter', sans-serif; text-align: left; -webkit-tap-highlight-color: transparent; }
 .retention-btn:active { background: var(--surface-2); }
-.retention-btn svg { flex-shrink: 0; }
-
 .flex-spacer { flex: 1; min-height: 16px; }
 .bottom-actions { display: flex; flex-direction: column; gap: 8px; padding-top: 6px; flex-shrink: 0; }
-
 .screen { display: none; height: 100%; flex-direction: column; }
 .screen.active { display: flex; }
-
 .return-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); }
 .return-item:last-child { border-bottom: none; }
 .return-item-img { width: 34px; height: 34px; border-radius: 6px; background: var(--surface-2); border: 1px solid var(--border); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
 .return-item-name { font-size: 13px; font-weight: 600; color: var(--text-primary); flex: 1; }
 .return-item-qty { font-size: 12px; color: var(--text-tertiary); }
-
 .success-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--text-primary); display: flex; align-items: center; justify-content: center; margin: 12px auto 20px; }
-.dead-end-icon { width: 52px; height: 52px; border-radius: 50%; background: var(--red-bg); border: 1px solid var(--red-border); display: flex; align-items: center; justify-content: center; margin: 6px 0 20px; }
-
 svg { display: block; }
 </style>
 </head>
@@ -158,263 +115,233 @@ svg { display: block; }
 <div class="proto-shell">
   <div class="proto-wordmark">Zinzino · Withdrawal flow</div>
 
-  <div class="scenario-tabs">
-    <button class="scenario-tab" id="tab-open" onclick="switchScenario('open')">
-      <span class="tab-dot tab-dot-green"></span>Window open
-    </button>
-    <button class="scenario-tab" id="tab-closed" onclick="switchScenario('closed')">
-      <span class="tab-dot tab-dot-red"></span>Window closed
-    </button>
-  </div>
+  <div class="device-shell"><div class="device-inner"><div class="device-frame">
 
-  <!-- ══════════════════════════════════════
-       SCENARIO A · WINDOW OPEN
-  ══════════════════════════════════════ -->
-  <div class="scenario" id="scenario-open">
-    <div class="device-shell"><div class="device-inner"><div class="device-frame">
-
-      <!-- S2: ENTRY -->
-      <div class="screen active" id="A-entry">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
+    <!-- S1: ENTRY -->
+    <div class="screen active" id="A-entry">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
+      <div class="screen-content">
+        <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="screen-headline">Withdraw your purchase</div>
+        <div class="screen-sub">You have the right to withdraw from this order within 14 days of receipt.</div>
+        <div class="section-label">Your order</div>
+        <div class="summary-card">
+          <div class="summary-row"><span class="summary-label">Order</span><span class="summary-value">#ZZ-20481</span></div>
+          <div class="summary-row"><span class="summary-label">Order date</span><span class="summary-value">28 Feb 2025</span></div>
+          <div class="summary-row"><span class="summary-label">Withdrawal deadline</span><span class="summary-value">14 Mar 2025</span></div>
+          <div class="summary-row"><span class="summary-label">Items</span><span class="summary-value">3 products</span></div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:10%"></div></div>
-        <div class="screen-content">
-          <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="screen-headline">Withdraw your purchase</div>
-          <div class="screen-sub">You have the right to withdraw from this order within 14 days of receipt.</div>
-          <div class="section-label">Your order</div>
-          <div class="summary-card">
-            <div class="summary-row"><span class="summary-label">Order</span><span class="summary-value">#ZZ-20481</span></div>
-            <div class="summary-row"><span class="summary-label">Order date</span><span class="summary-value">28 Feb 2025</span></div>
-            <div class="summary-row"><span class="summary-label">Withdrawal deadline</span><span class="summary-value">14 Mar 2025</span></div>
-            <div class="summary-row"><span class="summary-label">Items</span><span class="summary-value">3 products</span></div>
-          </div>
-          <div class="alert alert-warning">
-            <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="#C8940A" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 6.5V9.5" stroke="#C8940A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r=".75" fill="#C8940A"/></svg></div>
-            <div class="alert-text"><strong>Opened products cannot be returned.</strong> The retail price for any opened item will be deducted from your refund.</div>
-          </div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions">
-            <button class="btn-primary" onclick="A_go('A-collected')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Start withdrawal</button>
-            <button class="btn-ghost">Cancel</button>
-          </div>
+        <div class="alert alert-warning">
+          <div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="#C8940A" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 6.5V9.5" stroke="#C8940A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r=".75" fill="#C8940A"/></svg></div>
+          <div class="alert-text"><strong>Opened products cannot be returned.</strong> The retail price for any opened item will be deducted from your refund.</div>
+        </div>
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions">
+          <button class="btn-primary" onclick="A_go('A-collected')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Start withdrawal</button>
+          <button class="btn-ghost">Cancel</button>
         </div>
       </div>
+    </div>
 
-      <!-- S3: PACKAGE COLLECTED? -->
-      <div class="screen" id="A-collected">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back" onclick="A_go('A-entry')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-          <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">1 of 4</div>
+    <!-- S2: PACKAGE COLLECTED? -->
+    <div class="screen" id="A-collected">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back" onclick="A_go('A-entry')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+        <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">1 of 4</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+      <div class="screen-content">
+        <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 12l8-4 8 4v8l-8 4-8-4v-8z" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 8v8M8 12l8 4 8-4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="screen-headline">Have you collected your package?</div>
+        <div class="screen-sub">This helps us process your return correctly.</div>
+        <div class="option-list">
+          <div class="option-item" id="A-opt-yes" onclick="A_setCollected('yes')"><div class="option-text"><div class="option-title">Yes, I have the package</div><div class="option-desc">I can return the items</div></div><div class="radio-outer" id="A-r-yes"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-no" onclick="A_setCollected('no')"><div class="option-text"><div class="option-title">No, I haven't collected it</div><div class="option-desc">Package is still with the carrier</div></div><div class="radio-outer" id="A-r-no"><div class="radio-inner"></div></div></div>
         </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
-        <div class="screen-content">
-          <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 12l8-4 8 4v8l-8 4-8-4v-8z" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 8v8M8 12l8 4 8-4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="screen-headline">Have you collected your package?</div>
-          <div class="screen-sub">This helps us process your return correctly.</div>
-          <div class="option-list">
-            <div class="option-item" id="A-opt-yes" onclick="A_setCollected('yes')"><div class="option-text"><div class="option-title">Yes, I have the package</div><div class="option-desc">I can return the items</div></div><div class="radio-outer" id="A-r-yes"><div class="radio-inner"></div></div></div>
-            <div class="option-item" id="A-opt-no" onclick="A_setCollected('no')"><div class="option-text"><div class="option-title">No, I haven't collected it</div><div class="option-desc">Package is still with the carrier</div></div><div class="radio-outer" id="A-r-no"><div class="radio-inner"></div></div></div>
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions"><button class="btn-primary" id="A-btn-col" disabled onclick="A_go('A-reason')">Continue</button></div>
+      </div>
+    </div>
+
+    <!-- S3: REASON -->
+    <div class="screen" id="A-reason">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back" onclick="A_go('A-collected')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+        <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">2 of 4</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+      <div class="screen-content">
+        <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><circle cx="16" cy="14" r="4" stroke="#111" stroke-width="1.5"/><path d="M9 26c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="screen-headline">Why are you returning?</div>
+        <div class="screen-sub">Select the reason that best describes your situation.</div>
+        <!-- Alphabetical order. defect + dislike hidden when package not collected -->
+        <div class="option-list" id="A-reason-list">
+          <div class="option-item" id="A-opt-changed" onclick="A_setReason('changed')"><div class="option-text"><div class="option-title">Changed my mind</div></div><div class="radio-outer" id="A-r-changed"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-dislike" onclick="A_setReason('dislike')"><div class="option-text"><div class="option-title">I didn't like the product</div><div class="option-desc">Not what I expected</div></div><div class="radio-outer" id="A-r-dislike"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-other" onclick="A_setReason('other')"><div class="option-text"><div class="option-title">Other reason</div></div><div class="radio-outer" id="A-r-other"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-defect" onclick="A_setReason('defect')"><div class="option-text"><div class="option-title">Something is wrong with the product</div><div class="option-desc">Damaged, defective or incorrect item</div></div><div class="radio-outer" id="A-r-defect"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-expensive" onclick="A_setReason('expensive')"><div class="option-text"><div class="option-title">Too expensive</div></div><div class="radio-outer" id="A-r-expensive"><div class="radio-inner"></div></div></div>
+        </div>
+        <!-- Optional textarea for other reason -->
+        <div id="A-other-wrap" style="display:none">
+          <textarea class="other-textarea" id="A-other-text" rows="3" placeholder="Please describe your reason (optional)"></textarea>
+        </div>
+        <!-- Retention hint — only for dislike -->
+        <div id="A-hint" style="display:none">
+          <div class="retention-block">
+            <div class="retention-header">
+              <div class="retention-label">Before you go</div>
+              <div class="retention-msg" id="A-hint-text"></div>
+            </div>
+            <div class="retention-actions" id="A-hint-actions"></div>
           </div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions"><button class="btn-primary" id="A-btn-col" disabled onclick="A_go('A-reason')">Continue</button></div>
+        </div>
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions"><button class="btn-primary" id="A-btn-reason" disabled onclick="A_reasonContinue()">Continue with withdrawal</button></div>
+      </div>
+    </div>
+
+    <!-- REDIRECT SCREEN (defect / retention exits) -->
+    <div class="screen" id="A-redirect">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back" onclick="A_go('A-reason')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+      </div>
+      <div class="screen-content">
+        <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M16 8v8M12 12l4-4 4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="20" width="16" height="4" rx="2" stroke="#111" stroke-width="1.5"/></svg></div>
+        <div class="screen-headline" id="A-redir-title">We'll sort this out</div>
+        <div class="screen-sub" id="A-redir-sub">This continues to a separate flow.</div>
+        <div class="alert alert-info"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#999" stroke-width="1.2"/><path d="M8 7v4.5" stroke="#999" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r=".75" fill="#999"/></svg></div><div class="alert-text">This is a <strong>prototype boundary</strong>. In the live product, tapping continue would open the relevant flow.</div></div>
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions">
+          <button class="btn-primary" id="A-redir-btn" style="background:var(--border-strong);cursor:default">Continue</button>
+          <button class="btn-ghost" onclick="A_go('A-reason')">Go back</button>
         </div>
       </div>
+    </div>
 
-      <!-- S4: REASON -->
-      <div class="screen" id="A-reason">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back" onclick="A_go('A-collected')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-          <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">2 of 4</div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
-        <div class="screen-content">
-          <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><circle cx="16" cy="14" r="4" stroke="#111" stroke-width="1.5"/><path d="M9 26c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="screen-headline">Why are you returning?</div>
-          <div class="screen-sub">Select the reason that best describes your situation.</div>
-          <div class="option-list">
-            <div class="option-item" onclick="A_setReason('defect')"><div class="option-text"><div class="option-title">Something is wrong with the product</div><div class="option-desc">Damaged, defective or incorrect item</div></div><div class="radio-outer" id="A-r-defect"><div class="radio-inner"></div></div></div>
-            <div class="option-item" onclick="A_setReason('dislike')"><div class="option-text"><div class="option-title">I didn't like the product</div><div class="option-desc">Not what I expected</div></div><div class="radio-outer" id="A-r-dislike"><div class="radio-inner"></div></div></div>
-            <div class="option-item" onclick="A_setReason('changed')"><div class="option-text"><div class="option-title">Changed my mind</div></div><div class="radio-outer" id="A-r-changed"><div class="radio-inner"></div></div></div>
-            <div class="option-item" onclick="A_setReason('expensive')"><div class="option-text"><div class="option-title">Too expensive</div></div><div class="radio-outer" id="A-r-expensive"><div class="radio-inner"></div></div></div>
-            <div class="option-item" onclick="A_setReason('other')"><div class="option-text"><div class="option-title">Other reason</div></div><div class="radio-outer" id="A-r-other"><div class="radio-inner"></div></div></div>
+    <!-- S4: SELECT PRODUCTS -->
+    <div class="screen" id="A-products">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back" onclick="A_go('A-reason')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+        <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">3 of 4</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+      <div class="screen-content">
+        <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="screen-headline">Select items to return</div>
+        <div class="screen-sub">Product must be unopened and in original condition.</div>
+        <!-- Strong opened notice -->
+        <div class="opened-notice">
+          <div class="opened-notice-title">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#CC0000" stroke-width="1.4"/><path d="M8 4.5V8.5" stroke="#CC0000" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11" r=".9" fill="#CC0000"/></svg>
+            Opened products CANNOT be returned
           </div>
-          <div id="A-hint" style="display:none">
-            <div class="retention-block">
-              <div class="retention-header">
-                <div class="retention-label">Before you go</div>
-                <div class="retention-msg" id="A-hint-text"></div>
+          <div class="opened-notice-body">The full retail price of any opened item will be deducted from your refund.</div>
+        </div>
+        <div class="product-list">
+          <div class="product-card selected" id="A-p1" onclick="A_toggleProd(1)"><div class="checkbox checked" id="A-c1"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div></div>
+          <div class="product-card selected" id="A-p2" onclick="A_toggleProd(2)"><div class="checkbox checked" id="A-c2"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div></div>
+          <div class="product-card disabled"><div class="checkbox" style="border-color:#E0E0E0"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div></div>
+        </div>
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" onclick="A_go('A-confirm')">Continue with 2 items</button></div>
+      </div>
+    </div>
+
+    <!-- S5: CONFIRM -->
+    <div class="screen" id="A-confirm">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar">
+        <button class="nav-back" onclick="A_go('A-products')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-title">Right of withdrawal</div>
+        <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">4 of 4</div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
+      <div class="screen-content">
+        <div class="screen-headline">Confirm your return</div>
+        <div class="screen-sub">Review before submitting.</div>
+
+        <!-- Items being returned -->
+        <div class="section-label">Items being returned</div>
+        <div style="border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px">
+          <div style="padding:0 16px">
+            <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">Zinzino Balance Oil+</div><div class="return-item-qty">×1</div></div>
+            <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">ZinoBiotic+</div><div class="return-item-qty">×1</div></div>
+          </div>
+        </div>
+
+        <!-- Email — primary section -->
+        <div class="section-label">Confirmation sent to</div>
+        <div class="email-field-primary">
+          <div class="email-field-label">Email address</div>
+          <div class="email-field-value">anna.lindstrom@email.com</div>
+          <span class="email-field-change">Change email address</span>
+        </div>
+
+        <div class="flex-spacer"></div>
+        <div class="bottom-actions" style="padding-top:12px">
+          <button class="btn-primary" onclick="A_go('A-done')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Submit return request</button>
+          <button class="btn-ghost" onclick="A_go('A-reason')">Go back</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- S6: DONE -->
+    <div class="screen" id="A-done">
+      <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
+      <div class="nav-bar"><div class="nav-title">Right of withdrawal</div></div>
+      <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+      <div class="screen-content" style="align-items:center;text-align:center">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
+          <div class="success-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M4 13l6 6L22 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="screen-headline" style="text-align:center">Return submitted</div>
+          <div style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin:8px 0 24px;max-width:260px">Your request has been received. Check your email for next steps.</div>
+
+          <!-- Deadline + instructions info (image 3) -->
+          <div class="deadline-info" style="width:100%;text-align:left">
+            <div class="deadline-row">
+              <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#111" stroke-width="1.2"/><path d="M5 1.5V4M11 1.5V4M2 6.5h12" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+              <div class="deadline-text">
+                <div class="deadline-title">Return before 21 Mar 2025</div>
+                <div class="deadline-sub">Items must be received by the warehouse before this date</div>
               </div>
-              <div class="retention-actions" id="A-hint-actions"></div>
+            </div>
+            <div class="deadline-row">
+              <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="#111" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="deadline-text">
+                <div class="deadline-title">Check your email</div>
+                <div class="deadline-sub">Return instructions and return slip will be sent to your email within the next 24 hours</div>
+              </div>
             </div>
           </div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions"><button class="btn-primary" id="A-btn-reason" disabled onclick="A_reasonContinue()">Continue with withdrawal</button></div>
+        </div>
+        <div class="bottom-actions" style="width:100%;margin-top:20px">
+          <button class="btn-secondary" onclick="A_go('A-entry')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M3 4.5h10M3 11.5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>Back to orders</button>
         </div>
       </div>
+    </div>
 
-      <!-- DEFECT REDIRECT -->
-      <div class="screen" id="A-defect">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back" onclick="A_go('A-reason')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-        </div>
-        <div class="screen-content">
-          <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M16 8v8M12 12l4-4 4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="8" y="20" width="16" height="4" rx="2" stroke="#111" stroke-width="1.5"/></svg></div>
-          <div class="screen-headline">We'll sort this out</div>
-          <div class="screen-sub">Since there's an issue with your product, this continues to the defect claim flow — handled separately from withdrawal.</div>
-          <div class="alert alert-info"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#999" stroke-width="1.2"/><path d="M8 7v4.5" stroke="#999" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r=".75" fill="#999"/></svg></div><div class="alert-text">This is a <strong>prototype boundary</strong>. In the live product, tapping continue would open the defect claim flow.</div></div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions">
-            <button class="btn-primary" style="background:var(--border-strong);cursor:default">Continue to defect flow</button>
-            <button class="btn-ghost" onclick="A_go('A-reason')">Go back</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- S5: SELECT PRODUCTS -->
-      <div class="screen" id="A-products">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back" onclick="A_go('A-reason')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-          <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">3 of 4</div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
-        <div class="screen-content">
-          <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-          <div class="screen-headline">Select items to return</div>
-          <div class="screen-sub">Select only unopened, sealed items. Opened products cannot be returned.</div>
-          <div class="product-list">
-            <div class="product-card selected" id="A-p1" onclick="A_toggleProd(1)"><div class="checkbox checked" id="A-c1"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div><div class="product-tag tag-sealed">Sealed</div></div>
-            <div class="product-card selected" id="A-p2" onclick="A_toggleProd(2)"><div class="checkbox checked" id="A-c2"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div><div class="product-tag tag-sealed">Sealed</div></div>
-            <div class="product-card disabled"><div class="checkbox" style="border-color:#E0E0E0"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div><div class="product-tag tag-opened">Opened</div></div>
-          </div>
-          <div class="alert alert-warning"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="#C8940A" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 6.5V9.5" stroke="#C8940A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r=".75" fill="#C8940A"/></svg></div><div class="alert-text"><strong>Xtend+</strong> is opened and cannot be returned.</div></div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" onclick="A_go('A-confirm')">Continue with 2 items</button></div>
-        </div>
-      </div>
-
-      <!-- S6: CONFIRM -->
-      <div class="screen" id="A-confirm">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back" onclick="A_go('A-products')"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-          <div style="font-size:12px;color:var(--text-tertiary);font-weight:500">4 of 4</div>
-        </div>
-        <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
-        <div class="screen-content">
-          <div class="screen-headline">Confirm your return</div>
-          <div class="screen-sub">Review before submitting.</div>
-          <div class="section-label">Items being returned</div>
-          <div style="border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px">
-            <div style="padding:0 16px">
-              <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">Zinzino Balance Oil+</div><div class="return-item-qty">×1</div></div>
-              <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">ZinoBiotic+</div><div class="return-item-qty">×1</div></div>
-            </div>
-          </div>
-          <div class="section-label">Refund estimate</div>
-          <div class="summary-card">
-            <div class="summary-row"><span class="summary-label">Items subtotal</span><span class="summary-value">SEK 1,398</span></div>
-            <div class="summary-row"><span class="summary-label">Shipping (non-refundable)</span><span class="summary-value red">− SEK 89</span></div>
-            <div class="summary-row" style="border-top:2px solid var(--border)"><span class="summary-label" style="font-weight:600;color:var(--text-primary)">Estimated refund</span><span class="summary-value" style="font-size:16px">SEK 1,309</span></div>
-          </div>
-          <div class="email-field"><div><div class="email-label">Confirmation sent to</div><div class="email-value">anna.lindstrom@email.com</div></div><span class="email-change">Change</span></div>
-          <div class="accordion">
-            <div class="accordion-header" onclick="A_toggleAcc()">
-              <div class="accordion-title"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="1" width="10" height="12" rx="1.5" stroke="#111" stroke-width="1.2"/><path d="M4.5 5h5M4.5 7.5h5M4.5 10h3" stroke="#111" stroke-width="1.1" stroke-linecap="round"/></svg>Return instructions</div>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" id="A-acc-arrow" style="transition:transform .2s;flex-shrink:0"><path d="M4 6l4 4 4-4" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-            <div class="accordion-body" id="A-acc-body">A prepaid return label will be emailed once submitted.<ol><li>Print the label</li><li>Pack items securely</li><li>Drop off at PostNord service point</li><li>Keep your receipt</li></ol><br>Refund processed once warehouse confirms receipt.</div>
-          </div>
-          <div class="alert alert-warning"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14.5 13.5H1.5L8 2Z" stroke="#C8940A" stroke-width="1.2" stroke-linejoin="round"/><path d="M8 6.5V9.5" stroke="#C8940A" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="11.5" r=".75" fill="#C8940A"/></svg></div><div class="alert-text"><strong>Your subscription will be paused immediately</strong> and permanently cancelled once the warehouse confirms your return.</div></div>
-          <div class="bottom-actions" style="padding-top:12px">
-            <button class="btn-primary" onclick="A_go('A-done')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Submit return request</button>
-            <button class="btn-ghost" onclick="A_go('A-reason')">Go back</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- S7: DONE -->
-      <div class="screen" id="A-done">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar"><div class="nav-title">Right of withdrawal</div></div>
-        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
-        <div class="screen-content" style="align-items:center;text-align:center">
-          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
-            <div class="success-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M4 13l6 6L22 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <div class="screen-headline" style="text-align:center">Return submitted</div>
-            <div style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin:8px 0 28px;max-width:260px">Shipping label sent to <strong style="color:var(--text-primary)">anna.lindstrom@email.com</strong>. Subscription paused.</div>
-            <div class="summary-card" style="width:100%;text-align:left">
-              <div class="summary-row"><span class="summary-label">Return reference</span><span class="summary-value">#RET-8821</span></div>
-              <div class="summary-row"><span class="summary-label">Estimated refund</span><span class="summary-value">SEK 1,309</span></div>
-              <div class="summary-row"><span class="summary-label">Timeline</span><span class="summary-value">5–10 business days</span></div>
-              <div class="summary-row"><span class="summary-label">Subscription</span><span class="summary-value" style="color:#888">Paused</span></div>
-            </div>
-            <div class="alert alert-info" style="text-align:left;width:100%"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#999" stroke-width="1.2"/><path d="M8 7v4.5" stroke="#999" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r=".75" fill="#999"/></svg></div><div class="alert-text">Subscription will be <strong>permanently cancelled</strong> once the warehouse confirms your return.</div></div>
-          </div>
-          <div class="bottom-actions" style="width:100%"><button class="btn-secondary" onclick="A_go('A-entry')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M3 4.5h10M3 11.5h6" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg>Back to orders</button></div>
-        </div>
-      </div>
-
-    </div></div></div>
-  </div><!-- /scenario-open -->
-
-
-  <!-- ══════════════════════════════════════
-       SCENARIO B · WINDOW CLOSED
-  ══════════════════════════════════════ -->
-  <div class="scenario" id="scenario-closed">
-    <div class="device-shell"><div class="device-inner"><div class="device-frame">
-
-      <div class="screen active">
-        <div class="status-bar"><span class="status-time">9:41</span><div class="status-icons"><svg width="16" height="11" viewBox="0 0 16 11" fill="none"><rect x="0" y="4" width="3" height="7" rx="1" fill="#111"/><rect x="4.5" y="2.5" width="3" height="8.5" rx="1" fill="#111"/><rect x="9" y="0.5" width="3" height="10.5" rx="1" fill="#111"/><rect x="13.5" y="0" width="2.5" height="11" rx="1" fill="#E0E0E0"/></svg><svg width="15" height="11" viewBox="0 0 15 11" fill="none"><path d="M7.5 2C9.5 2 11.3 2.8 12.6 4.1L14 2.6C12.3.9 10 0 7.5 0S2.7.9 1 2.6l1.4 1.5C3.7 2.8 5.5 2 7.5 2z" fill="#111"/><path d="M7.5 5c1.2 0 2.3.5 3.1 1.2L12 4.8C10.8 3.7 9.2 3 7.5 3S4.2 3.7 3 4.8l1.4 1.4C5.2 5.5 6.3 5 7.5 5z" fill="#111"/><circle cx="7.5" cy="9" r="1.5" fill="#111"/></svg><svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#111" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#111"/><path d="M23 4.5v3c.8-.3 1.5-1 1.5-1.5s-.7-1.2-1.5-1.5z" fill="#111" fill-opacity=".4"/></svg></div></div>
-        <div class="nav-bar">
-          <button class="nav-back"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4.5L6.5 9 11 13.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-          <div class="nav-title">Right of withdrawal</div>
-        </div>
-        <div class="screen-content">
-          <div class="dead-end-icon"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="9" stroke="#CC0000" stroke-width="1.5"/><path d="M11 6.5V11.5" stroke="#CC0000" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="14.5" r="1" fill="#CC0000"/></svg></div>
-          <div class="screen-headline">Withdrawal window closed</div>
-          <div class="screen-sub">The 14-day right of withdrawal period for this order has passed. Returns are no longer available.</div>
-          <div class="alert alert-error"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#CC0000" stroke-width="1.2"/><path d="M8 4.5v4" stroke="#CC0000" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="10.5" r=".75" fill="#CC0000"/></svg></div><div class="alert-text"><strong>Order #ZZ-20481</strong><br>Placed 28 Feb 2025 · Window closed 14 Mar 2025</div></div>
-          <div class="alert alert-info"><div class="alert-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#999" stroke-width="1.2"/><path d="M8 7v4.5" stroke="#999" stroke-width="1.5" stroke-linecap="round"/><circle cx="8" cy="5" r=".75" fill="#999"/></svg></div><div class="alert-text">If you have an issue with your product, you may still be eligible for a <strong>defect claim</strong>. Contact our support team.</div></div>
-          <div class="flex-spacer"></div>
-          <div class="bottom-actions">
-            <button class="btn-secondary"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8S4.41 14.5 8 14.5 14.5 11.59 14.5 8 11.59 1.5 8 1.5z" stroke="#111" stroke-width="1.2"/><path d="M6 8h4M9 6.5L10.5 8 9 9.5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Contact support</button>
-            <button class="btn-ghost">Back to orders</button>
-          </div>
-        </div>
-      </div>
-
-    </div></div></div>
-  </div><!-- /scenario-closed -->
-
-</div><!-- /proto-shell -->
+  </div></div></div>
+</div>
 
 <script>
-function switchScenario(s) {
-  document.getElementById('scenario-open').classList.toggle('active', s === 'open');
-  document.getElementById('scenario-closed').classList.toggle('active', s === 'closed');
-  document.getElementById('tab-open').classList.toggle('active', s === 'open');
-  document.getElementById('tab-closed').classList.toggle('active', s === 'closed');
-}
-switchScenario('open');
-
 var A_collected = null, A_reason = null, A_sel = [1, 2];
 
 function A_go(id) {
-  document.querySelectorAll('#scenario-open .screen').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.device-frame .screen').forEach(function(s){s.classList.remove('active');});
   var el = document.getElementById(id);
   if (el) { el.classList.add('active'); var sc = el.querySelector('.screen-content'); if(sc) sc.scrollTop = 0; }
 }
@@ -426,44 +353,48 @@ function A_setCollected(v) {
     document.getElementById('A-r-'+x).classList.toggle('checked', x===v);
   });
   document.getElementById('A-btn-col').disabled = false;
+  // Show/hide defect and dislike based on package collected (change 8)
+  A_updateReasonVisibility();
 }
 
-var retentionData = {
-  dislike: {
-    msg: 'You might find a better fit. Would you like to switch to a different product instead of withdrawing?',
-    actions: [{ label: 'Switch to a different product', fn: 'A_goChangeProduct()' }]
-  },
-  changed: {
-    msg: 'You can manage your subscription without cancelling.',
-    actions: [
-      { label: 'Pause subscription', fn: "A_goRetentionOut('pause')" },
-      { label: 'Skip next delivery', fn: "A_goRetentionOut('skip')" }
-    ]
-  },
-  expensive: {
-    msg: 'You can pause your subscription temporarily instead of withdrawing.',
-    actions: [{ label: 'Pause subscription', fn: "A_goRetentionOut('pause')" }]
+function A_updateReasonVisibility() {
+  var collected = A_collected === 'yes';
+  ['defect','dislike'].forEach(function(r){
+    var el = document.getElementById('A-opt-' + r);
+    if (el) el.style.display = collected ? 'flex' : 'none';
+  });
+  // Fix first/last radius after show/hide
+  var items = document.querySelectorAll('#A-reason-list .option-item:not([style*="display: none"]):not([style*="display:none"])');
+  document.querySelectorAll('#A-reason-list .option-item').forEach(function(i){
+    i.style.borderRadius = '';
+  });
+  if (items.length > 0) {
+    items[0].style.borderRadius = 'var(--radius-md) var(--radius-md) 0 0';
+    items[items.length-1].style.borderRadius = '0 0 var(--radius-md) var(--radius-md)';
+    if (items.length === 1) items[0].style.borderRadius = 'var(--radius-md)';
   }
-};
+}
 
 var chevronRight = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 function A_setReason(v) {
   A_reason = v;
-  ['defect','dislike','changed','expensive','other'].forEach(function(x){
+  ['changed','dislike','other','defect','expensive'].forEach(function(x){
     var r = document.getElementById('A-r-'+x); if(!r) return;
     r.classList.toggle('checked', x===v);
-    r.closest('.option-item').classList.toggle('selected', x===v);
+    var item = document.getElementById('A-opt-'+x);
+    if (item) item.classList.toggle('selected', x===v);
   });
   document.getElementById('A-btn-reason').disabled = false;
+
+  // Show textarea only for other
+  document.getElementById('A-other-wrap').style.display = v === 'other' ? 'block' : 'none';
+
+  // Show retention hint only for dislike
   var h = document.getElementById('A-hint');
-  var data = retentionData[v];
-  if (data) {
-    document.getElementById('A-hint-text').textContent = data.msg;
-    var actEl = document.getElementById('A-hint-actions');
-    actEl.innerHTML = data.actions.map(function(a) {
-      return '<button class="retention-btn" onclick="' + a.fn + '">' + a.label + chevronRight + '</button>';
-    }).join('');
+  if (v === 'dislike') {
+    document.getElementById('A-hint-text').textContent = 'You might find a better fit. Would you like to switch to a different product instead of withdrawing?';
+    document.getElementById('A-hint-actions').innerHTML = '<button class="retention-btn" onclick="A_goRedirect(\'change\')">Switch to a different product ' + chevronRight + '</button>';
     h.style.display = 'block';
   } else {
     h.style.display = 'none';
@@ -471,23 +402,22 @@ function A_setReason(v) {
 }
 
 function A_reasonContinue() {
-  if (A_reason === 'defect') { A_go('A-defect'); return; }
+  if (A_reason === 'defect') { A_goRedirect('defect'); return; }
   A_go(A_collected === 'no' ? 'A-confirm' : 'A-products');
 }
 
-function A_goChangeProduct() {
-  A_go('A-defect');
-  document.querySelector('#A-defect .screen-headline').textContent = 'Switch your product';
-  document.querySelector('#A-defect .screen-sub').textContent = 'This continues to the change product flow — handled separately from withdrawal.';
-  document.querySelector('#A-defect .btn-primary').textContent = 'Continue to change product flow';
-}
-
-function A_goRetentionOut(type) {
-  A_go('A-defect');
-  var titles = { pause: 'Pause subscription', skip: 'Skip next delivery' };
-  document.querySelector('#A-defect .screen-headline').textContent = titles[type] || 'Manage subscription';
-  document.querySelector('#A-defect .screen-sub').textContent = 'This continues to the subscription management flow — handled separately from withdrawal.';
-  document.querySelector('#A-defect .btn-primary').textContent = 'Continue to subscription management';
+function A_goRedirect(type) {
+  var configs = {
+    defect: { title: 'We\'ll sort this out', sub: 'Since there\'s an issue with your product, this continues to the defect claim flow — handled separately from withdrawal.', btn: 'Continue to defect flow' },
+    change: { title: 'Switch your product', sub: 'This continues to the change product flow — handled separately from withdrawal.', btn: 'Continue to change product flow' },
+    pause:  { title: 'Pause subscription', sub: 'This continues to the subscription management flow — handled separately from withdrawal.', btn: 'Continue to subscription management' },
+    skip:   { title: 'Skip next delivery', sub: 'This continues to the subscription management flow — handled separately from withdrawal.', btn: 'Continue to subscription management' }
+  };
+  var c = configs[type] || configs.defect;
+  document.getElementById('A-redir-title').textContent = c.title;
+  document.getElementById('A-redir-sub').textContent = c.sub;
+  document.getElementById('A-redir-btn').textContent = c.btn;
+  A_go('A-redirect');
 }
 
 function A_toggleProd(n) {
@@ -499,14 +429,6 @@ function A_toggleProd(n) {
   var btn = document.getElementById('A-btn-prod'), c = A_sel.length;
   btn.disabled = c===0;
   btn.textContent = c===0 ? 'Select at least one item' : 'Continue with '+c+' item'+(c>1?'s':'');
-}
-
-function A_toggleAcc() {
-  var b = document.getElementById('A-acc-body'), a = document.getElementById('A-acc-arrow');
-  var h = a.closest('.accordion-header');
-  b.classList.toggle('open');
-  h.classList.toggle('open', b.classList.contains('open'));
-  a.style.transform = b.classList.contains('open') ? 'rotate(180deg)' : '';
 }
 </script>
 </body>
