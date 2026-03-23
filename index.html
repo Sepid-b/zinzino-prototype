@@ -252,12 +252,12 @@ svg { display: block; }
           <div class="opened-notice-body">The full retail price of any opened item will be deducted from your refund.</div>
         </div>
         <div class="product-list">
-          <div class="product-card selected" id="A-p1" onclick="A_toggleProd(1)"><div class="checkbox checked" id="A-c1"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div></div>
-          <div class="product-card selected" id="A-p2" onclick="A_toggleProd(2)"><div class="checkbox checked" id="A-c2"><svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div></div>
-          <div class="product-card disabled"><div class="checkbox" style="border-color:#E0E0E0"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div></div>
+          <div class="product-card" id="A-p1" onclick="A_toggleProd(1)"><div class="checkbox" id="A-c1"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div></div>
+          <div class="product-card" id="A-p2" onclick="A_toggleProd(2)"><div class="checkbox" id="A-c2"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div></div>
+          <div class="product-card" id="A-p3" onclick="A_toggleProd(3)"><div class="checkbox" id="A-c3"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div></div>
         </div>
         <div class="flex-spacer"></div>
-        <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" onclick="A_go('A-confirm')">Continue with 2 items</button></div>
+        <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" disabled onclick="A_go('A-confirm')">Select items to continue</button></div>
       </div>
     </div>
 
@@ -293,7 +293,7 @@ svg { display: block; }
 
         <div class="flex-spacer"></div>
         <div class="bottom-actions" style="padding-top:12px">
-          <button class="btn-primary" onclick="A_go('A-done')"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Submit return request</button>
+          <button class="btn-primary" onclick="A_goToDone()"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4.5L13 8l-4 3.5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Submit return request</button>
           <button class="btn-ghost" onclick="A_go('A-reason')">Go back</button>
         </div>
       </div>
@@ -308,9 +308,8 @@ svg { display: block; }
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%">
           <div class="success-icon"><svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M4 13l6 6L22 7" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="screen-headline" style="text-align:center">Return submitted</div>
-          <div style="font-size:14px;color:var(--text-secondary);line-height:1.6;margin:8px 0 24px;max-width:260px">Your request has been received. Check your email for next steps.</div>
 
-          <!-- Deadline + instructions info (image 3) -->
+          <!-- Deadline + instructions info -->
           <div class="deadline-info" style="width:100%;text-align:left">
             <div class="deadline-row">
               <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#111" stroke-width="1.2"/><path d="M5 1.5V4M11 1.5V4M2 6.5h12" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg></div>
@@ -319,7 +318,7 @@ svg { display: block; }
                 <div class="deadline-sub">Items must be received by the warehouse before this date</div>
               </div>
             </div>
-            <div class="deadline-row">
+            <div class="deadline-row" id="A-done-slip-row">
               <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="#111" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
               <div class="deadline-text">
                 <div class="deadline-title">Check your email</div>
@@ -338,7 +337,7 @@ svg { display: block; }
 </div>
 
 <script>
-var A_collected = null, A_reason = null, A_sel = [1, 2];
+var A_collected = null, A_reason = null, A_sel = [];
 
 function A_go(id) {
   document.querySelectorAll('.device-frame .screen').forEach(function(s){s.classList.remove('active');});
@@ -420,15 +419,20 @@ function A_goRedirect(type) {
   A_go('A-redirect');
 }
 
+function A_goToDone() {
+  var slipRow = document.getElementById('A-done-slip-row');
+  slipRow.style.display = A_collected === 'no' ? 'none' : 'flex';
+  A_go('A-done');
+}
+
 function A_toggleProd(n) {
   var card = document.getElementById('A-p'+n), chk = document.getElementById('A-c'+n);
-  if (card.classList.contains('disabled')) return;
   var i = A_sel.indexOf(n);
   if (i > -1) { A_sel.splice(i,1); card.classList.remove('selected'); chk.classList.remove('checked'); chk.innerHTML=''; }
   else { A_sel.push(n); card.classList.add('selected'); chk.classList.add('checked'); chk.innerHTML='<svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
   var btn = document.getElementById('A-btn-prod'), c = A_sel.length;
   btn.disabled = c===0;
-  btn.textContent = c===0 ? 'Select at least one item' : 'Continue with '+c+' item'+(c>1?'s':'');
+  btn.textContent = c===0 ? 'Select items to continue' : 'Continue with '+c+' item'+(c>1?'s':'');
 }
 </script>
 </body>
