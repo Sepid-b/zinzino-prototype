@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zinzino · Pause Subscription</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #EDEDED;
+  --surface: #FFFFFF;
+  --surface-2: #F5F5F5;
+  --border: #E8E8E8;
+  --border-strong: #CCCCCC;
+  --text-primary: #1A1A1A;
+  --text-secondary: #666666;
+  --text-tertiary: #999999;
+  --red: #CC0000;
+  --red-bg: #FFF2F2;
+  --red-border: #F5C0C0;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 50px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;color:var(--text-primary);-webkit-font-smoothing:antialiased}
+
+.proto-shell{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:36px 16px 80px}
+.proto-wordmark{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:20px}
+
+/* DEMO SWITCHER */
+.switcher-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px;text-align:center}
+.switcher{display:flex;background:#DCDCDC;border-radius:11px;padding:3px;gap:2px;margin-bottom:28px;flex-wrap:wrap;justify-content:center}
+.sw-btn{padding:8px 14px;border-radius:9px;font-size:12px;font-weight:600;border:none;cursor:pointer;background:transparent;color:var(--text-tertiary);transition:all .18s;font-family:'Inter',sans-serif;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.sw-btn.active{background:var(--surface);color:var(--text-primary);box-shadow:0 1px 4px rgba(0,0,0,.13)}
+.sw-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-active{background:#2ECC71}
+.dot-paused{background:#F5A623}
+.dot-reminder{background:#CC0000}
+
+/* DEVICE */
+.device-shell{width:390px;max-width:calc(100vw - 24px);border-radius:50px;background:#1C1C1E;padding:14px;box-shadow:0 40px 100px rgba(0,0,0,.28),0 2px 8px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.08)}
+.device-inner{border-radius:38px;overflow:hidden;background:var(--surface)}
+.device-frame{width:100%;height:772px;background:var(--surface);display:flex;flex-direction:column;overflow:hidden}
+
+/* STATUS BAR */
+.status-bar{height:50px;background:var(--surface);display:flex;align-items:flex-end;justify-content:space-between;padding:0 24px 10px;flex-shrink:0}
+.status-time{font-size:15px;font-weight:700;color:var(--text-primary)}
+.status-icons{display:flex;gap:6px;align-items:center}
+
+/* NAV BAR */
+.nav-bar{height:50px;background:var(--surface);display:flex;align-items:center;padding:0 16px;gap:12px;border-bottom:1px solid var(--border);flex-shrink:0}
+.nav-back{width:32px;height:32px;border-radius:50%;border:1.5px solid var(--border);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+.nav-back:active{background:var(--surface-2)}
+.nav-title{font-size:14px;font-weight:600;color:var(--text-primary);flex:1}
+
+/* PROGRESS */
+.progress-bar{height:3px;background:var(--border);flex-shrink:0}
+.progress-fill{height:100%;background:var(--text-primary);transition:width .3s ease}
+
+/* SCROLL CONTENT */
+.screen-content{flex:1;overflow-y:auto;padding:24px 20px 32px;display:flex;flex-direction:column}
+
+/* TYPOGRAPHY */
+.screen-headline{font-size:26px;font-weight:900;line-height:1.15;letter-spacing:-.5px;color:var(--text-primary);margin-bottom:8px}
+.screen-sub{font-size:14px;color:var(--text-secondary);line-height:1.5;margin-bottom:24px}
+.section-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:10px}
+
+/* BUTTONS */
+.btn-primary{width:100%;height:52px;border-radius:var(--radius-pill);background:var(--text-primary);color:#FFF;font-family:'Inter',sans-serif;font-size:15px;font-weight:600;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:opacity .15s;flex-shrink:0}
+.btn-primary:active{opacity:.8}
+.btn-primary:disabled{background:var(--border-strong);cursor:not-allowed}
+.btn-secondary{width:100%;height:52px;border-radius:var(--radius-pill);background:transparent;color:var(--text-primary);font-family:'Inter',sans-serif;font-size:15px;font-weight:600;border:1.5px solid var(--border-strong);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.btn-secondary:active{background:var(--surface-2)}
+.btn-ghost{width:100%;height:44px;border-radius:var(--radius-pill);background:transparent;color:var(--text-secondary);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.bottom-actions{padding:16px 20px 24px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;border-top:1px solid var(--border);background:var(--surface)}
+
+/* SCREENS */
+.screen{display:none;flex-direction:column;flex:1;overflow:hidden;position:relative}
+.screen.active{display:flex}
+
+/* STATUS BADGE */
+.status-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--radius-pill);font-size:12px;font-weight:600;letter-spacing:.02em}
+.badge-active{background:#F0FAF5;color:#1A7A4A;border:1px solid #A8DFC0}
+.badge-paused{background:#FFF8EC;color:#8A5000;border:1px solid #F5D49A}
+.badge-reminder{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+
+/* SUBSCRIPTION CARD */
+.sub-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}
+.sub-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.sub-card-name{font-size:15px;font-weight:700;color:var(--text-primary)}
+.sub-card-detail{font-size:13px;color:var(--text-secondary);margin-top:3px}
+.sub-card-divider{height:1px;background:var(--border);margin:12px 0}
+.sub-card-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-secondary)}
+.sub-card-row strong{color:var(--text-primary);font-weight:600}
+
+/* ACTION LIST */
+.action-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px}
+.action-item{display:flex;align-items:center;padding:15px 16px;background:var(--surface);cursor:pointer;gap:14px;border-bottom:1px solid var(--border)}
+.action-item:last-child{border-bottom:none}
+.action-item:active{background:var(--surface-2)}
+.action-icon{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--surface-2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.action-text{flex:1}
+.action-title{font-size:14px;font-weight:600;color:var(--text-primary)}
+.action-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}
+.action-chevron{color:var(--text-tertiary)}
+
+/* NOTIFICATION BANNER */
+.notif-banner{border-radius:var(--radius-md);padding:13px 15px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start}
+.notif-normal{background:var(--surface-2);border:1px solid var(--border)}
+.notif-urgent{background:var(--red-bg);border:1px solid var(--red-border)}
+.notif-icon{flex-shrink:0;margin-top:1px}
+.notif-title{font-size:13px;font-weight:700;color:var(--text-primary);margin-bottom:3px}
+.notif-urgent .notif-title{color:var(--red)}
+.notif-body{font-size:12px;color:var(--text-secondary);line-height:1.5}
+
+/* DURATION OPTIONS */
+.duration-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.duration-option{display:flex;align-items:center;padding:16px;border:1.5px solid var(--border);border-radius:var(--radius-md);cursor:pointer;transition:all .15s;background:var(--surface);gap:14px}
+.duration-option:active{background:var(--surface-2)}
+.duration-option.selected{border-color:var(--text-primary);background:var(--surface)}
+.duration-radio{width:20px;height:20px;border-radius:50%;border:2px solid var(--border-strong);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.duration-option.selected .duration-radio{border-color:var(--text-primary);background:var(--text-primary)}
+.duration-radio-dot{width:8px;height:8px;border-radius:50%;background:#FFF;display:none}
+.duration-option.selected .duration-radio-dot{display:block}
+.duration-text{flex:1}
+.duration-label{font-size:15px;font-weight:700;color:var(--text-primary)}
+.duration-date{font-size:12px;color:var(--text-secondary);margin-top:2px}
+
+/* CONFIRM SUMMARY CARD */
+.confirm-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:20px}
+.confirm-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border)}
+.confirm-row:last-child{border-bottom:none;padding-bottom:0}
+.confirm-row-label{font-size:13px;color:var(--text-secondary)}
+.confirm-row-value{font-size:13px;font-weight:600;color:var(--text-primary);text-align:right}
+
+/* SUCCESS SCREEN */
+.success-icon{width:64px;height:64px;border-radius:50%;background:var(--surface-2);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.success-date-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px;text-align:center;margin-bottom:24px}
+.success-date-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:6px}
+.success-date-value{font-size:22px;font-weight:900;color:var(--text-primary)}
+
+/* MODAL OVERLAY */
+.modal-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:flex-end;z-index:100;border-radius:0}
+.modal-sheet{background:var(--surface);border-radius:24px 24px 0 0;padding:24px 20px 32px;width:100%}
+.modal-handle{width:36px;height:4px;background:var(--border-strong);border-radius:2px;margin:0 auto 20px}
+.modal-title{font-size:20px;font-weight:900;color:var(--text-primary);margin-bottom:8px}
+.modal-body{font-size:14px;color:var(--text-secondary);line-height:1.5;margin-bottom:24px}
+.modal-actions{display:flex;flex-direction:column;gap:10px}
+
+/* PAUSED ACTIONS */
+.pause-action-list{display:flex;flex-direction:column;gap:0;border:1px solid var(--border);border-radius:var(--radius-md);overflow:hidden;margin-bottom:16px}
+.pause-action-item{display:flex;align-items:center;padding:15px 16px;background:var(--surface);cursor:pointer;gap:14px;border-bottom:1px solid var(--border)}
+.pause-action-item:last-child{border-bottom:none}
+.pause-action-item:active{background:var(--surface-2)}
+
+/* EXTEND OPTIONS */
+.extend-context{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md);padding:14px;margin-bottom:20px}
+.extend-progress{height:6px;background:var(--border);border-radius:3px;margin-top:10px;overflow:hidden}
+.extend-progress-fill{height:100%;background:var(--text-primary);border-radius:3px;transition:width .4s ease}
+
+/* HOME INDICATOR */
+.home-indicator{height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface)}
+.home-bar{width:120px;height:5px;background:var(--text-primary);border-radius:3px;opacity:.2}
+</style>
+</head>
+<body>
+<div class="proto-shell">
+  <div class="proto-wordmark">Zinzino · Pause Flow Prototype</div>
+
+  <div class="switcher-label">Simulate account state</div>
+  <div class="switcher">
+    <button class="sw-btn active" onclick="setScenario('active')">
+      <span class="sw-dot dot-active"></span> Active
+    </button>
+    <button class="sw-btn" onclick="setScenario('paused')">
+      <span class="sw-dot dot-paused"></span> Paused
+    </button>
+    <button class="sw-btn" onclick="setScenario('reminder')">
+      <span class="sw-dot dot-reminder"></span> Paused + Reminder
+    </button>
+  </div>
+
+  <div class="device-shell">
+    <div class="device-inner">
+      <div class="device-frame" id="device-frame">
+
+        <!-- STATUS BAR -->
+        <div class="status-bar">
+          <span class="status-time" id="clk">09:41</span>
+          <div class="status-icons">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><rect x="0" y="3" width="3" height="9" rx="1" fill="#1A1A1A"/><rect x="4.5" y="2" width="3" height="10" rx="1" fill="#1A1A1A"/><rect x="9" y="0" width="3" height="12" rx="1" fill="#1A1A1A"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" fill="#E8E8E8"/></svg>
+            <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><path d="M7.5 2.5C9.8 2.5 11.9 3.5 13.3 5.1L14.5 3.9C12.8 2 10.3 1 7.5 1C4.7 1 2.2 2 0.5 3.9L1.7 5.1C3.1 3.5 5.2 2.5 7.5 2.5Z" fill="#1A1A1A"/><path d="M7.5 5.5C8.9 5.5 10.2 6.1 11.1 7.1L12.3 5.9C11.1 4.6 9.4 3.8 7.5 3.8C5.6 3.8 3.9 4.6 2.7 5.9L3.9 7.1C4.8 6.1 6.1 5.5 7.5 5.5Z" fill="#1A1A1A"/><circle cx="7.5" cy="10" r="1.5" fill="#1A1A1A"/></svg>
+            <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#1A1A1A" stroke-opacity=".35"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#1A1A1A"/><path d="M23 4.5V7.5C23.8 7.2 24.5 6.5 24.5 6C24.5 5.5 23.8 4.8 23 4.5Z" fill="#1A1A1A" fill-opacity=".4"/></svg>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S0 — MANAGE SUBSCRIPTION (ACTIVE)
+        ════════════════════════════════════════════ -->
+        <div class="screen active" id="S0">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Manage Subscription</span>
+          </div>
+          <div class="screen-content">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+              <span class="status-badge badge-active">
+                <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="#1A7A4A"/></svg>
+                Active
+              </span>
+            </div>
+            <div class="sub-card">
+              <div class="sub-card-top">
+                <div>
+                  <div class="sub-card-name">BalanceOil+ 300ml Lemon</div>
+                  <div class="sub-card-detail">Monthly subscription</div>
+                </div>
+                <div style="font-size:15px;font-weight:700;color:var(--text-primary)">€79.00</div>
+              </div>
+              <div class="sub-card-divider"></div>
+              <div class="sub-card-row" style="margin-bottom:6px">
+                <span>Next delivery</span>
+                <strong>15 Apr 2026</strong>
+              </div>
+              <div class="sub-card-row">
+                <span>Member since</span>
+                <strong>Jan 2025</strong>
+              </div>
+            </div>
+
+            <div class="section-label">Manage</div>
+            <div class="action-list">
+              <div class="action-item" onclick="go('S1')">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="8" width="14" height="2" rx="1" fill="#1A1A1A"/><rect x="2" y="12" width="14" height="2" rx="1" fill="#1A1A1A"/><rect x="2" y="4" width="14" height="2" rx="1" fill="#1A1A1A"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Pause subscription</div>
+                  <div class="action-desc">Temporarily pause for 1–3 months</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="action-item" onclick="">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#1A1A1A" stroke-width="1.8"/><path d="M9 6v3l2 2" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Skip next delivery</div>
+                  <div class="action-desc">Skip 15 Apr 2026</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="action-item" onclick="">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M9 3l6 6-6 6" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Change product</div>
+                  <div class="action-desc">Switch to a different product</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="action-item" onclick="">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M2 9h14" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Cancel subscription</div>
+                  <div class="action-desc">30-day notice period applies</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S0-PAUSED — MANAGE SUBSCRIPTION (PAUSED)
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S0-paused">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Manage Subscription</span>
+          </div>
+          <div class="screen-content">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+              <span class="status-badge badge-paused">
+                <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="#8A5000"/></svg>
+                Paused
+              </span>
+            </div>
+
+            <div class="notif-banner notif-normal">
+              <div class="notif-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#666" stroke-width="1.5"/><path d="M9 6v3l2 2" stroke="#666" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <div class="notif-title">Subscription paused</div>
+                <div class="notif-body">Your subscription will automatically resume on <strong style="color:var(--text-primary)" id="paused-notif-date">—</strong>. No action needed.</div>
+              </div>
+            </div>
+
+            <div class="sub-card">
+              <div class="sub-card-top">
+                <div>
+                  <div class="sub-card-name">BalanceOil+ 300ml Lemon</div>
+                  <div class="sub-card-detail">Monthly subscription</div>
+                </div>
+                <div style="font-size:15px;font-weight:700;color:var(--text-primary)">€79.00</div>
+              </div>
+              <div class="sub-card-divider"></div>
+              <div class="sub-card-row" style="margin-bottom:6px">
+                <span>Pause started</span>
+                <strong>24 Mar 2026</strong>
+              </div>
+              <div class="sub-card-row" style="margin-bottom:6px">
+                <span>Resumes on</span>
+                <strong id="paused-resumes">—</strong>
+              </div>
+              <div class="sub-card-row">
+                <span>Pause duration</span>
+                <strong id="paused-duration">—</strong>
+              </div>
+            </div>
+
+            <div class="section-label">Actions</div>
+            <div class="pause-action-list">
+              <div class="pause-action-item" onclick="showResumeModal()">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3l10 6-10 6V3z" fill="#1A1A1A"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Resume early</div>
+                  <div class="action-desc">Restart your subscription now</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="pause-action-item" onclick="go('S5')">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M2 9h14" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Extend pause</div>
+                  <div class="action-desc" id="extend-avail-desc">Up to 1 month available</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESUME MODAL -->
+          <div class="modal-overlay" id="resume-modal" style="display:none">
+            <div class="modal-sheet">
+              <div class="modal-handle"></div>
+              <div class="modal-title">Resume subscription?</div>
+              <div class="modal-body">Your subscription will restart immediately. Your next delivery will be scheduled as soon as possible.</div>
+              <div class="modal-actions">
+                <button class="btn-primary" onclick="go('S0-resumed')">Yes, resume now</button>
+                <button class="btn-secondary" onclick="hideResumeModal()">Keep paused</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S0-REMINDER — PAUSED + 1-WEEK REMINDER
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S0-reminder">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Manage Subscription</span>
+          </div>
+          <div class="screen-content">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
+              <span class="status-badge badge-reminder">
+                <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="#CC0000"/></svg>
+                Resuming soon
+              </span>
+            </div>
+
+            <div class="notif-banner notif-urgent">
+              <div class="notif-icon">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L1 15h16L9 2z" stroke="#CC0000" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8v3M9 13v.5" stroke="#CC0000" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div>
+                <div class="notif-title">Resuming in 7 days</div>
+                <div class="notif-body">Your subscription resumes on <strong style="color:var(--red)">14 Apr 2026</strong>. Your next delivery will be charged on that date. You can extend your pause if more time is needed.</div>
+              </div>
+            </div>
+
+            <div class="sub-card">
+              <div class="sub-card-top">
+                <div>
+                  <div class="sub-card-name">BalanceOil+ 300ml Lemon</div>
+                  <div class="sub-card-detail">Monthly subscription</div>
+                </div>
+                <div style="font-size:15px;font-weight:700;color:var(--text-primary)">€79.00</div>
+              </div>
+              <div class="sub-card-divider"></div>
+              <div class="sub-card-row" style="margin-bottom:6px">
+                <span>Pause started</span>
+                <strong>14 Jan 2026</strong>
+              </div>
+              <div class="sub-card-row" style="margin-bottom:6px">
+                <span>Resumes on</span>
+                <strong style="color:var(--red)">14 Apr 2026</strong>
+              </div>
+              <div class="sub-card-row">
+                <span>Pause duration</span>
+                <strong>3 months (maximum)</strong>
+              </div>
+            </div>
+
+            <div class="section-label">Actions</div>
+            <div class="pause-action-list">
+              <div class="pause-action-item" onclick="showResumeModal2()">
+                <div class="action-icon">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M5 3l10 6-10 6V3z" fill="#1A1A1A"/></svg>
+                </div>
+                <div class="action-text">
+                  <div class="action-title">Resume early</div>
+                  <div class="action-desc">Restart your subscription now</div>
+                </div>
+                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--text-tertiary);text-align:center;padding:4px 0">Maximum pause period reached — extension not available.</p>
+          </div>
+
+          <!-- RESUME MODAL 2 -->
+          <div class="modal-overlay" id="resume-modal-2" style="display:none">
+            <div class="modal-sheet">
+              <div class="modal-handle"></div>
+              <div class="modal-title">Resume subscription?</div>
+              <div class="modal-body">Your subscription will restart immediately. Your next delivery will be scheduled as soon as possible.</div>
+              <div class="modal-actions">
+                <button class="btn-primary" onclick="go('S0-resumed')">Yes, resume now</button>
+                <button class="btn-secondary" onclick="hideResumeModal2()">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S0-RESUMED — RESUMED CONFIRMATION STATE
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S0-resumed">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Manage Subscription</span>
+          </div>
+          <div class="screen-content" style="align-items:center;justify-content:center;text-align:center">
+            <div class="success-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 14l6 6 10-12" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="screen-headline" style="text-align:center;margin-bottom:10px">Subscription resumed</div>
+            <div class="screen-sub" style="text-align:center;max-width:260px">Your subscription is now active again. Your next delivery will be scheduled shortly.</div>
+            <div class="success-date-card" style="width:100%">
+              <div class="success-date-label">Next delivery</div>
+              <div class="success-date-value">~15 Apr 2026</div>
+            </div>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" onclick="go('S0')">Back to subscription</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S1 — CHOOSE DURATION
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S1">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Pause subscription</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:33%"></div></div>
+          <div class="screen-content">
+            <div class="screen-headline">How long do you need?</div>
+            <div class="screen-sub">Choose a pause duration. Your subscription will restart automatically when the period ends.</div>
+            <div class="duration-list" id="duration-list">
+              <div class="duration-option" id="dur-1" onclick="selectDuration(1)">
+                <div class="duration-radio"><div class="duration-radio-dot"></div></div>
+                <div class="duration-text">
+                  <div class="duration-label">1 month</div>
+                  <div class="duration-date" id="date-1">Resumes 24 Apr 2026</div>
+                </div>
+              </div>
+              <div class="duration-option" id="dur-2" onclick="selectDuration(2)">
+                <div class="duration-radio"><div class="duration-radio-dot"></div></div>
+                <div class="duration-text">
+                  <div class="duration-label">2 months</div>
+                  <div class="duration-date" id="date-2">Resumes 24 May 2026</div>
+                </div>
+              </div>
+              <div class="duration-option" id="dur-3" onclick="selectDuration(3)">
+                <div class="duration-radio"><div class="duration-radio-dot"></div></div>
+                <div class="duration-text">
+                  <div class="duration-label">3 months</div>
+                  <div class="duration-date" id="date-3">Resumes 24 Jun 2026</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" id="btn-dur" disabled onclick="go('S2')">Continue</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S2 — CONFIRM PAUSE
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S2">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Pause subscription</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:66%"></div></div>
+          <div class="screen-content">
+            <div class="screen-headline">Confirm your pause</div>
+            <div class="screen-sub">Review the details below before confirming.</div>
+            <div class="confirm-card">
+              <div class="confirm-row">
+                <span class="confirm-row-label">Subscription</span>
+                <span class="confirm-row-value">BalanceOil+ 300ml Lemon</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Pause starts</span>
+                <span class="confirm-row-value">Today, 24 Mar 2026</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Duration</span>
+                <span class="confirm-row-value" id="confirm-dur">—</span>
+              </div>
+              <div class="confirm-row">
+                <span class="confirm-row-label">Resumes on</span>
+                <span class="confirm-row-value" id="confirm-date">—</span>
+              </div>
+            </div>
+            <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6">Your subscription will restart automatically on the resumption date. You'll receive a reminder email 1 week before.</p>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" onclick="go('S3')">Confirm pause</button>
+            <button class="btn-secondary" onclick="goBack()">Go back</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S3 — PAUSE CONFIRMED
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S3">
+          <div class="nav-bar">
+            <span style="flex:1"></span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          <div class="screen-content" style="align-items:center;justify-content:center;text-align:center">
+            <div class="success-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="8" y="5" width="4" height="18" rx="2" fill="#1A1A1A"/><rect x="16" y="5" width="4" height="18" rx="2" fill="#1A1A1A"/></svg>
+            </div>
+            <div class="screen-headline" style="text-align:center;margin-bottom:10px">Subscription paused</div>
+            <div class="screen-sub" style="text-align:center;max-width:260px">Your subscription is now paused. A confirmation has been sent to your email.</div>
+            <div class="success-date-card" style="width:100%">
+              <div class="success-date-label">Resumes on</div>
+              <div class="success-date-value" id="s3-date">—</div>
+            </div>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" onclick="go('S0-paused')">Back to subscription</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S5 — EXTEND PAUSE
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S5">
+          <div class="nav-bar">
+            <button class="nav-back" onclick="goBack()">
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none"><path d="M7 1L1 7L7 13" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <span class="nav-title">Extend pause</span>
+          </div>
+          <div class="screen-content">
+            <div class="screen-headline">Extend your pause</div>
+            <div class="screen-sub" id="s5-sub">—</div>
+
+            <div class="extend-context">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+                <span style="font-size:13px;font-weight:600;color:var(--text-primary)">Pause duration used</span>
+                <span style="font-size:13px;font-weight:700;color:var(--text-primary)" id="s5-used">—</span>
+              </div>
+              <div class="extend-progress">
+                <div class="extend-progress-fill" id="s5-bar" style="width:0%"></div>
+              </div>
+            </div>
+
+            <div class="section-label">Available extension</div>
+            <div class="duration-list" id="s5-options"></div>
+            <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6" id="s5-note">Maximum pause period is 3 months in total.</p>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" onclick="go('S6')">Extend by 1 month</button>
+            <button class="btn-secondary" onclick="goBack()">Cancel</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             S6 — EXTEND CONFIRMED
+        ════════════════════════════════════════════ -->
+        <div class="screen" id="S6">
+          <div class="nav-bar">
+            <span style="flex:1"></span>
+          </div>
+          <div class="screen-content" style="align-items:center;justify-content:center;text-align:center">
+            <div class="success-icon">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 14l6 6 10-12" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <div class="screen-headline" style="text-align:center;margin-bottom:10px">Pause extended</div>
+            <div class="screen-sub" style="text-align:center;max-width:260px">Your pause has been extended by 1 month. A confirmation has been sent to your email.</div>
+            <div class="success-date-card" style="width:100%">
+              <div class="success-date-label">New resumption date</div>
+              <div class="success-date-value">14 Jun 2026</div>
+            </div>
+            <div style="margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;width:100%;text-align:left">
+              <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6">Maximum pause reached — no further extensions are possible. Your subscription will resume automatically on 14 Jun 2026.</p>
+            </div>
+          </div>
+          <div class="bottom-actions">
+            <button class="btn-primary" onclick="go('S0-paused')">Back to subscription</button>
+          </div>
+          <div class="home-indicator"><div class="home-bar"></div></div>
+        </div>
+
+      </div><!-- /device-frame -->
+    </div><!-- /device-inner -->
+  </div><!-- /device-shell -->
+</div><!-- /proto-shell -->
+
+<script>
+// ── STATE ──────────────────────────────────────────────────────
+let currentScreen = 'S0';
+let selectedDuration = null;
+let selectedExtension = null;
+const history = ['S0'];
+
+// Resumption dates from today (24 Mar 2026)
+const resumeDates = {
+  1: '24 Apr 2026',
+  2: '24 May 2026',
+  3: '24 Jun 2026'
+};
+
+// Extension dates (adding on top of chosen duration)
+const extendDates = {
+  1: { 1: '24 May 2026', 2: '24 Jun 2026' }, // 1 month pause → can add 1 or 2
+  2: { 1: '24 Jun 2026' },                    // 2 month pause → can add 1 only
+  3: {}                                        // 3 month pause → no extension
+};
+
+// Scenario → starting screen map
+const scenarioScreens = {
+  active: 'S0',
+  paused: 'S0-paused',
+  reminder: 'S0-reminder'
+};
+
+// ── NAVIGATION ─────────────────────────────────────────────────
+function go(id) {
+  hideResumeModal();
+  hideResumeModal2();
+
+  const cur = document.getElementById(currentScreen);
+  const next = document.getElementById(id);
+  if (!next) return;
+
+  if (cur) cur.classList.remove('active');
+  next.classList.add('active');
+  history.push(id);
+  currentScreen = id;
+
+  if (id === 'S2') updateConfirm();
+  if (id === 'S3') updateS3();
+  if (id === 'S0-paused') updatePausedScreen();
+  if (id === 'S5') updateExtendScreen();
+}
+
+function goBack() {
+  if (history.length <= 1) return;
+  history.pop();
+  const prev = history[history.length - 1];
+  const cur = document.getElementById(currentScreen);
+  const next = document.getElementById(prev);
+  if (cur) cur.classList.remove('active');
+  if (next) next.classList.add('active');
+  currentScreen = prev;
+}
+
+// ── SCENARIO SWITCHER ──────────────────────────────────────────
+function setScenario(name) {
+  document.querySelectorAll('.sw-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  const target = scenarioScreens[name] || 'S0';
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(target);
+  if (el) el.classList.add('active');
+  currentScreen = target;
+  history.length = 0;
+  history.push(target);
+
+  if (name === 'active') resetDuration();
+
+  // For demo switcher paused state use preset values
+  if (name === 'paused') {
+    selectedDuration = 2; // demo: 2 months used
+    updatePausedScreen();
+  }
+}
+
+// ── DURATION SELECTION ─────────────────────────────────────────
+function selectDuration(n) {
+  selectedDuration = n;
+  document.querySelectorAll('#duration-list .duration-option').forEach(el => el.classList.remove('selected'));
+  document.getElementById('dur-' + n).classList.add('selected');
+  const btn = document.getElementById('btn-dur');
+  btn.disabled = false;
+}
+
+function resetDuration() {
+  selectedDuration = null;
+  document.querySelectorAll('.duration-option').forEach(el => el.classList.remove('selected'));
+  const btn = document.getElementById('btn-dur');
+  if (btn) btn.disabled = true;
+}
+
+// ── UPDATE CONFIRM SCREEN ──────────────────────────────────────
+function updateConfirm() {
+  const n = selectedDuration || 1;
+  document.getElementById('confirm-dur').textContent = n + (n === 1 ? ' month' : ' months');
+  document.getElementById('confirm-date').textContent = resumeDates[n];
+}
+
+function updateS3() {
+  const n = selectedDuration || 1;
+  document.getElementById('s3-date').textContent = resumeDates[n];
+}
+
+// ── UPDATE PAUSED SCREEN ───────────────────────────────────────
+function updatePausedScreen() {
+  const n = selectedDuration || 1;
+  const resumeDate = resumeDates[n];
+  const available = 3 - n;
+
+  // Notification banner
+  const notifDate = document.getElementById('paused-notif-date');
+  if (notifDate) notifDate.textContent = resumeDate;
+
+  // Card rows
+  const resumesEl = document.getElementById('paused-resumes');
+  if (resumesEl) resumesEl.textContent = resumeDate;
+
+  const durEl = document.getElementById('paused-duration');
+  if (durEl) durEl.textContent = n + ' of 3 months used';
+
+  // Extend action desc
+  const extDesc = document.getElementById('extend-avail-desc');
+  if (extDesc) {
+    if (available === 0) extDesc.textContent = 'Not available — maximum reached';
+    else extDesc.textContent = 'Up to ' + available + ' month' + (available > 1 ? 's' : '') + ' available';
+  }
+
+  // Hide extend action if at max
+  const extItem = document.querySelector('#S0-paused .pause-action-item:last-child');
+  if (extItem) extItem.style.display = available === 0 ? 'none' : 'flex';
+}
+
+// ── UPDATE EXTEND SCREEN ───────────────────────────────────────
+function updateExtendScreen() {
+  const n = selectedDuration || 1;
+  const available = 3 - n;
+  const pct = (n / 3) * 100;
+
+  document.getElementById('s5-sub').textContent =
+    "You've used " + n + " of 3 months. You can extend by up to " + available + " month" + (available > 1 ? 's' : '') + ".";
+  document.getElementById('s5-used').textContent = n + ' / 3 months';
+  document.getElementById('s5-bar').style.width = pct + '%';
+
+  // Build extension options
+  const container = document.getElementById('s5-options');
+  container.innerHTML = '';
+  selectedExtension = null;
+
+  for (let i = 1; i <= available; i++) {
+    const newDate = extendDates[n] && extendDates[n][i] ? extendDates[n][i] : '—';
+    const opt = document.createElement('div');
+    opt.className = 'duration-option' + (available === 1 ? ' selected' : '');
+    opt.id = 'ext-' + i;
+    opt.onclick = () => selectExtension(i, available);
+    opt.innerHTML = `
+      <div class="duration-radio"><div class="duration-radio-dot" ${available === 1 ? 'style="display:block"' : ''}></div></div>
+      <div class="duration-text">
+        <div class="duration-label">+${i} month${i > 1 ? 's' : ''}</div>
+        <div class="duration-date">New resumption date: ${newDate}</div>
+      </div>`;
+    container.appendChild(opt);
+    if (available === 1) selectedExtension = 1;
+  }
+
+  // Note
+  document.getElementById('s5-note').textContent =
+    available === 1
+      ? 'Maximum pause period is 3 months. No further extensions after this.'
+      : 'Maximum pause period is 3 months in total.';
+
+  // Update confirm button
+  const btn = document.querySelector('#S5 .btn-primary');
+  if (btn) {
+    if (available === 1) {
+      btn.textContent = 'Extend by 1 month';
+      btn.disabled = false;
+    } else {
+      btn.textContent = selectedExtension ? 'Extend by ' + selectedExtension + ' month' + (selectedExtension > 1 ? 's' : '') : 'Select duration';
+      btn.disabled = !selectedExtension;
+    }
+  }
+}
+
+function selectExtension(i, available) {
+  selectedExtension = i;
+  for (let j = 1; j <= available; j++) {
+    const el = document.getElementById('ext-' + j);
+    if (el) {
+      el.classList.toggle('selected', j === i);
+      const dot = el.querySelector('.duration-radio-dot');
+      if (dot) dot.style.display = j === i ? 'block' : 'none';
+    }
+  }
+  const btn = document.querySelector('#S5 .btn-primary');
+  if (btn) {
+    btn.textContent = 'Extend by ' + i + ' month' + (i > 1 ? 's' : '');
+    btn.disabled = false;
+  }
+}
+
+// ── MODALS ─────────────────────────────────────────────────────
+function showResumeModal() {
+  document.getElementById('resume-modal').style.display = 'flex';
+}
+function hideResumeModal() {
+  const m = document.getElementById('resume-modal');
+  if (m) m.style.display = 'none';
+}
+function showResumeModal2() {
+  document.getElementById('resume-modal-2').style.display = 'flex';
+}
+function hideResumeModal2() {
+  const m = document.getElementById('resume-modal-2');
+  if (m) m.style.display = 'none';
+}
+
+// ── CLOCK ──────────────────────────────────────────────────────
+function tick() {
+  const n = new Date();
+  const h = String(n.getHours()).padStart(2,'0');
+  const m = String(n.getMinutes()).padStart(2,'0');
+  const c = document.getElementById('clk');
+  if (c) c.textContent = h + ':' + m;
+}
+tick();
+setInterval(tick, 15000);
+</script>
+</body>
+</html>
