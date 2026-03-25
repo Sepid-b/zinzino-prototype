@@ -115,6 +115,11 @@ svg { display: block; }
 <div class="proto-shell">
   <div class="proto-wordmark">Zinzino · Withdrawal flow</div>
 
+  <a href="https://sepid-b.github.io/zinzino-prototype" target="_blank" style="display:flex;align-items:center;gap:8px;margin-bottom:24px;padding:10px 18px;background:#fff;border:1px solid #E0E0E0;border-radius:50px;font-size:13px;font-weight:600;color:#111;text-decoration:none;box-shadow:0 1px 4px rgba(0,0,0,0.08);transition:background 0.15s;" onmouseover="this.style.background='#F7F7F7'" onmouseout="this.style.background='#fff'">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3.5L5.5 8 10 12.5" stroke="#111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to hub
+  </a>
+
   <div class="device-shell"><div class="device-inner"><div class="device-frame">
 
     <!-- S1: ENTRY -->
@@ -128,12 +133,12 @@ svg { display: block; }
       <div class="screen-content">
         <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="screen-headline">Withdraw your purchase</div>
-        <div class="screen-sub">You have the right to withdraw from this order within 14 days of receipt.</div>
+        <div class="screen-sub">You have the right to withdraw from this order within 30 days of receipt.</div>
         <div class="section-label">Your order</div>
         <div class="summary-card">
           <div class="summary-row"><span class="summary-label">Order</span><span class="summary-value">#ZZ-20481</span></div>
           <div class="summary-row"><span class="summary-label">Order date</span><span class="summary-value">28 Feb 2025</span></div>
-          <div class="summary-row"><span class="summary-label">Withdrawal deadline</span><span class="summary-value">14 Mar 2025</span></div>
+          <div class="summary-row"><span class="summary-label">Withdrawal deadline</span><span class="summary-value">30 Mar 2025</span></div>
           <div class="summary-row"><span class="summary-label">Items</span><span class="summary-value">3 products</span></div>
         </div>
         <div class="alert alert-warning">
@@ -160,10 +165,10 @@ svg { display: block; }
       <div class="screen-content">
         <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 12l8-4 8 4v8l-8 4-8-4v-8z" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/><path d="M16 8v8M8 12l8 4 8-4" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="screen-headline">Have you collected your package?</div>
-        <div class="screen-sub">This helps us process your return correctly.</div>
+        <div style="margin-bottom:22px"></div>
         <div class="option-list">
-          <div class="option-item" id="A-opt-yes" onclick="A_setCollected('yes')"><div class="option-text"><div class="option-title">Yes, I have the package</div><div class="option-desc">I can return the items</div></div><div class="radio-outer" id="A-r-yes"><div class="radio-inner"></div></div></div>
-          <div class="option-item" id="A-opt-no" onclick="A_setCollected('no')"><div class="option-text"><div class="option-title">No, I haven't collected it</div><div class="option-desc">Package is still with the carrier</div></div><div class="radio-outer" id="A-r-no"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-yes" onclick="A_setCollected('yes')"><div class="option-text"><div class="option-title">Yes</div></div><div class="radio-outer" id="A-r-yes"><div class="radio-inner"></div></div></div>
+          <div class="option-item" id="A-opt-no" onclick="A_setCollected('no')"><div class="option-text"><div class="option-title">No</div></div><div class="radio-outer" id="A-r-no"><div class="radio-inner"></div></div></div>
         </div>
         <div class="flex-spacer"></div>
         <div class="bottom-actions"><button class="btn-primary" id="A-btn-col" disabled onclick="A_go('A-reason')">Continue</button></div>
@@ -182,7 +187,7 @@ svg { display: block; }
       <div class="screen-content">
         <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><circle cx="16" cy="14" r="4" stroke="#111" stroke-width="1.5"/><path d="M9 26c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="screen-headline">Why are you returning?</div>
-        <div class="screen-sub">Select the reason that best describes your situation.</div>
+        <div style="margin-bottom:22px"></div>
         <!-- Alphabetical order. defect + dislike hidden when package not collected -->
         <div class="option-list" id="A-reason-list">
           <div class="option-item" id="A-opt-changed" onclick="A_setReason('changed')"><div class="option-text"><div class="option-title">Changed my mind</div></div><div class="radio-outer" id="A-r-changed"><div class="radio-inner"></div></div></div>
@@ -242,22 +247,49 @@ svg { display: block; }
       <div class="screen-content">
         <div style="margin-bottom:10px"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="#F2F2F2"/><path d="M8 10h16v14a2 2 0 01-2 2H10a2 2 0 01-2-2V10z" stroke="#111" stroke-width="1.5"/><path d="M6 10h20M13 10V8a1 1 0 011-1h4a1 1 0 011 1v2" stroke="#111" stroke-width="1.5" stroke-linecap="round"/></svg></div>
         <div class="screen-headline">Select items to return</div>
-        <div class="screen-sub">Product must be unopened and in original condition.</div>
-        <!-- Strong opened notice -->
-        <div class="opened-notice">
+        <div style="margin-bottom:20px"></div>
+
+        <!-- Kit parent row -->
+        <div style="border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:8px;overflow:hidden">
+          <!-- Kit header -->
+          <div style="display:flex;align-items:center;gap:12px;padding:13px 14px;cursor:pointer;background:var(--surface-2);border-bottom:1px solid var(--border);" onclick="A_toggleKit()" id="A-kit-row">
+            <div class="checkbox" id="A-kit-chk" style="flex-shrink:0"></div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:600;color:var(--text-primary)">BalanceOil Start kit</div>
+              <div style="font-size:12px;color:var(--text-secondary);margin-top:2px">3 items</div>
+            </div>
+          </div>
+          <!-- Sub-items -->
+          <div id="A-subitems">
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 14px 11px 46px;cursor:pointer;border-bottom:1px solid var(--border);background:var(--surface);" onclick="A_toggleProd(1)" id="A-p1">
+              <div class="checkbox" id="A-c1" style="flex-shrink:0;width:18px;height:18px;border-radius:5px;"></div>
+              <div class="product-img" style="width:36px;height:36px;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div>
+              <div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 14px 11px 46px;cursor:pointer;border-bottom:1px solid var(--border);background:var(--surface);" onclick="A_toggleProd(2)" id="A-p2">
+              <div class="checkbox" id="A-c2" style="flex-shrink:0;width:18px;height:18px;border-radius:5px;"></div>
+              <div class="product-img" style="width:36px;height:36px;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div>
+              <div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 14px 11px 46px;cursor:pointer;background:var(--surface);" onclick="A_toggleProd(3)" id="A-p3">
+              <div class="checkbox" id="A-c3" style="flex-shrink:0;width:18px;height:18px;border-radius:5px;"></div>
+              <div class="product-img" style="width:36px;height:36px;"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div>
+              <div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-spacer"></div>
+
+        <!-- Red notice just above button -->
+        <div class="opened-notice" style="margin-bottom:14px">
           <div class="opened-notice-title">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#CC0000" stroke-width="1.4"/><path d="M8 4.5V8.5" stroke="#CC0000" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="11" r=".9" fill="#CC0000"/></svg>
             Opened products CANNOT be returned
           </div>
           <div class="opened-notice-body">The full retail price of any opened item will be deducted from your refund.</div>
         </div>
-        <div class="product-list">
-          <div class="product-card" id="A-p1" onclick="A_toggleProd(1)"><div class="checkbox" id="A-c1"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Zinzino Balance Oil+</div><div class="product-qty">1 × 300 ml</div></div></div>
-          <div class="product-card" id="A-p2" onclick="A_toggleProd(2)"><div class="checkbox" id="A-c2"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">ZinoBiotic+</div><div class="product-qty">1 × 180 g</div></div></div>
-          <div class="product-card" id="A-p3" onclick="A_toggleProd(3)"><div class="checkbox" id="A-c3"></div><div class="product-img"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="13" rx="2" stroke="#C8C8C8" stroke-width="1.2"/><path d="M6 5V4a4 4 0 018 0v1" stroke="#C8C8C8" stroke-width="1.2"/></svg></div><div class="product-info"><div class="product-name">Xtend+</div><div class="product-qty">1 × 60 capsules</div></div></div>
-        </div>
-        <div class="flex-spacer"></div>
-        <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" disabled onclick="A_go('A-confirm')">Select items to continue</button></div>
+        <div class="bottom-actions"><button class="btn-primary" id="A-btn-prod" disabled onclick="A_goToConfirm()">Select items to continue</button></div>
       </div>
     </div>
 
@@ -272,15 +304,12 @@ svg { display: block; }
       <div class="progress-bar"><div class="progress-fill" style="width:90%"></div></div>
       <div class="screen-content">
         <div class="screen-headline">Confirm your return</div>
-        <div class="screen-sub">Review before submitting.</div>
+        <div style="margin-bottom:20px"></div>
 
-        <!-- Items being returned -->
+        <!-- Items being returned — populated dynamically -->
         <div class="section-label">Items being returned</div>
         <div style="border:1px solid var(--border);border-radius:var(--radius-lg);margin-bottom:20px">
-          <div style="padding:0 16px">
-            <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">Zinzino Balance Oil+</div><div class="return-item-qty">×1</div></div>
-            <div class="return-item"><div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div><div class="return-item-name">ZinoBiotic+</div><div class="return-item-qty">×1</div></div>
-          </div>
+          <div style="padding:0 16px" id="A-confirm-items"></div>
         </div>
 
         <!-- Email — primary section -->
@@ -311,18 +340,18 @@ svg { display: block; }
 
           <!-- Deadline + instructions info -->
           <div class="deadline-info" style="width:100%;text-align:left">
-            <div class="deadline-row">
+            <div class="deadline-row" id="A-done-deadline-row">
               <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="#111" stroke-width="1.2"/><path d="M5 1.5V4M11 1.5V4M2 6.5h12" stroke="#111" stroke-width="1.2" stroke-linecap="round"/></svg></div>
               <div class="deadline-text">
-                <div class="deadline-title">Return before 21 Mar 2025</div>
+                <div class="deadline-title">Return before 30 Mar 2025</div>
                 <div class="deadline-sub">Items must be received by the warehouse before this date</div>
               </div>
             </div>
             <div class="deadline-row" id="A-done-slip-row">
               <div class="deadline-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12v9a1 1 0 01-1 1H3a1 1 0 01-1-1V4z" stroke="#111" stroke-width="1.2"/><path d="M2 4l6 5 6-5" stroke="#111" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <div class="deadline-text">
+              <div class="deadline-text" id="A-done-slip-text">
                 <div class="deadline-title">Check your email</div>
-                <div class="deadline-sub">Return instructions and return slip will be sent to your email within the next 24 hours</div>
+                <div class="deadline-sub" id="A-done-slip-sub">Return instructions and return slip will be sent to your email within the next 24 hours</div>
               </div>
             </div>
           </div>
@@ -420,19 +449,91 @@ function A_goRedirect(type) {
 }
 
 function A_goToDone() {
+  var notCollected = A_collected === 'no';
+  // Deadline row — not relevant if package not collected
+  document.getElementById('A-done-deadline-row').style.display = notCollected ? 'none' : 'flex';
+  // Slip row — always show, but different text for not-collected
   var slipRow = document.getElementById('A-done-slip-row');
-  slipRow.style.display = A_collected === 'no' ? 'none' : 'flex';
+  var slipSub = document.getElementById('A-done-slip-sub');
+  slipRow.style.display = 'flex';
+  if (notCollected) {
+    slipSub.textContent = 'As soon as we receive your product, we\'ll send you a confirmation email and begin processing it right away.';
+  } else {
+    slipSub.textContent = 'Return instructions and return slip will be sent to your email within the next 24 hours';
+  }
   A_go('A-done');
 }
 
+var ITEMS = {
+  1: { name: 'Zinzino Balance Oil+', qty: '1 × 300 ml' },
+  2: { name: 'ZinoBiotic+', qty: '1 × 180 g' },
+  3: { name: 'Xtend+', qty: '1 × 60 capsules' }
+};
+var TOTAL_ITEMS = 3;
+var checkSVG = '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var dashSVG = '<svg width="10" height="2" viewBox="0 0 10 2" fill="none"><path d="M1 1h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>';
+
+function A_updateKitChk() {
+  var chk = document.getElementById('A-kit-chk');
+  if (A_sel.length === 0) {
+    chk.classList.remove('checked'); chk.innerHTML = '';
+  } else if (A_sel.length === TOTAL_ITEMS) {
+    chk.classList.add('checked'); chk.innerHTML = checkSVG;
+  } else {
+    chk.classList.add('checked'); chk.innerHTML = dashSVG; // partial — dash
+  }
+  var btn = document.getElementById('A-btn-prod');
+  btn.disabled = A_sel.length === 0;
+  btn.textContent = A_sel.length === 0 ? 'Select items to continue' :
+    A_sel.length === TOTAL_ITEMS ? 'Continue with full kit' :
+    'Continue with ' + A_sel.length + ' item' + (A_sel.length > 1 ? 's' : '');
+}
+
+function A_toggleKit() {
+  var allSelected = A_sel.length === TOTAL_ITEMS;
+  A_sel = allSelected ? [] : [1, 2, 3];
+  [1, 2, 3].forEach(function(n) {
+    var chk = document.getElementById('A-c' + n);
+    var row = document.getElementById('A-p' + n);
+    if (A_sel.includes(n)) {
+      chk.classList.add('checked'); chk.innerHTML = checkSVG;
+      row.style.background = 'var(--surface-2)';
+    } else {
+      chk.classList.remove('checked'); chk.innerHTML = '';
+      row.style.background = 'var(--surface)';
+    }
+  });
+  A_updateKitChk();
+}
+
 function A_toggleProd(n) {
-  var card = document.getElementById('A-p'+n), chk = document.getElementById('A-c'+n);
+  var chk = document.getElementById('A-c' + n);
+  var row = document.getElementById('A-p' + n);
   var i = A_sel.indexOf(n);
-  if (i > -1) { A_sel.splice(i,1); card.classList.remove('selected'); chk.classList.remove('checked'); chk.innerHTML=''; }
-  else { A_sel.push(n); card.classList.add('selected'); chk.classList.add('checked'); chk.innerHTML='<svg width="12" height="10" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'; }
-  var btn = document.getElementById('A-btn-prod'), c = A_sel.length;
-  btn.disabled = c===0;
-  btn.textContent = c===0 ? 'Select items to continue' : 'Continue with '+c+' item'+(c>1?'s':'');
+  if (i > -1) {
+    A_sel.splice(i, 1);
+    chk.classList.remove('checked'); chk.innerHTML = '';
+    row.style.background = 'var(--surface)';
+  } else {
+    A_sel.push(n);
+    chk.classList.add('checked'); chk.innerHTML = checkSVG;
+    row.style.background = 'var(--surface-2)';
+  }
+  A_updateKitChk();
+}
+
+function A_goToConfirm() {
+  var el = document.getElementById('A-confirm-items');
+  var img = '<div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div>';
+  // Not collected = whole package, always show kit name
+  if (A_collected === 'no' || A_sel.length === TOTAL_ITEMS) {
+    el.innerHTML = '<div class="return-item">' + img + '<div class="return-item-name">BalanceOil Start kit</div><div class="return-item-qty">×1</div></div>';
+  } else {
+    el.innerHTML = A_sel.sort().map(function(n) {
+      return '<div class="return-item">' + img + '<div class="return-item-name">' + ITEMS[n].name + '</div><div class="return-item-qty">×1</div></div>';
+    }).join('');
+  }
+  A_go('A-confirm');
 }
 </script>
 </body>
