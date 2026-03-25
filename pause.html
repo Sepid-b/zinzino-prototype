@@ -84,7 +84,7 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
 .status-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:var(--radius-pill);font-size:12px;font-weight:600;letter-spacing:.02em}
 .badge-active{background:#F0FAF5;color:#1A7A4A;border:1px solid #A8DFC0}
 .badge-paused{background:#FFF8EC;color:#8A5000;border:1px solid #F5D49A}
-.badge-reminder{background:var(--red-bg);color:var(--red);border:1px solid var(--red-border)}
+.badge-reminder{background:#EEF4FF;color:#1A56CC;border:1px solid #BFCFEE}
 
 /* SUBSCRIPTION CARD */
 .sub-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:16px;margin-bottom:16px}
@@ -160,14 +160,23 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
 .extend-progress{height:6px;background:var(--border);border-radius:3px;margin-top:10px;overflow:hidden}
 .extend-progress-fill{height:100%;background:var(--text-primary);border-radius:3px;transition:width .4s ease}
 
+/* HUB LINK */
+
 /* HOME INDICATOR */
 .home-indicator{height:34px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--surface)}
 .home-bar{width:120px;height:5px;background:var(--text-primary);border-radius:3px;opacity:.2}
+.hub-back{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text-tertiary);text-decoration:none;padding:6px 14px;border-radius:var(--radius-pill);border:1px solid var(--border-strong);background:var(--surface);margin-bottom:20px;transition:all .15s}
+.hub-back:hover{color:var(--text-primary);border-color:var(--text-primary)}
 </style>
 </head>
 <body>
 <div class="proto-shell">
   <div class="proto-wordmark">Zinzino · Pause Flow Prototype</div>
+
+  <a href="index.html" class="hub-back">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M8 2L4 6l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to hub
+  </a>
 
   <div class="switcher-label">Simulate account state</div>
   <div class="switcher">
@@ -244,16 +253,7 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
                 </div>
                 <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <div class="action-item" onclick="">
-                <div class="action-icon">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#1A1A1A" stroke-width="1.8"/><path d="M9 6v3l2 2" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                <div class="action-text">
-                  <div class="action-title">Skip next delivery</div>
-                  <div class="action-desc">Skip 15 Apr 2026</div>
-                </div>
-                <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
+
               <div class="action-item" onclick="">
                 <div class="action-icon">
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M9 3l6 6-6 6" stroke="#1A1A1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -384,19 +384,9 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
           <div class="screen-content">
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px">
               <span class="status-badge badge-reminder">
-                <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="#CC0000"/></svg>
+                <svg width="7" height="7" viewBox="0 0 7 7"><circle cx="3.5" cy="3.5" r="3.5" fill="#1A56CC"/></svg>
                 Resuming soon
               </span>
-            </div>
-
-            <div class="notif-banner notif-urgent">
-              <div class="notif-icon">
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L1 15h16L9 2z" stroke="#CC0000" stroke-width="1.5" stroke-linejoin="round"/><path d="M9 8v3M9 13v.5" stroke="#CC0000" stroke-width="1.5" stroke-linecap="round"/></svg>
-              </div>
-              <div>
-                <div class="notif-title">Resuming in 7 days</div>
-                <div class="notif-body">Your subscription resumes on <strong style="color:var(--red)">14 Apr 2026</strong>. Your next delivery will be charged on that date. You can extend your pause if more time is needed.</div>
-              </div>
             </div>
 
             <div class="sub-card">
@@ -414,7 +404,7 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
               </div>
               <div class="sub-card-row" style="margin-bottom:6px">
                 <span>Resumes on</span>
-                <strong style="color:var(--red)">14 Apr 2026</strong>
+                <strong>14 Apr 2026</strong>
               </div>
               <div class="sub-card-row">
                 <span>Pause duration</span>
@@ -435,7 +425,6 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
                 <svg class="action-chevron" width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1L6 6L1 11" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
-            <p style="font-size:12px;color:var(--text-tertiary);text-align:center;padding:4px 0">Maximum pause period reached — extension not available.</p>
           </div>
 
           <!-- RESUME MODAL 2 -->
@@ -641,11 +630,9 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;co
             <div class="screen-sub" style="text-align:center;max-width:260px">Your pause has been extended by 1 month. A confirmation has been sent to your email.</div>
             <div class="success-date-card" style="width:100%">
               <div class="success-date-label">New resumption date</div>
-              <div class="success-date-value">14 Jun 2026</div>
+              <div class="success-date-value" id="s6-date">—</div>
             </div>
-            <div style="margin-top:12px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-md);padding:12px;width:100%;text-align:left">
-              <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6">Maximum pause reached — no further extensions are possible. Your subscription will resume automatically on 14 Jun 2026.</p>
-            </div>
+            <p style="font-size:12px;color:var(--text-tertiary);line-height:1.6;text-align:center;padding:0 16px" id="s6-note"></p>
           </div>
           <div class="bottom-actions">
             <button class="btn-primary" onclick="go('S0-paused')">Back to subscription</button>
@@ -704,6 +691,7 @@ function go(id) {
   if (id === 'S3') updateS3();
   if (id === 'S0-paused') updatePausedScreen();
   if (id === 'S5') updateExtendScreen();
+  if (id === 'S6') { selectedDuration = (selectedDuration || 1) + (selectedExtension || 1); updateS6(); }
 }
 
 function goBack() {
@@ -844,6 +832,19 @@ function updateExtendScreen() {
       btn.textContent = selectedExtension ? 'Extend by ' + selectedExtension + ' month' + (selectedExtension > 1 ? 's' : '') : 'Select duration';
       btn.disabled = !selectedExtension;
     }
+  }
+}
+
+
+// ── UPDATE S6 SCREEN ──────────────────────────────────────────
+function updateS6() {
+  const n = selectedDuration;
+  const el = document.getElementById('s6-date');
+  if (el) el.textContent = resumeDates[n] || '—';
+  const note = document.getElementById('s6-note');
+  if (note) {
+    if (n >= 3) note.textContent = 'Maximum pause reached — no further extensions are possible. Your subscription will resume automatically.';
+    else note.style.display = 'none';
   }
 }
 
