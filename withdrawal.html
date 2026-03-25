@@ -367,6 +367,14 @@ svg { display: block; }
 
 <script>
 var A_collected = null, A_reason = null, A_sel = [];
+var ITEMS = {
+  1: { name: 'Zinzino Balance Oil+', qty: '1 × 300 ml' },
+  2: { name: 'ZinoBiotic+', qty: '1 × 180 g' },
+  3: { name: 'Xtend+', qty: '1 × 60 capsules' }
+};
+var TOTAL_ITEMS = 3;
+var checkSVG = '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var dashSVG = '<svg width="10" height="2" viewBox="0 0 10 2" fill="none"><path d="M1 1h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>';
 
 function A_go(id) {
   document.querySelectorAll('.device-frame .screen').forEach(function(s){s.classList.remove('active');});
@@ -478,15 +486,6 @@ function A_goToDone() {
   A_go('A-done');
 }
 
-var ITEMS = {
-  1: { name: 'Zinzino Balance Oil+', qty: '1 × 300 ml' },
-  2: { name: 'ZinoBiotic+', qty: '1 × 180 g' },
-  3: { name: 'Xtend+', qty: '1 × 60 capsules' }
-};
-var TOTAL_ITEMS = 3;
-var checkSVG = '<svg width="11" height="9" viewBox="0 0 12 10" fill="none"><path d="M1 5l3.5 3.5L11 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-var dashSVG = '<svg width="10" height="2" viewBox="0 0 10 2" fill="none"><path d="M1 1h8" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>';
-
 function A_updateKitChk() {
   var chk = document.getElementById('A-kit-chk');
   if (A_sel.length === 0) {
@@ -534,20 +533,6 @@ function A_toggleProd(n) {
     row.style.background = 'var(--surface-2)';
   }
   A_updateKitChk();
-}
-
-function A_goToConfirm() {
-  var el = document.getElementById('A-confirm-items');
-  var img = '<div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div>';
-  // Not collected = whole package, always show kit name
-  if (A_collected === 'no' || A_sel.length === TOTAL_ITEMS) {
-    el.innerHTML = '<div class="return-item">' + img + '<div class="return-item-name">BalanceOil Start kit</div><div class="return-item-qty">×1</div></div>';
-  } else {
-    el.innerHTML = A_sel.sort().map(function(n) {
-      return '<div class="return-item">' + img + '<div class="return-item-name">' + ITEMS[n].name + '</div><div class="return-item-qty">×1</div></div>';
-    }).join('');
-  }
-  A_go('A-confirm');
 }
 </script>
 </body>
