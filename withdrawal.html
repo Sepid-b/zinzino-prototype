@@ -431,7 +431,21 @@ function A_setReason(v) {
 
 function A_reasonContinue() {
   if (A_reason === 'defect') { A_goRedirect('defect'); return; }
-  A_go(A_collected === 'no' ? 'A-confirm' : 'A-products');
+  A_goToConfirm(A_collected === 'no' ? 'A-confirm' : 'A-products');
+}
+
+function A_goToConfirm(next) {
+  // If going straight to confirm (not-collected path), populate items first
+  var el = document.getElementById('A-confirm-items');
+  var img = '<div class="return-item-img"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="1" y="3" width="12" height="10" rx="1.5" stroke="#C8C8C8" stroke-width="1.1"/><path d="M4 3V2.5A3 3 0 0110 2.5V3" stroke="#C8C8C8" stroke-width="1.1"/></svg></div>';
+  if (A_collected === 'no' || A_sel.length === TOTAL_ITEMS) {
+    el.innerHTML = '<div class="return-item">' + img + '<div class="return-item-name">BalanceOil Start kit</div><div class="return-item-qty">×1</div></div>';
+  } else {
+    el.innerHTML = A_sel.sort().map(function(n) {
+      return '<div class="return-item">' + img + '<div class="return-item-name">' + ITEMS[n].name + '</div><div class="return-item-qty">×1</div></div>';
+    }).join('');
+  }
+  A_go(next || 'A-confirm');
 }
 
 function A_goRedirect(type) {
@@ -446,6 +460,7 @@ function A_goRedirect(type) {
   document.getElementById('A-redir-sub').textContent = c.sub;
   document.getElementById('A-redir-btn').textContent = c.btn;
   A_go('A-redirect');
+}
 }
 
 function A_goToDone() {
