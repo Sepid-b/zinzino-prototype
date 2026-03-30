@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zinzino · Cancel Subscription</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --k-black: #1A1A1A;
+  --k-gray1: #F5F5F5;
+  --k-gray2: #E8E8E8;
+  --k-gray3: #ADADAD;
+  --k-gray4: #666666;
+  --k-green: #00A67E;
+  --k-green-bg: #E6F7F2;
+  --k-green-b: #B3DDD4;
+  --k-red: #E53E3E;
+  --k-red-bg: #FFF5F5;
+  --k-red-b: #FED7D7;
+  --k-amber: #C05621;
+  --k-amber-bg: #FFFBEB;
+  --k-amber-b: #FBD38D;
+  --k-blue: #0055FF;
+  --k-blue-bg: #F0F4FF;
+  --k-blue-b: #BFDBFE;
+  --radius: 16px;
+  --radius-pill: 100px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Inter', sans-serif; background: #EDEDED; min-height: 100vh; display: flex; align-items: flex-start; justify-content: center; padding: 24px 12px 72px; }
+.wrap { display: flex; flex-direction: column; align-items: center; }
+.hub-link { font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--k-gray4); text-decoration: none; margin-bottom: 14px; display: flex; align-items: center; gap: 5px; transition: color .12s; }
+.hub-link:hover { color: var(--k-black); }
+.demo-switcher { background: #fff; border-radius: 14px; padding: 14px 16px; margin-bottom: 16px; width: 375px; max-width: calc(100vw - 24px); box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.demo-label { font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: var(--k-gray3); margin-bottom: 10px; }
+.demo-row { display: flex; flex-direction: column; gap: 9px; }
+.demo-group { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.demo-group-label { font-size: 10px; font-weight: 600; color: var(--k-gray4); min-width: 84px; flex-shrink: 0; }
+.demo-btn { padding: 5px 13px; border-radius: 100px; border: 1.5px solid var(--k-gray2); background: transparent; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; color: var(--k-gray4); cursor: pointer; transition: all .12s; }
+.demo-btn.on { background: var(--k-black); border-color: var(--k-black); color: #fff; }
+.device-shell { background: #1A1A1A; border-radius: 54px; padding: 14px; box-shadow: 0 40px 100px rgba(0,0,0,.32), 0 2px 8px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.07); }
+.device-inner { border-radius: 42px; overflow: hidden; background: #fff; }
+.phone { width: 375px; background: #fff; border-radius: 0; box-shadow: none; display: flex; flex-direction: column; height: 812px; position: relative; overflow: hidden; }
+.sbar { background: #fff; padding: 13px 26px 6px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; color: var(--k-black); flex-shrink: 0; }
+.nav { background: #fff; padding: 10px 18px 12px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--k-gray2); flex-shrink: 0; }
+.back-btn { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--k-gray2); background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background .12s; }
+.back-btn:active { background: var(--k-gray1); }
+.back-btn.hidden { visibility: hidden; pointer-events: none; }
+.nav-title { font-size: 14px; font-weight: 600; color: var(--k-black); flex: 1; }
+.progress-bar { height: 2px; background: var(--k-gray2); flex-shrink: 0; }
+.progress-fill { height: 100%; background: var(--k-black); transition: width .3s ease; }
+.screen { flex: 1; overflow-y: auto; padding: 22px 20px 32px; display: flex; flex-direction: column; -webkit-overflow-scrolling: touch; }
+.headline { font-size: 26px; font-weight: 900; line-height: 1.13; letter-spacing: -.5px; color: var(--k-black); margin-bottom: 6px; }
+.subtext { font-size: 14px; color: var(--k-gray4); line-height: 1.6; margin-bottom: 22px; }
+.section-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--k-gray3); margin-bottom: 10px; }
+.btn-primary { width: 100%; height: 52px; border-radius: var(--radius-pill); background: var(--k-black); color: #fff; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; transition: opacity .15s; }
+.btn-primary:active { opacity: .8; }
+.btn-primary[disabled] { background: var(--k-gray2); color: var(--k-gray3); cursor: not-allowed; }
+.btn-secondary { width: 100%; height: 52px; border-radius: var(--radius-pill); background: transparent; color: var(--k-black); font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; border: 1.5px solid var(--k-gray2); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; transition: background .12s; }
+.btn-secondary:active { background: var(--k-gray1); }
+.btn-ghost { width: 100%; height: 44px; background: transparent; color: var(--k-gray4); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; border: none; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; flex-shrink: 0; }
+.btn-danger { width: 100%; height: 52px; border-radius: var(--radius-pill); background: transparent; color: var(--k-red); font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; border: 1.5px solid var(--k-red-b); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; flex-shrink: 0; transition: background .12s; }
+.btn-danger:active { background: var(--k-red-bg); }
+.btn-stack { display: flex; flex-direction: column; gap: 10px; margin-top: auto; padding-top: 24px; }
+.option-list { display: flex; flex-direction: column; gap: 9px; margin-bottom: 6px; }
+.option-card { border: 1.5px solid var(--k-gray2); border-radius: var(--radius); padding: 15px 16px; display: flex; align-items: flex-start; gap: 13px; cursor: pointer; background: #fff; transition: border-color .12s, background .12s; }
+.option-card.selected { border-color: var(--k-black); background: var(--k-gray1); }
+.option-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--k-gray3); flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: border-color .12s; margin-top: 1px; }
+.option-card.selected .option-radio { border-color: var(--k-black); }
+.radio-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--k-black); display: none; }
+.option-card.selected .radio-dot { display: block; }
+.option-text { font-size: 14px; font-weight: 500; color: var(--k-black); line-height: 1.4; }
+.other-wrap { max-height: 0; overflow: hidden; transition: max-height .28s ease; }
+.other-wrap.open { max-height: 110px; }
+.other-textarea { width: 100%; margin-top: 10px; padding: 10px 12px; border-radius: 10px; border: 1.5px solid var(--k-gray2); font-family: 'Inter', sans-serif; font-size: 13px; color: var(--k-black); background: #fff; resize: none; min-height: 68px; line-height: 1.5; outline: none; display: block; }
+.other-textarea:focus { border-color: var(--k-black); }
+.detail-list { border: 1.5px solid var(--k-gray2); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
+.detail-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--k-gray2); font-size: 13px; }
+.detail-row:last-child { border-bottom: none; }
+.detail-key { color: var(--k-gray4); }
+.detail-val { color: var(--k-black); font-weight: 600; }
+.warning-box { border-radius: 13px; padding: 13px 15px; display: flex; gap: 11px; align-items: flex-start; margin-bottom: 14px; }
+.warning-box.red { background: var(--k-red-bg); border: 1px solid var(--k-red-b); }
+.warning-box.amber { background: var(--k-amber-bg); border: 1px solid var(--k-amber-b); }
+.wb-body { font-size: 13px; line-height: 1.55; font-weight: 500; }
+.warning-box.red .wb-body { color: var(--k-red); }
+.warning-box.amber .wb-body { color: var(--k-amber); }
+.ptrack-wrap { margin-bottom: 18px; }
+.ptrack { display: flex; align-items: center; margin-bottom: 7px; }
+.ptrack-dot { width: 28px; height: 28px; border-radius: 50%; background: var(--k-gray2); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: var(--k-gray3); flex-shrink: 0; }
+.ptrack-dot.done { background: var(--k-black); color: #fff; }
+.ptrack-dot.goal { background: var(--k-gray1); border: 2px dashed var(--k-gray3); color: var(--k-gray3); }
+.ptrack-line { flex: 1; height: 2px; background: var(--k-gray2); }
+.ptrack-line.done { background: var(--k-black); }
+.ptrack-footnote { display: flex; justify-content: space-between; }
+.ptrack-fn-l { font-size: 10px; color: var(--k-gray4); }
+.ptrack-fn-r { font-size: 10px; font-weight: 700; color: var(--k-black); }
+.stat-row { display: flex; gap: 8px; margin-bottom: 16px; }
+.stat-pill { flex: 1; background: var(--k-gray1); border-radius: 14px; padding: 14px 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.stat-num { font-size: 20px; font-weight: 900; color: var(--k-black); letter-spacing: -.03em; line-height: 1; }
+.stat-sub { font-size: 9px; font-weight: 600; color: var(--k-gray3); line-height: 1.3; text-transform: uppercase; letter-spacing: .02em; }
+.loss-list { border: 1.5px solid var(--k-gray2); border-radius: 14px; overflow: hidden; margin-bottom: 16px; }
+.loss-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid var(--k-gray2); background: #fff; }
+.loss-item:last-child { border-bottom: none; }
+.loss-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--k-gray1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.loss-text { flex: 1; min-width: 0; }
+.loss-title { font-size: 13px; font-weight: 600; color: var(--k-black); }
+.loss-note { font-size: 11px; color: var(--k-gray4); margin-top: 1px; }
+.loss-badge { font-size: 9px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 3px 8px; border-radius: 100px; flex-shrink: 0; white-space: nowrap; }
+.loss-badge.perm { background: var(--k-red-bg); color: var(--k-red); border: 1px solid var(--k-red-b); }
+.loss-badge.soon { background: var(--k-amber-bg); color: var(--k-amber); border: 1px solid var(--k-amber-b); }
+.loss-badge.safe { background: var(--k-gray1); color: var(--k-gray3); border: 1px solid var(--k-gray2); }
+.done-wrap { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 24px; }
+.done-icon { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; flex-shrink: 0; }
+.done-title { font-size: 26px; font-weight: 900; letter-spacing: -.5px; color: var(--k-black); margin-bottom: 8px; }
+.done-sub { font-size: 14px; color: var(--k-gray4); line-height: 1.6; margin-bottom: 24px; max-width: 280px; }
+.summary-card { width: 100%; border: 1.5px solid var(--k-gray2); border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; text-align: left; }
+.summary-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 16px; border-bottom: 1px solid var(--k-gray2); font-size: 13px; }
+.summary-row:last-child { border-bottom: none; }
+.summary-key { color: var(--k-gray4); }
+.summary-val { color: var(--k-black); font-weight: 600; }
+.zino-reminder { width: 100%; background: var(--k-amber-bg); border: 1px solid var(--k-amber-b); border-radius: 13px; padding: 12px 14px; display: flex; gap: 9px; align-items: flex-start; font-size: 12px; color: var(--k-amber); line-height: 1.55; margin-bottom: 20px; text-align: left; }
+.info-box { background: var(--k-gray1); border-radius: 13px; padding: 13px 15px; margin-bottom: 14px; }
+.info-box-body { font-size: 13px; color: var(--k-gray4); line-height: 1.55; }
+/* Modal */
+.modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0); pointer-events: none; transition: background .25s ease; z-index: 10; border-radius: 44px; }
+.modal-overlay.show { background: rgba(0,0,0,0.38); pointer-events: all; }
+.modal-sheet { position: absolute; bottom: 0; left: 0; right: 0; background: #fff; border-radius: 24px 24px 0 0; padding: 0 20px 40px; transform: translateY(100%); transition: transform .32s cubic-bezier(.32,.72,0,1); z-index: 11; }
+.modal-sheet.show { transform: translateY(0); }
+.modal-handle { width: 36px; height: 4px; border-radius: 2px; background: var(--k-gray2); margin: 12px auto 18px; }
+.modal-feat { display: flex; flex-direction: column; gap: 12px; margin: 14px 0 20px; }
+.modal-feat-row { display: flex; align-items: center; gap: 12px; }
+.modal-feat-icon { width: 32px; height: 32px; border-radius: 9px; background: var(--k-gray1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.modal-feat-text { font-size: 14px; font-weight: 500; color: var(--k-black); line-height: 1.4; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+.screen-in { animation: fadeUp .17s ease both; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="index.html" class="hub-link">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 3.5L4.5 7L9 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back to hub
+  </a>
+
+  <div style="font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#999;margin-bottom:10px">Zinzino · Cancel Subscription</div>
+
+  <div class="demo-switcher">
+    <div class="demo-label">Simulate account state</div>
+    <div class="demo-row">
+      <div class="demo-group">
+        <span class="demo-group-label">Subscription</span>
+        <button class="demo-btn on" id="d-before" onclick="setDemo('month','before')">Before month 4</button>
+        <button class="demo-btn" id="d-after" onclick="setDemo('month','after')">After month 4</button>
+      </div>
+      <div class="demo-group" id="kit-row">
+        <span class="demo-group-label">Kit type</span>
+        <button class="demo-btn on" id="d-premier" onclick="setDemo('kit','premier')">Premier + Test</button>
+        <button class="demo-btn" id="d-standard" onclick="setDemo('kit','standard')">Standard kit</button>
+      </div>
+      <div class="demo-group">
+        <span class="demo-group-label">Billing cycle</span>
+        <button class="demo-btn on" id="d-regular" onclick="setDemo('billing','regular')">Regular month</button>
+        <button class="demo-btn" id="d-nodelivery" onclick="setDemo('billing','nodelivery')">No-delivery month</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="device-shell"><div class="device-inner">
+  <div class="phone">
+    <div class="sbar">
+      <span id="clk">09:41</span>
+      <div style="display:flex;gap:5px;align-items:center">
+        <svg width="13" height="9" viewBox="0 0 13 9"><rect x="0" y="4" width="2.5" height="5" rx=".7" fill="currentColor"/><rect x="3.5" y="2.5" width="2.5" height="6.5" rx=".7" fill="currentColor"/><rect x="7" y="1" width="2.5" height="8" rx=".7" fill="currentColor"/><rect x="10.5" y="0" width="2" height="9" rx=".7" fill="currentColor" opacity=".3"/></svg>
+        <svg width="12" height="9" viewBox="0 0 12 9"><path d="M6 2.2c1.7 0 3.1.7 4.2 1.7L11.5 2.6C10.1 1.3 8.1.5 6 .5s-4.1.8-5.5 2.1l1.3 1.3C2.9 2.9 4.3 2.2 6 2.2Z" fill="currentColor"/><circle cx="6" cy="7.8" r="1.3" fill="currentColor"/></svg>
+        <svg width="21" height="9" viewBox="0 0 21 9"><rect x="0" y=".9" width="17" height="7.2" rx="2" stroke="currentColor" stroke-width="1.1" fill="none"/><rect x="1.1" y="2.1" width="12" height="5" rx="1.2" fill="currentColor"/><path d="M18.5 3v3c.8-.2 1.5-.8 1.5-1.5S19.3 3.2 18.5 3Z" fill="currentColor"/></svg>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="back-btn hidden" id="nav-back" onclick="goBack()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3.5L5.5 8L10 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-title" id="nav-title">Manage Subscription</div>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+    <div class="screen" id="scr"></div>
+    <div id="modal-ov" class="modal-overlay" onclick="hideModal()"></div>
+    <div id="modal-sh" class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div id="modal-cnt"></div>
+    </div>
+  </div>
+  </div></div>
+</div>
+
+<script>
+var demo = { month: 'before', kit: 'premier', billing: 'regular' };
+var hist = [];
+var cur = 'MANAGE';
+var selectedReason = null;
+var otherText = '';
+
+function account() {
+  var before = demo.month === 'before';
+  var premier = before && demo.kit === 'premier';
+  return {
+    isBefore: before,
+    hasPremierTest: premier,
+    paymentsCompleted: before ? 2 : 5,
+    paymentsToBonus: before ? 2 : 0,
+    zinoCashBalance: 245,
+    isNoDelivery: demo.billing === 'nodelivery',
+    nextBillingDate: '15 April 2026',
+    lastDeliveryDate: '15 April 2026',
+    endDate: '29 April 2026'
+  };
+}
+
+var TITLES = {
+  MANAGE: 'Manage Subscription',
+  CANCEL_WHY: 'Cancel Subscription',
+  CANCEL_CHANGE_WARN: 'Important notice',
+  CANCEL_RETENTION: 'Before you cancel',
+  CANCEL_CONFIRM: 'Confirm cancellation',
+  CANCEL_DONE: 'Subscription cancelled',
+  CANCEL_KEPT: 'Subscription kept',
+  CANCEL_CHANGE_FLOW: 'Change Product Flow'
+};
+
+var PROGRESS = {
+  MANAGE: 0, CANCEL_WHY: 20, CANCEL_CHANGE_WARN: 50,
+  CANCEL_RETENTION: 65, CANCEL_CONFIRM: 82, CANCEL_DONE: 100,
+  CANCEL_KEPT: 100, CANCEL_CHANGE_FLOW: 100
+};
+
+function go(s) { hist.push(cur); cur = s; render(); }
+function goBack() { if (hist.length) { cur = hist.pop(); render(); } }
+
+function render() {
+  var el = document.getElementById('scr');
+  el.scrollTop = 0; el.innerHTML = '';
+  document.getElementById('nav-title').textContent = TITLES[cur] || '';
+  document.getElementById('prog').style.width = (PROGRESS[cur] || 0) + '%';
+  var nb = document.getElementById('nav-back');
+  if (hist.length && cur !== 'MANAGE') { nb.classList.remove('hidden'); }
+  else { nb.classList.add('hidden'); }
+  if (SCREENS[cur]) SCREENS[cur](el);
+}
+
+function setDemo(key, val) {
+  demo[key] = val;
+  if (key === 'month') {
+    document.getElementById('d-before').className = 'demo-btn' + (val === 'before' ? ' on' : '');
+    document.getElementById('d-after').className = 'demo-btn' + (val === 'after' ? ' on' : '');
+    document.getElementById('kit-row').style.display = val === 'before' ? 'flex' : 'none';
+  }
+  if (key === 'kit') {
+    document.getElementById('d-premier').className = 'demo-btn' + (val === 'premier' ? ' on' : '');
+    document.getElementById('d-standard').className = 'demo-btn' + (val === 'standard' ? ' on' : '');
+  }
+  if (key === 'billing') {
+    document.getElementById('d-regular').className = 'demo-btn' + (val === 'regular' ? ' on' : '');
+    document.getElementById('d-nodelivery').className = 'demo-btn' + (val === 'nodelivery' ? ' on' : '');
+  }
+  hist = []; cur = 'MANAGE'; selectedReason = null; otherText = '';
+  render();
+}
+
+function tick() {
+  var n = new Date(), h = String(n.getHours()).padStart(2,'0'), m = String(n.getMinutes()).padStart(2,'0');
+  var c = document.getElementById('clk'); if (c) c.textContent = h + ':' + m;
+}
+tick(); setInterval(tick, 15000);
+
+var IC = {
+  check:    '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3.5 3.5 6-7" stroke="COLOR" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  test:     '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M6.5 2v7L4 14a1.5 1.5 0 001.5 2h7A1.5 1.5 0 0014 14l-2.5-5V2" stroke="COLOR" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.5 2h5M4.5 11.5h9" stroke="COLOR" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  cash:     '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="COLOR" stroke-width="1.4"/><path d="M9 5v8M7 7h2.5a1.5 1.5 0 010 3H7m0 0h2.5a1.5 1.5 0 010 3H7" stroke="COLOR" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  warning:  '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2.5L2 15.5h14L9 2.5Z" stroke="COLOR" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 7.5v4" stroke="COLOR" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="13" r=".8" fill="COLOR"/></svg>',
+  pause:    '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="COLOR" stroke-width="1.4"/><rect x="6.5" y="6" width="1.8" height="6" rx=".9" fill="COLOR"/><rect x="9.8" y="6" width="1.8" height="6" rx=".9" fill="COLOR"/></svg>',
+  products: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2L2 6v6l7 4 7-4V6L9 2Z" stroke="COLOR" stroke-width="1.4" stroke-linejoin="round"/><path d="M2 6l7 4 7-4M9 16V10" stroke="COLOR" stroke-width="1.4"/></svg>',
+  email:    '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10.5" rx="2" stroke="COLOR" stroke-width="1.4"/><path d="M2 7l7 4.5 7-4.5" stroke="COLOR" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  delivery: '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="1" y="5.5" width="11" height="8" rx="1.5" stroke="COLOR" stroke-width="1.4"/><path d="M12 8.5h3.5L17 12v3h-5V8.5Z" stroke="COLOR" stroke-width="1.4" stroke-linejoin="round"/><circle cx="4.5" cy="14" r="1.5" stroke="COLOR" stroke-width="1.3"/><circle cx="13.5" cy="14" r="1.5" stroke="COLOR" stroke-width="1.3"/></svg>',
+  resume:   '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="COLOR" stroke-width="1.4"/><path d="M7.5 6.5l5 2.5-5 2.5V6.5Z" fill="COLOR"/></svg>'
+};
+function ic(name, color) { return (IC[name] || '').replace(/COLOR/g, color || 'currentColor'); }
+
+function selectReason(id) {
+  selectedReason = id;
+  document.querySelectorAll('.option-card').forEach(function(c) { c.classList.remove('selected'); });
+  var card = document.getElementById('opt-' + id);
+  if (card) card.classList.add('selected');
+  var wrap = document.getElementById('other-wrap');
+  if (wrap) wrap.className = 'other-wrap' + (id === 'other' ? ' open' : '');
+  var btn = document.getElementById('reason-continue');
+  if (btn) { btn.removeAttribute('disabled'); btn.style.cssText = ''; }
+}
+
+function proceedFromReason() {
+  if (!selectedReason) return;
+  var ta = document.getElementById('other-textarea');
+  if (ta) otherText = ta.value.trim();
+  if (selectedReason === 'too_many') { showModal('pause'); }
+  else if (selectedReason === 'dont_like') { showModal('change'); }
+  else { go('CANCEL_RETENTION'); }
+}
+
+function proceedToChange() {
+  if (account().hasPremierTest) { go('CANCEL_CHANGE_WARN'); }
+  else { go('CANCEL_CHANGE_FLOW'); }
+}
+
+function showModal(type) {
+  var cnt = document.getElementById('modal-cnt');
+  cnt.innerHTML = type === 'pause' ? pauseModalHTML() : changeModalHTML();
+  document.getElementById('modal-ov').classList.add('show');
+  document.getElementById('modal-sh').classList.add('show');
+}
+function hideModal() {
+  document.getElementById('modal-ov').classList.remove('show');
+  document.getElementById('modal-sh').classList.remove('show');
+}
+function modalDecline() { hideModal(); setTimeout(function() { go('CANCEL_RETENTION'); }, 300); }
+function modalChangeYes() { hideModal(); setTimeout(function() { proceedToChange(); }, 300); }
+
+function pauseModalHTML() {
+  var data = account();
+  var progressRow = data.isBefore
+    ? '<div class="modal-feat-row"><div class="modal-feat-icon">' + ic('check','var(--k-black)') + '</div><span class="modal-feat-text">120-day progress frozen, not lost</span></div>'
+    : '';
+  var subtitle = data.isBefore
+    ? 'Pausing keeps your progress — no deliveries or billing for 1–3 months.'
+    : 'Take a break — no deliveries or billing for 1–3 months, then pick up where you left off.';
+  return '<div>' +
+    '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--k-gray3);margin-bottom:6px">Before you cancel</div>' +
+    '<div style="font-size:20px;font-weight:900;color:var(--k-black);letter-spacing:-.4px;line-height:1.2;margin-bottom:4px">Too many products at home?</div>' +
+    '<p style="font-size:13px;color:var(--k-gray4);line-height:1.5;margin-bottom:0">' + subtitle + '</p>' +
+    '<div class="modal-feat">' +
+      '<div class="modal-feat-row"><div class="modal-feat-icon">' + ic('pause','var(--k-black)') + '</div><span class="modal-feat-text">No deliveries for 1–3 months</span></div>' +
+      progressRow +
+      '<div class="modal-feat-row"><div class="modal-feat-icon">' + ic('resume','var(--k-black)') + '</div><span class="modal-feat-text">Resume anytime with one tap</span></div>' +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px">' +
+      '<a href="pause.html" style="text-decoration:none;display:block">' +
+        '<button class="btn-primary" style="width:100%">' + ic('pause','#fff') + ' Yes, pause my subscription</button>' +
+      '</a>' +
+      '<button class="btn-ghost" onclick="modalDecline()">No, I still want to cancel</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function changeModalHTML() {
+  var testRow = account().hasPremierTest
+    ? '<div class="modal-feat-row"><div class="modal-feat-icon" style="background:var(--k-amber-bg)">' + ic('warning','var(--k-amber)') + '</div><span class="modal-feat-text" style="color:var(--k-amber);font-weight:600">May affect your 2nd test eligibility</span></div>'
+    : '';
+  return '<div>' +
+    '<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--k-gray3);margin-bottom:6px">Before you cancel</div>' +
+    '<div style="font-size:20px;font-weight:900;color:var(--k-black);letter-spacing:-.4px;line-height:1.2;margin-bottom:4px">Swap products, keep your progress</div>' +
+    '<p style="font-size:13px;color:var(--k-gray4);line-height:1.5">Change what you receive without cancelling your subscription.</p>' +
+    '<div class="modal-feat">' +
+      '<div class="modal-feat-row"><div class="modal-feat-icon">' + ic('products','var(--k-black)') + '</div><span class="modal-feat-text">Same billing cycle, different products</span></div>' +
+      '<div class="modal-feat-row"><div class="modal-feat-icon">' + ic('check','var(--k-black)') + '</div><span class="modal-feat-text">Subscription progress unchanged</span></div>' +
+      testRow +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px">' +
+      '<button class="btn-primary" onclick="modalChangeYes()">' + ic('products','#fff') + ' Yes, change my products</button>' +
+      '<button class="btn-ghost" onclick="modalDecline()">No, I want to cancel</button>' +
+    '</div>' +
+  '</div>';
+}
+
+function paymentTrack(completed) {
+  var html = '<div class="ptrack">';
+  for (var i = 1; i <= 4; i++) {
+    var isDone = i <= completed;
+    var dotClass = isDone ? ' done' : (i === 4 ? ' goal' : '');
+    html += '<div class="ptrack-dot' + dotClass + '">';
+    if (isDone) { html += ic('check','#fff'); } else { html += i; }
+    html += '</div>';
+    if (i < 4) { html += '<div class="ptrack-line' + ((i + 1 <= completed) ? ' done' : '') + '"></div>'; }
+  }
+  html += '</div>';
+  html += '<div class="ptrack-footnote"><span class="ptrack-fn-l">Payment ' + completed + ' of 4 completed</span><span class="ptrack-fn-r">Milestone at payment 4</span></div>';
+  return '<div class="ptrack-wrap">' + html + '</div>';
+}
+
+var SCREENS = {
+
+  MANAGE: function(el) {
+    var data = account();
+    var chevron = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8 6 12.5" stroke="var(--k-gray3)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var icPause = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="4" y="3.5" width="3.5" height="11" rx="1.2" fill="var(--k-black)"/><rect x="10.5" y="3.5" width="3.5" height="11" rx="1.2" fill="var(--k-black)"/></svg>';
+    var icChange = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M11 5l4 4-4 4" stroke="var(--k-black)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var icCancel = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4.5 4.5l9 9M13.5 4.5l-9 9" stroke="var(--k-black)" stroke-width="1.5" stroke-linecap="round"/></svg>';
+    var kitName = data.hasPremierTest ? 'BalanceOil+ Premier' : 'BalanceOil+ 300ml Lemon';
+    el.innerHTML = '<div class="screen-in">' +
+      '<div style="display:inline-flex;align-items:center;gap:6px;background:var(--k-green-bg);border:1px solid var(--k-green-b);border-radius:100px;padding:5px 12px;margin-bottom:16px">' +
+        '<div style="width:7px;height:7px;border-radius:50%;background:var(--k-green);flex-shrink:0"></div>' +
+        '<span style="font-size:13px;font-weight:700;color:var(--k-green)">Active</span>' +
+      '</div>' +
+      '<div style="border:1.5px solid var(--k-gray2);border-radius:var(--radius);padding:16px;margin-bottom:22px;background:#fff">' +
+        '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px">' +
+          '<div style="font-size:15px;font-weight:700;color:var(--k-black);line-height:1.3">' + kitName + '</div>' +
+          '<div style="font-size:15px;font-weight:700;color:var(--k-black);flex-shrink:0;margin-left:8px">€89.00</div>' +
+        '</div>' +
+        '<div style="font-size:13px;color:var(--k-gray4);margin-bottom:12px">Monthly subscription</div>' +
+        '<div style="height:1px;background:var(--k-gray2);margin-bottom:12px"></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">' +
+          '<span style="color:var(--k-gray4)">Next delivery</span>' +
+          '<span style="font-weight:600;color:var(--k-black)">15 Apr 2026</span>' +
+        '</div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px">' +
+          '<span style="color:var(--k-gray4)">Member since</span>' +
+          '<span style="font-weight:600;color:var(--k-black)">Jan 2025</span>' +
+        '</div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:13px">' +
+          '<span style="color:var(--k-gray4)">Programme progress</span>' +
+          '<span style="font-weight:600;color:var(--k-black)">' + (data.isBefore ? 'Payment ' + data.paymentsCompleted + ' of 4' : 'Completed') + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<p class="section-label">Manage</p>' +
+      '<div style="border:1.5px solid var(--k-gray2);border-radius:var(--radius);overflow:hidden">' +
+        '<div style="display:flex;align-items:center;gap:13px;padding:14px 16px;border-bottom:1px solid var(--k-gray2);cursor:pointer;background:#fff" onclick="void(0)">' +
+          '<div style="width:34px;height:34px;border-radius:9px;background:var(--k-gray1);display:flex;align-items:center;justify-content:center;flex-shrink:0">' + icPause + '</div>' +
+          '<div style="flex:1">' +
+            '<div style="font-size:14px;font-weight:600;color:var(--k-black)">Pause subscription</div>' +
+            '<div style="font-size:12px;color:var(--k-gray4);margin-top:1px">Temporarily pause for 1–3 months</div>' +
+          '</div>' +
+          chevron +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:13px;padding:14px 16px;border-bottom:1px solid var(--k-gray2);cursor:pointer;background:#fff" onclick="void(0)">' +
+          '<div style="width:34px;height:34px;border-radius:9px;background:var(--k-gray1);display:flex;align-items:center;justify-content:center;flex-shrink:0">' + icChange + '</div>' +
+          '<div style="flex:1">' +
+            '<div style="font-size:14px;font-weight:600;color:var(--k-black)">Change product</div>' +
+            '<div style="font-size:12px;color:var(--k-gray4);margin-top:1px">Switch to a different product</div>' +
+          '</div>' +
+          chevron +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:13px;padding:14px 16px;cursor:pointer;background:#fff" onclick="go(\'CANCEL_WHY\')">' +
+          '<div style="width:34px;height:34px;border-radius:9px;background:var(--k-gray1);display:flex;align-items:center;justify-content:center;flex-shrink:0">' + icCancel + '</div>' +
+          '<div style="flex:1">' +
+            '<div style="font-size:14px;font-weight:600;color:var(--k-black)">Cancel subscription</div>' +
+            '<div style="font-size:12px;color:var(--k-gray4);margin-top:1px">30-day notice period applies</div>' +
+          '</div>' +
+          chevron +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  },
+
+  CANCEL_WHY: function(el) {
+    var reasons = [
+      { id: 'dont_like',     label: "Don't like / allergic to the products" },
+      { id: 'other',         label: 'Other reason' },
+      { id: 'too_expensive', label: 'Too expensive' },
+      { id: 'too_many',      label: 'Too many products' }
+    ];
+    var cards = reasons.map(function(r) {
+      var isSel = selectedReason === r.id;
+      var extra = r.id === 'other'
+        ? '<div class="other-wrap' + (isSel ? ' open' : '') + '" id="other-wrap"><textarea class="other-textarea" id="other-textarea" placeholder="Tell us more (optional)" rows="3" onclick="event.stopPropagation()">' + otherText + '</textarea></div>'
+        : '';
+      return '<div class="option-card' + (isSel ? ' selected' : '') + '" id="opt-' + r.id + '" onclick="selectReason(\'' + r.id + '\')">' +
+        '<div class="option-radio"><div class="radio-dot"></div></div>' +
+        '<div style="flex:1"><div class="option-text">' + r.label + '</div>' + extra + '</div>' +
+      '</div>';
+    }).join('');
+    el.innerHTML = '<div class="screen-in">' +
+      '<div class="headline">Why do you want to cancel?</div>' +
+      '<p class="subtext">Select a reason — we may have a better solution.</p>' +
+      '<div class="option-list">' + cards + '</div>' +
+      '<div class="btn-stack">' +
+        '<button class="btn-primary" id="reason-continue" onclick="proceedFromReason()"' +
+          (selectedReason ? '' : ' disabled style="opacity:.38;cursor:not-allowed"') + '>Continue</button>' +
+        '<button class="btn-ghost" onclick="go(\'CANCEL_KEPT\')">Keep my subscription</button>' +
+      '</div>' +
+    '</div>';
+  },
+
+  CANCEL_CHANGE_WARN: function(el) {
+    var testIconLarge = '<svg width="40" height="40" viewBox="0 0 40 40" fill="none"><path d="M15 5v15L9 32a3 3 0 003 4h16a3 3 0 003-4L25 20V5" stroke="var(--k-red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 5h10M10 26h20" stroke="var(--k-red)" stroke-width="2.2" stroke-linecap="round"/></svg>';
+    var whyIcon = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="var(--k-gray3)" stroke-width="1.4"/><path d="M8 7.5v4" stroke="var(--k-gray3)" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="5.5" r=".8" fill="var(--k-gray3)"/></svg>';
+    el.innerHTML = '<div class="screen-in">' +
+      // Large icon + headline centred
+      '<div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding:8px 0 22px">' +
+        '<div style="width:72px;height:72px;border-radius:50%;background:var(--k-red-bg);display:flex;align-items:center;justify-content:center;margin-bottom:16px">' +
+          testIconLarge +
+        '</div>' +
+        '<div class="headline">Your 2nd test will be lost</div>' +
+        '<p style="font-size:14px;color:var(--k-gray4);line-height:1.55;margin-top:6px">Changing products before payment 4 permanently resets your test eligibility.</p>' +
+      '</div>' +
+      // Two compact visual rows showing what's at stake
+      '<div class="loss-list" style="margin-bottom:14px">' +
+        '<div class="loss-item">' +
+          '<div class="loss-icon" style="background:var(--k-red-bg)">' + ic('test','var(--k-red)') + '</div>' +
+          '<div class="loss-text">' +
+            '<div class="loss-title">2nd health test result</div>' +
+            '<div class="loss-note">Permanently lost — cannot be recovered</div>' +
+          '</div>' +
+          '<div class="loss-badge perm">Permanent</div>' +
+        '</div>' +
+        '<div class="loss-item">' +
+          '<div class="loss-icon" style="background:var(--k-red-bg)">' + ic('cash','var(--k-red)') + '</div>' +
+          '<div class="loss-text">' +
+            '<div class="loss-title">500 kr bonus ZinoCash</div>' +
+            '<div class="loss-note">Tied to completing payment 4</div>' +
+          '</div>' +
+          '<div class="loss-badge perm">Lost</div>' +
+        '</div>' +
+      '</div>' +
+      // Why — compact collapsed info
+      '<div style="display:flex;gap:8px;align-items:flex-start;padding:11px 13px;background:var(--k-gray1);border-radius:11px;margin-bottom:0">' +
+        whyIcon +
+        '<div style="font-size:12px;color:var(--k-gray4);line-height:1.55">Your 2nd test compares your bloodwork <em>before and after</em> these specific products. Switching breaks that comparison.</div>' +
+      '</div>' +
+      '<div class="btn-stack">' +
+        '<button class="btn-primary" onclick="go(\'CANCEL_KEPT\')">Keep my products — I\'ll stay</button>' +
+        '<button class="btn-secondary" onclick="go(\'CANCEL_CHANGE_FLOW\')" style="color:var(--k-red);border-color:var(--k-red-b)">Change anyway — I understand</button>' +
+      '</div>' +
+    '</div>';
+  },
+
+  CANCEL_RETENTION: function(el) {
+    var data = account();
+    var trackHTML = '';
+    var statHTML = '';
+    var lossHTML = '';
+    var header = '';
+
+    if (data.isBefore) {
+      header = '<div class="section-label" style="margin-bottom:6px">You\'d be leaving behind</div>' +
+        '<p style="font-size:13px;color:var(--k-gray4);line-height:1.55;margin-bottom:14px">Your 120-day programme advances one payment at a time. You\'re on payment ' + data.paymentsCompleted + ' — here\'s what cancelling now means.</p>';
+      trackHTML = paymentTrack(data.paymentsCompleted);
+      if (data.hasPremierTest) {
+        statHTML = '<div class="stat-row">' +
+          '<div class="stat-pill"><div class="stat-num">' + data.paymentsToBonus + '</div><div class="stat-sub">pmts to<br>milestone</div></div>' +
+          '<div class="stat-pill"><div class="stat-num">500 kr</div><div class="stat-sub">ZinoCash<br>bonus</div></div>' +
+          '<div class="stat-pill"><div class="stat-num">' + data.zinoCashBalance + ' kr</div><div class="stat-sub">current<br>balance</div></div>' +
+        '</div>';
+        lossHTML = '<div class="loss-list">' +
+          '<div class="loss-item"><div class="loss-icon">' + ic('test','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">2nd health test result</div><div class="loss-note">Permanently lost if you cancel now</div></div><div class="loss-badge perm">Permanent</div></div>' +
+          '<div class="loss-item"><div class="loss-icon">' + ic('cash','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">500 kr bonus ZinoCash</div><div class="loss-note">' + data.paymentsToBonus + ' payments away</div></div><div class="loss-badge soon">' + data.paymentsToBonus + ' pmts away</div></div>' +
+          '<div class="loss-item"><div class="loss-icon">' + ic('cash','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">ZinoCash: ' + data.zinoCashBalance + ' kr</div><div class="loss-note">Spend it before you go — valid 1 year from last purchase</div></div><div class="loss-badge safe">1 yr valid</div></div>' +
+        '</div>';
+      } else {
+        statHTML = '<div class="stat-row">' +
+          '<div class="stat-pill"><div class="stat-num">' + data.paymentsToBonus + '</div><div class="stat-sub">pmts to<br>bonus</div></div>' +
+          '<div class="stat-pill"><div class="stat-num">500 kr</div><div class="stat-sub">ZinoCash<br>bonus</div></div>' +
+          '<div class="stat-pill"><div class="stat-num">' + data.zinoCashBalance + ' kr</div><div class="stat-sub">current<br>balance</div></div>' +
+        '</div>';
+        lossHTML = '<div class="loss-list">' +
+          '<div class="loss-item"><div class="loss-icon">' + ic('cash','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">500 kr bonus ZinoCash</div><div class="loss-note">' + data.paymentsToBonus + ' payments away from your bonus</div></div><div class="loss-badge soon">' + data.paymentsToBonus + ' pmts away</div></div>' +
+          '<div class="loss-item"><div class="loss-icon">' + ic('cash','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">ZinoCash: ' + data.zinoCashBalance + ' kr</div><div class="loss-note">Spend it before you go — valid 1 year from last purchase</div></div><div class="loss-badge safe">1 yr valid</div></div>' +
+        '</div>';
+      }
+    } else {
+      header = '<div class="headline" style="margin-bottom:4px">One thing before you go</div><p class="subtext">Your ZinoCash stays valid for 1 year after cancellation.</p>';
+      statHTML = '<div class="stat-row" style="margin-bottom:16px"><div class="stat-pill" style="padding:20px 10px"><div class="stat-num" style="font-size:28px">' + data.zinoCashBalance + ' kr</div><div class="stat-sub">ZinoCash balance · 1 year validity</div></div></div>';
+      lossHTML = '<div class="loss-list"><div class="loss-item"><div class="loss-icon">' + ic('cash','var(--k-black)') + '</div><div class="loss-text"><div class="loss-title">ZinoCash: ' + data.zinoCashBalance + ' kr</div><div class="loss-note">Spend it before you go — valid 1 year after last purchase</div></div><div class="loss-badge safe">1 yr valid</div></div></div>';
+    }
+
+    el.innerHTML = '<div class="screen-in">' + header + trackHTML + statHTML + lossHTML +
+      '<div class="btn-stack">' +
+        '<button class="btn-primary" onclick="go(\'CANCEL_KEPT\')">Keep my subscription</button>' +
+        '<button class="btn-danger" onclick="go(\'CANCEL_CONFIRM\')">Cancel anyway</button>' +
+      '</div>' +
+    '</div>';
+  },
+
+  CANCEL_CONFIRM: function(el) {
+    var data = account();
+    var noDelWarn = data.isNoDelivery
+      ? '<div class="warning-box amber">' + ic('delivery','var(--k-amber)') + '<div class="wb-body"><strong>Non-delivery month.</strong> Full shipping cost added to final invoice. Products held until payment received.</div></div>'
+      : '';
+    var shippingRow = data.isNoDelivery
+      ? '<div class="detail-row"><span class="detail-key">Final invoice</span><span class="detail-val" style="color:var(--k-amber)">Includes full shipping</span></div>'
+      : '<div class="detail-row"><span class="detail-key">Final payment</span><span class="detail-val">On regular billing date</span></div>';
+    el.innerHTML = '<div class="screen-in">' +
+      '<div class="headline">Confirm cancellation</div>' +
+      '<p class="subtext">Review the details below. This cannot be undone.</p>' +
+      '<div class="detail-list">' +
+        '<div class="detail-row"><span class="detail-key">Last payment</span><span class="detail-val">' + data.nextBillingDate + '</span></div>' +
+        '<div class="detail-row"><span class="detail-key">Last delivery</span><span class="detail-val">' + data.lastDeliveryDate + '</span></div>' +
+        '<div class="detail-row"><span class="detail-key">Subscription ends</span><span class="detail-val">' + data.endDate + '</span></div>' +
+        shippingRow +
+      '</div>' +
+      noDelWarn +
+      '<div style="display:flex;gap:10px;align-items:flex-start;background:var(--k-gray1);border-radius:13px;padding:12px 14px">' +
+        ic('email','var(--k-gray4)') +
+        '<div style="font-size:12px;color:var(--k-gray4);line-height:1.55">Confirmation email sent with end date, last payment, and final delivery.</div>' +
+      '</div>' +
+      '<div class="btn-stack">' +
+        '<button class="btn-danger" onclick="go(\'CANCEL_DONE\')">Confirm cancellation</button>' +
+        '<button class="btn-ghost" onclick="go(\'CANCEL_KEPT\')">Keep my subscription</button>' +
+      '</div>' +
+    '</div>';
+  },
+
+  CANCEL_DONE: function(el) {
+    var data = account();
+    var invoiceRow = data.isNoDelivery
+      ? '<div class="summary-row"><span class="summary-key">Final invoice</span><span class="summary-val" style="color:var(--k-amber)">Includes shipping</span></div>'
+      : '<div class="summary-row"><span class="summary-key">Final payment</span><span class="summary-val">On regular billing date</span></div>';
+    el.innerHTML = '<div class="screen-in done-wrap">' +
+      '<div class="done-icon" style="background:var(--k-gray1)">' +
+        '<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M7 16l6 6 12-12" stroke="var(--k-black)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</div>' +
+      '<div class="done-title">Subscription cancelled</div>' +
+      '<p class="done-sub">A confirmation email has been sent with your final details.</p>' +
+      '<div class="summary-card">' +
+        '<div class="summary-row"><span class="summary-key">End date</span><span class="summary-val">' + data.endDate + '</span></div>' +
+        '<div class="summary-row"><span class="summary-key">Last payment</span><span class="summary-val">' + data.nextBillingDate + '</span></div>' +
+        '<div class="summary-row"><span class="summary-key">Last delivery</span><span class="summary-val">' + data.lastDeliveryDate + '</span></div>' +
+        invoiceRow +
+        '<div class="summary-row"><span class="summary-key">ZinoCash balance</span><span class="summary-val">' + data.zinoCashBalance + ' kr</span></div>' +
+      '</div>' +
+      '<div class="zino-reminder">' + ic('cash','var(--k-amber)') +
+        '<div><strong>Spend your ZinoCash before it expires.</strong> Your ' + data.zinoCashBalance + ' kr is valid for 1 year from your last purchase.</div>' +
+      '</div>' +
+      '<button class="btn-secondary" style="width:100%" onclick="go(\'MANAGE\')">Back to My Account</button>' +
+    '</div>';
+  },
+
+  CANCEL_KEPT: function(el) {
+    el.innerHTML = '<div class="screen-in done-wrap">' +
+      '<div class="done-icon" style="background:var(--k-green-bg)">' +
+        '<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M7 16l6 6 12-12" stroke="var(--k-green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</div>' +
+      '<div class="done-title">Subscription kept</div>' +
+      '<p class="done-sub">Your subscription continues as normal — nothing has changed.</p>' +
+      '<button class="btn-primary" style="width:100%" onclick="go(\'MANAGE\')">Back to My Account</button>' +
+    '</div>';
+  },
+
+  CANCEL_CHANGE_FLOW: function(el) {
+    el.innerHTML = '<div class="screen-in done-wrap" style="padding-top:48px">' +
+      '<div class="done-icon" style="background:var(--k-blue-bg)">' + ic('products','var(--k-blue)') + '</div>' +
+      '<div class="done-title" style="font-size:20px">Change Product Flow</div>' +
+      '<p class="done-sub">This would navigate to the change product prototype — not yet built.</p>' +
+      '<button class="btn-secondary" style="width:100%" onclick="go(\'MANAGE\')">Back to My Account</button>' +
+    '</div>';
+  }
+};
+
+render();
+</script>
+</body>
+</html>
