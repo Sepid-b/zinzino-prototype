@@ -9,7 +9,6 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Inter',sans-serif;background:#e8e5e0;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:24px 16px 60px;}
 
-/* Simulator */
 .sim-bar{width:393px;margin-bottom:12px;background:#fff;border-radius:14px;padding:14px 16px;border:1px solid #e0e0e0;}
 .sim-bar-label{font-size:10px;font-weight:800;color:#bbb;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
 .sim-grid{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;align-items:center;}
@@ -18,50 +17,39 @@ body{font-family:'Inter',sans-serif;background:#e8e5e0;display:flex;flex-directi
 .sopt{font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;border:1px solid #e0e0e0;color:#888;cursor:pointer;transition:all .15s;}
 .sopt.on{background:#111;color:#fff;border-color:#111;}
 
-/* Phone shell */
 .phone-shell{width:393px;flex-shrink:0;background:#1a1a1a;border-radius:54px;padding:14px;box-shadow:0 32px 80px rgba(0,0,0,0.3);position:relative;}
 .phone-shell::before{content:'';position:absolute;top:22px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#1a1a1a;border-radius:20px;z-index:10;}
 .phone-inner{background:#fff;border-radius:42px;overflow:hidden;height:844px;display:flex;flex-direction:column;}
 
-/* Status bar — fixed height 83px */
 .sbar{flex-shrink:0;display:flex;justify-content:space-between;align-items:center;padding:52px 24px 6px;font-size:13px;font-weight:700;color:#111;background:#fff;}
 
-/* Global header — fixed height 57px, contains progress bar as border-bottom overlay */
-.global-hdr{flex-shrink:0;display:flex;align-items:center;gap:12px;padding:12px 20px 0;background:#fff;position:relative;height:57px;}
+.global-hdr{flex-shrink:0;display:flex;align-items:center;gap:12px;padding:12px 20px 0;background:#fff;height:57px;}
 .back-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid #e0e0e0;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;background:#fff;}
 .hdr-title{font-size:17px;font-weight:800;color:#111;letter-spacing:-.3px;}
 
-/* Progress bar: sits exactly ON the header bottom border */
 .progress-line{flex-shrink:0;height:3px;background:#e8e8e8;position:relative;}
 .progress-fill{position:absolute;top:0;left:0;height:3px;background:#111;transition:width .3s ease;width:0%;}
 
-/* Scrollable content area: fills remaining height */
-/* sbar=83, hdr=57, progress=3 → content = 844-83-57-3 = 701px */
 .screen-area{flex:1;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;-ms-overflow-style:none;scrollbar-width:none;}
 .screen-area::-webkit-scrollbar{display:none;}
 
-/* Screens — fill content area, flex column so cta always at bottom */
 .screen{display:none;flex-direction:column;flex:1;}
 .screen.active{display:flex;}
 
-/* Body grows to fill, pushes CTA to bottom */
 .body{flex:1;padding:24px 20px 16px;overflow-y:auto;}
 .cta-footer{flex-shrink:0;background:#fff;padding:12px 20px 28px;border-top:1px solid #f0f0f0;}
 
-/* Typography */
 .screen-icon{width:44px;height:44px;background:#f5f5f5;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;}
 .big-headline{font-size:26px;font-weight:900;color:#111;line-height:1.15;letter-spacing:-.5px;margin-bottom:10px;}
 .sub-copy{font-size:14px;color:#888;line-height:1.6;margin-bottom:24px;font-weight:500;}
 .sec-label{font-size:10px;font-weight:800;color:#bbb;text-transform:uppercase;letter-spacing:.08em;margin:18px 0 10px;}
 
-/* CTAs */
 .cta-primary{width:100%;padding:16px;background:#111;color:#fff;border-radius:50px;font-size:15px;font-weight:800;text-align:center;margin-bottom:10px;cursor:pointer;letter-spacing:-.2px;}
 .cta-primary.disabled{background:#e0e0e0;color:#bbb;cursor:not-allowed;pointer-events:none;}
 .cta-outline{width:100%;padding:15px;background:#fff;border:1.5px solid #e0e0e0;color:#111;border-radius:50px;font-size:14px;font-weight:700;text-align:center;margin-bottom:10px;cursor:pointer;}
 .cta-ghost{width:100%;padding:12px;color:#aaa;font-size:13px;font-weight:600;text-align:center;cursor:pointer;}
-.cta-cancel-text{width:100%;padding:15px;background:#fff;border:1.5px solid #e0e0e0;color:#111;border-radius:50px;font-size:14px;font-weight:700;text-align:center;cursor:pointer;}
+.cta-secondary{width:100%;padding:15px;background:#fff;border:1.5px solid #e0e0e0;color:#111;border-radius:50px;font-size:14px;font-weight:700;text-align:center;cursor:pointer;}
 
-/* Reason list */
 .reason-list{border:1.5px solid #e8e8e8;border-radius:16px;overflow:hidden;margin-bottom:14px;}
 .reason-item{display:flex;align-items:flex-start;gap:14px;padding:16px;border-bottom:1px solid #ebebeb;cursor:pointer;background:#fff;transition:background .1s;}
 .reason-item:last-child{border-bottom:none;}
@@ -73,23 +61,14 @@ body{font-family:'Inter',sans-serif;background:#e8e5e0;display:flex;flex-directi
 .reason-text h4{font-size:14px;font-weight:700;color:#111;line-height:1.3;}
 .reason-text p{font-size:12px;color:#999;margin-top:2px;}
 
-/* Before you go */
-.byg-block{background:#f5f5f5;border-radius:14px;padding:16px;margin-bottom:14px;display:none;}
-.byg-block.visible{display:block;animation:fadeUp .2s ease;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
-.byg-label{font-size:10px;font-weight:800;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
-.byg-text{font-size:13px;color:#444;line-height:1.6;font-weight:500;}
-.byg-cta{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13px;font-weight:800;color:#111;cursor:pointer;}
-
-/* Other textarea */
 .other-block{display:none;margin-bottom:14px;}
 .other-block.visible{display:block;animation:fadeUp .2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px);}to{opacity:1;transform:translateY(0);}}
 .other-label{font-size:13px;font-weight:600;color:#666;margin-bottom:8px;}
 textarea{width:100%;border:1.5px solid #e8e8e8;border-radius:12px;padding:14px;font-size:14px;color:#111;font-family:'Inter',sans-serif;resize:none;height:96px;outline:none;}
 textarea:focus{border-color:#111;}
 textarea::placeholder{color:#ccc;}
 
-/* Loss list */
 .loss-list{border:1.5px solid #e8e8e8;border-radius:16px;overflow:hidden;margin-bottom:6px;}
 .loss-item{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;border-bottom:1px solid #f0f0f0;}
 .loss-item:last-child{border-bottom:none;}
@@ -97,7 +76,6 @@ textarea::placeholder{color:#ccc;}
 .loss-text h4{font-size:13px;font-weight:700;color:#111;line-height:1.3;}
 .loss-text p{font-size:11px;color:#999;margin-top:3px;line-height:1.45;}
 
-/* Pause */
 .pause-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
 .pause-opt{display:flex;align-items:center;gap:14px;padding:16px;border:1.5px solid #e8e8e8;border-radius:14px;cursor:pointer;transition:all .15s;}
 .pause-opt:hover{background:#fafafa;}
@@ -107,14 +85,12 @@ textarea::placeholder{color:#ccc;}
 .shipment-bar{background:#f5f5f5;border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:12px;}
 .ship-icon{width:30px;height:30px;border-radius:50%;background:#e0e0e0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px;color:#888;}
 
-/* Summary */
 .summary-block{background:#f5f5f5;border-radius:14px;overflow:hidden;margin-bottom:16px;}
 .summary-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 16px;border-bottom:1px solid #ececec;}
 .summary-row:last-child{border-bottom:none;}
 .summary-key{font-size:12px;color:#999;font-weight:500;}
 .summary-val{font-size:12px;font-weight:700;color:#111;text-align:right;max-width:55%;}
 
-/* Manage hub */
 .active-badge{display:inline-flex;align-items:center;gap:6px;background:#edfaf4;color:#1a7a4a;border-radius:20px;padding:5px 12px;font-size:12px;font-weight:700;margin-bottom:16px;}
 .product-card{background:#f5f5f5;border-radius:16px;padding:16px;margin-bottom:24px;}
 .product-meta{margin-top:12px;border-top:1px solid #e8e8e8;padding-top:12px;display:flex;flex-direction:column;gap:6px;}
@@ -128,13 +104,12 @@ textarea::placeholder{color:#ccc;}
 .manage-icon{width:36px;height:36px;background:#f5f5f5;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .manage-text h4{font-size:14px;font-weight:700;color:#111;}
 .manage-text p{font-size:12px;color:#999;margin-top:2px;}
-
-/* Cancelled */
 .done-circle{width:56px;height:56px;border-radius:50%;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;}
 </style>
 </head>
 <body>
 
+<!-- Simulator — billing cycle removed per mentor feedback -->
 <div class="sim-bar">
   <div class="sim-bar-label">Simulate account state</div>
   <div class="sim-grid">
@@ -148,18 +123,12 @@ textarea::placeholder{color:#ccc;}
       <div class="sopt on" id="sim-premier" onclick="simSet('kit','premier')">Premier + Test</div>
       <div class="sopt" id="sim-standard" onclick="simSet('kit','standard')">Standard kit</div>
     </div>
-    <span class="sim-label">Billing cycle</span>
-    <div class="sim-opts">
-      <div class="sopt on" id="sim-regular" onclick="simSet('billing','regular')">Regular month</div>
-      <div class="sopt" id="sim-nodelivery" onclick="simSet('billing','no-delivery')">No-delivery month</div>
-    </div>
   </div>
 </div>
 
 <div class="phone-shell">
 <div class="phone-inner">
 
-  <!-- Status bar -->
   <div class="sbar">
     <span>14:53</span>
     <div style="display:flex;align-items:center;gap:6px;">
@@ -169,7 +138,6 @@ textarea::placeholder{color:#ccc;}
     </div>
   </div>
 
-  <!-- Global header — title + back button updated via JS -->
   <div class="global-hdr">
     <div class="back-btn" id="global-back" onclick="handleBack()">
       <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M8 1.5L4 5.5L8 9.5" stroke="#111" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -177,17 +145,14 @@ textarea::placeholder{color:#ccc;}
     <div class="hdr-title" id="global-title">Manage subscription</div>
   </div>
 
-  <!-- Progress bar — sits exactly on header bottom border -->
   <div class="progress-line" id="progress-line" style="display:none;">
     <div class="progress-fill" id="progress-fill"></div>
   </div>
-  <!-- Static border shown when no progress -->
   <div id="static-border" style="height:1px;background:#ebebeb;flex-shrink:0;"></div>
 
-  <!-- Screen area -->
   <div class="screen-area" id="screen-area">
 
-    <!-- ── HUB ── -->
+    <!-- HUB -->
     <div class="screen active" id="screen-manage">
       <div class="body">
         <div class="active-badge"><div style="width:7px;height:7px;border-radius:50%;background:#1a7a4a;"></div>Active</div>
@@ -222,7 +187,7 @@ textarea::placeholder{color:#ccc;}
       </div>
     </div>
 
-    <!-- ── SCREEN 1: Reason ── -->
+    <!-- SCREEN 1: Reason -->
     <div class="screen" id="screen-reason">
       <div class="body">
         <div class="screen-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#888" stroke-width="1.4"/><path d="M4 17c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#888" stroke-width="1.4" stroke-linecap="round"/></svg></div>
@@ -246,61 +211,57 @@ textarea::placeholder{color:#ccc;}
             <div class="reason-text"><h4>Too many products</h4><p>I have more than I can use right now</p></div>
           </div>
         </div>
-        <div class="byg-block" id="byg-many">
-          <div class="byg-label">Before you go</div>
-          <div class="byg-text">If you've built up more than you can use, pausing stops new deliveries until you've caught up — nothing is lost.</div>
-          <div class="byg-cta" onclick="goTo('pause')">Pause instead <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M7 3l4 4-4 4" stroke="#111" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        </div>
+        <!-- Other text field — only for "something else" -->
         <div class="other-block" id="other-block">
           <div class="other-label">We'd love to understand — what's going on?</div>
           <textarea placeholder="Whatever's on your mind..."></textarea>
         </div>
       </div>
       <div class="cta-footer">
-        <div class="cta-primary disabled" id="reason-cta" onclick="continueFromReason()">See what I'd lose</div>
+        <div class="cta-primary disabled" id="reason-cta" onclick="continueFromReason()">Continue</div>
         <div class="cta-ghost" onclick="goTo('manage')">Keep my subscription</div>
       </div>
     </div>
 
-    <!-- ── SCREEN 2: Retention ── -->
+    <!-- SCREEN 2: Retention -->
     <div class="screen" id="screen-retention">
       <div class="body">
-        <div class="big-headline" id="ret-headline">Are you sure you want to lose all of this?</div>
-        <div class="sec-label" id="gone-label" style="margin-top:4px;">Immediately after cancelling</div>
-        <div class="loss-list" style="margin-bottom:14px;">
+        <div class="big-headline" id="ret-headline">Are you sure you want to lose all these benefits?</div>
+        <div class="sec-label" id="gone-label" style="margin-top:20px;">You are only 2 payments away from</div>
+        <div class="loss-list" id="gone-list" style="margin-bottom:22px;">
           <div class="loss-item" id="health-row">
             <div class="loss-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2a3.5 3.5 0 013.5 3.5V7h-7V5.5A3.5 3.5 0 018 2Z" stroke="#888" stroke-width="1.2" fill="none"/><rect x="3" y="7" width="10" height="7" rx="2" stroke="#888" stroke-width="1.2" fill="none"/><rect x="6.5" y="9.5" width="3" height="2.5" rx="1" fill="#888"/></svg></div>
             <div class="loss-text"><h4>Your 2nd health test result</h4><p>Permanently deleted on cancellation. This data can't be recovered once the subscription ends.</p></div>
           </div>
           <div class="loss-item" id="bonus-row">
             <div class="loss-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#888" stroke-width="1.2"/><text x="8" y="11.5" text-anchor="middle" font-size="8" font-weight="800" fill="#888" font-family="Inter,sans-serif">kr</text></svg></div>
-            <div class="loss-text" id="bonus-row-text"><h4>500 kr ZinoCash bonus</h4><p>Unlocks at payment 4 — just 2 more payments away. Cancelling means never earning it.</p></div>
+            <div class="loss-text"><h4>500 kr ZinoCash bonus</h4><p>Cancelling means never earning it.</p></div>
           </div>
         </div>
-        <div class="sec-label">Stays with you</div>
-        <div class="loss-list">
+        <!-- Stays with you — visually subordinated -->
+        <div style="font-size:10px;font-weight:600;color:#ccc;text-transform:uppercase;letter-spacing:.08em;margin:0 0 8px;">Stays with you</div>
+        <div class="loss-list" style="border-color:#efefef;">
           <div class="loss-item">
             <div class="loss-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#888" stroke-width="1.2"/><path d="M8 5.5v3l1.5 1.5" stroke="#888" stroke-width="1.2" stroke-linecap="round"/></svg></div>
-            <div class="loss-text"><h4>ZinoCash balance: 245 kr</h4><p>You can still use this after cancelling — valid 1 year from your last purchase.</p></div>
+            <div class="loss-text"><h4>ZinoCash: 245 kr</h4><p>You have 245,- i zinocash to shop for. This can only be used if you have an active subscription. Use them now!</p></div>
           </div>
           <div class="loss-item" id="bonus-earned-row" style="display:none;">
             <div class="loss-icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#888" stroke-width="1.2"/><text x="8" y="11.5" text-anchor="middle" font-size="8" font-weight="800" fill="#888" font-family="Inter,sans-serif">kr</text></svg></div>
-            <div class="loss-text"><h4>500 kr ZinoCash bonus</h4><p>Already earned and credited to your balance — yours to keep.</p></div>
+            <div class="loss-text"><h4>500 kr ZinoCash bonus</h4><p>Already earned and credited to your balance.</p></div>
           </div>
         </div>
-
       </div>
       <div class="cta-footer">
-        <div class="cta-primary" onclick="goTo('confirmation')">Cancel anyway</div>
+        <div class="cta-primary" onclick="goTo('confirmation')">Continue</div>
         <div class="cta-outline" onclick="goTo('manage')">Keep my subscription</div>
       </div>
     </div>
 
-    <!-- ── SCREEN 3: Pause ── -->
+    <!-- SCREEN 3: Pause — inserted into flow for "too many products" -->
     <div class="screen" id="screen-pause">
       <div class="body">
-        <div class="big-headline">Take a break — come back when you're ready</div>
-        <div class="sub-copy">No charges while paused. Your health data and progress stay safe.</div>
+        <div class="big-headline">Too much at home? Take a break until you've caught up.</div>
+        <div class="sub-copy">No new deliveries while paused. Your health data, progress and ZinoCash stay safe.</div>
         <div class="sec-label">Choose a pause length</div>
         <div class="pause-opts">
           <div class="pause-opt selected" id="po-1" onclick="selectPause(1)">
@@ -325,13 +286,53 @@ textarea::placeholder{color:#ccc;}
         </div>
       </div>
       <div class="cta-footer">
-        <div class="cta-primary" onclick="goTo('manage')">Pause subscription</div>
-        <div class="cta-cancel-text" onclick="goTo('confirmation')">Cancel anyway</div>
+        <div class="cta-primary" onclick="goTo('pause-confirm')">Pause subscription</div>
+        <div class="cta-secondary" onclick="goTo('retention')">Cancel anyway</div>
         <div class="cta-ghost" onclick="goTo('manage')">Keep subscription</div>
       </div>
     </div>
 
-    <!-- ── SCREEN 4: Confirmation ── -->
+
+    <!-- SCREEN: Pause confirmation -->
+    <div class="screen" id="screen-pause-confirm">
+      <div class="body">
+        <div class="big-headline">Confirm your pause</div>
+        <div class="sub-copy">Here's what happens when you pause.</div>
+        <div class="summary-block">
+          <div class="summary-row"><span class="summary-key">Pause starts</span><span class="summary-val">Today</span></div>
+          <div class="summary-row"><span class="summary-key">Resumes</span><span class="summary-val" id="pause-resume-date">1 May 2026</span></div>
+          <div class="summary-row"><span class="summary-key">Next shipment</span><span class="summary-val" id="pause-next-ship">Mon, 1 May 2026</span></div>
+          <div class="summary-row"><span class="summary-key">Charges while paused</span><span class="summary-val">None</span></div>
+          <div class="summary-row"><span class="summary-key">Health data &amp; progress</span><span class="summary-val">Kept safe</span></div>
+        </div>
+        <div style="background:#f5f5f5;border-radius:12px;padding:14px 16px;font-size:12px;color:#888;line-height:1.6;">
+          You can resume or cancel anytime from your account settings.
+        </div>
+      </div>
+      <div class="cta-footer">
+        <div class="cta-primary" onclick="goTo('paused')">Confirm pause</div>
+        <div class="cta-outline" onclick="goTo('pause')">Go back</div>
+      </div>
+    </div>
+
+    <!-- SCREEN: Paused success -->
+    <div class="screen" id="screen-paused">
+      <div class="body" style="text-align:center;padding-top:40px;">
+        <div class="done-circle"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="6" y="5" width="3.5" height="12" rx="1.5" fill="#888"/><rect x="12.5" y="5" width="3.5" height="12" rx="1.5" fill="#888"/></svg></div>
+        <div class="big-headline" style="text-align:center;">Your subscription is paused.</div>
+        <div class="sub-copy" style="text-align:center;margin-bottom:24px;">We'll remind you before it resumes.</div>
+        <div class="summary-block" style="text-align:left;">
+          <div class="summary-row"><span class="summary-key">Resumes</span><span class="summary-val" id="paused-resume-date">1 May 2026</span></div>
+          <div class="summary-row"><span class="summary-key">Next shipment</span><span class="summary-val" id="paused-next-ship">Mon, 1 May 2026</span></div>
+        </div>
+        <div style="font-size:13px;color:#aaa;line-height:1.65;margin-bottom:24px;">You can resume early or cancel anytime from your account.</div>
+      </div>
+      <div class="cta-footer">
+        <div class="cta-outline" onclick="goTo('manage')">Back to account</div>
+      </div>
+    </div>
+
+    <!-- SCREEN 4: Confirmation -->
     <div class="screen" id="screen-confirmation">
       <div class="body">
         <div class="big-headline">Here's what happens next</div>
@@ -340,7 +341,6 @@ textarea::placeholder{color:#ccc;}
           <div class="summary-row"><span class="summary-key">Last payment date</span><span class="summary-val">15 Apr 2026</span></div>
           <div class="summary-row"><span class="summary-key">Last delivery date</span><span class="summary-val">15 Apr 2026</span></div>
           <div class="summary-row"><span class="summary-key">Subscription ends</span><span class="summary-val">15 May 2026</span></div>
-          <div class="summary-row"><span class="summary-key">Final invoice</span><span class="summary-val" id="conf-invoice">Standard — regular billing date</span></div>
         </div>
         <div style="background:#f5f5f5;border-radius:12px;padding:14px 16px;font-size:12px;color:#888;line-height:1.6;">
           A confirmation email will be sent to your registered address once cancellation is processed.
@@ -352,7 +352,7 @@ textarea::placeholder{color:#ccc;}
       </div>
     </div>
 
-    <!-- ── SCREEN 5: Cancelled ── -->
+    <!-- SCREEN 5: Cancelled -->
     <div class="screen" id="screen-cancelled">
       <div class="body" style="text-align:center;padding-top:40px;">
         <div class="done-circle"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11l5 5 9-9" stroke="#888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -367,105 +367,102 @@ textarea::placeholder{color:#ccc;}
       </div>
       <div class="cta-footer">
         <div class="cta-outline" onclick="goTo('manage')">Back to account</div>
-        <div style="text-align:center;margin-top:6px;font-size:13px;font-weight:700;color:#111;text-decoration:underline;cursor:pointer;" onclick="goTo('manage')">Reactivate subscription</div>
       </div>
     </div>
 
-  </div><!-- screen-area -->
-</div><!-- phone-inner -->
-</div><!-- phone-shell -->
+  </div>
+</div>
+</div>
 
 <script>
 let current = 'manage';
 let selectedReason = null;
-const simState = { milestone:'before', kit:'premier', billing:'regular' };
+let selectedPause = 1;
+const simState = { milestone:'before', kit:'premier' };
 const shipLabels = { 1:'Mon, 1 May 2026', 2:'Mon, 1 Jun 2026', 3:'Tue, 1 Jul 2026' };
-const progressMap = { manage:0, reason:25, retention:50, pause:60, confirmation:80, cancelled:100 };
-const backMap = { reason:'manage', retention:'reason', pause:'reason', confirmation:'retention', cancelled:'manage' };
+
+// Progress: too-many goes reason→pause→retention→confirmation
+// Others go reason→retention→confirmation
+const progressMap = { manage:0, reason:25, pause:40, 'pause-confirm':55, retention:60, confirmation:80, cancelled:100, paused:100 };
+
 const titleMap = {
-  manage: 'Manage subscription',
-  reason: 'Cancel subscription',
-  retention: 'Before you cancel',
-  pause: 'Pause instead?',
-  confirmation: 'Cancel subscription',
-  cancelled: 'Subscription cancelled'
+  manage:'Manage subscription', reason:'Cancel subscription',
+  retention:'Before you cancel', pause:'Pause instead?',
+  'pause-confirm':'Pause subscription', paused:'Subscription paused',
+  confirmation:'Cancel subscription', cancelled:'Subscription cancelled'
 };
+
+// Back map depends on flow — too-many inserts pause between reason and retention
+function getBack(id) {
+  if (id === 'retention' && selectedReason === 'too-many') return 'pause';
+  const map = { reason:'manage', retention:'reason', pause:'reason', 'pause-confirm':'pause', paused:'manage', confirmation:'retention', cancelled:'manage' };
+  return map[id] || 'manage';
+}
 
 function goTo(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById('screen-'+id).classList.add('active');
   current = id;
 
-  // Update global header
   document.getElementById('global-title').textContent = titleMap[id];
-  document.getElementById('global-back').style.visibility = (id === 'manage' || id === 'cancelled') ? 'hidden' : 'visible';
+  document.getElementById('global-back').style.visibility = (id==='manage'||id==='cancelled') ? 'hidden' : 'visible';
 
-  // Progress bar — show only during flow, hide on hub and cancelled
   const pl = document.getElementById('progress-line');
   const pf = document.getElementById('progress-fill');
   const sb = document.getElementById('static-border');
-  if (id === 'manage' || id === 'cancelled') {
-    pl.style.display = 'none';
-    sb.style.display = 'block';
+  if (id==='manage'||id==='cancelled'||id==='paused') {
+    pl.style.display='none'; sb.style.display='block';
   } else {
-    pl.style.display = 'block';
-    sb.style.display = 'none';
-    pf.style.width = (progressMap[id] || 0) + '%';
+    pl.style.display='block'; sb.style.display='none';
+    pf.style.width=(progressMap[id]||0)+'%';
   }
 
-  if (id === 'retention') updateRetention();
-  document.getElementById('screen-area').scrollTo(0, 0);
+  if (id==='retention') updateRetention();
+  if (id==='pause-confirm'||id==='paused') syncPauseDates();
+  document.getElementById('screen-area').scrollTo(0,0);
 }
 
-function handleBack() {
-  const dest = backMap[current] || 'manage';
-  goTo(dest);
-}
+function handleBack() { goTo(getBack(current)); }
 
 function selectReason(r) {
   selectedReason = r;
-  const rMap = { 'allergic':'r-allergic','other':'r-other','too-expensive':'r-expensive','too-many':'r-many' };
-  const radMap = { 'allergic':'rad-allergic','other':'rad-other','too-expensive':'rad-expensive','too-many':'rad-many' };
+  const rMap = {'allergic':'r-allergic','other':'r-other','too-expensive':'r-expensive','too-many':'r-many'};
+  const radMap = {'allergic':'rad-allergic','other':'rad-other','too-expensive':'rad-expensive','too-many':'rad-many'};
   document.querySelectorAll('.reason-item').forEach(el => el.classList.remove('selected'));
   document.querySelectorAll('.radio').forEach(el => el.classList.remove('on'));
-  document.querySelectorAll('.byg-block').forEach(el => el.classList.remove('visible'));
   document.getElementById('other-block').classList.remove('visible');
   document.getElementById(rMap[r]).classList.add('selected');
   document.getElementById(radMap[r]).classList.add('on');
-  if (r === 'too-many') document.getElementById('byg-many').classList.add('visible');
-  if (r === 'other') document.getElementById('other-block').classList.add('visible');
+  if (r==='other') document.getElementById('other-block').classList.add('visible');
   document.getElementById('reason-cta').classList.remove('disabled');
 }
 
 function continueFromReason() {
   if (!selectedReason) return;
-  goTo('retention');
+  // Too many products → pause screen first, then retention if they still want to cancel
+  if (selectedReason === 'too-many') goTo('pause');
+  else goTo('retention');
 }
 
 function updateRetention() {
   const r = selectedReason || 'allergic';
   const afterMilestone = simState.milestone === 'after';
   const isPremier = simState.kit === 'premier';
-  const isNoDelivery = simState.billing === 'no-delivery';
 
   // Headline per reason
   const headlines = {
-    'too-many': 'A lot of product doesn\u2019t mean it\u2019s time to leave.',
-    'too-expensive': 'Are you sure you want to lose all of this?',
-    'allergic': 'Are you sure you want to lose all of this?',
-    'other': 'Before you go \u2014 here\u2019s what happens next.'
+    'too-many': 'Are you sure you want to lose all these benefits?',
+    'too-expensive': 'Are you sure you want to lose all these benefits?',
+    'allergic': 'Are you sure you want to lose all these benefits?',
+    'other': 'Are you sure you want to lose all these benefits?'
   };
   document.getElementById('ret-headline').textContent = headlines[r];
 
-  // STATE 1: Before 4 + Premier — health + bonus in lost
-  // STATE 2: Before 4 + Standard — bonus only in lost, no health
-  // STATE 3: After 4 + any kit — nothing lost, bonus moves to stays
-
-  // Health row — Premier only, before milestone only
+  // Health row — Premier only, before milestone
   const hr = document.getElementById('health-row');
   if (hr) hr.style.display = (isPremier && !afterMilestone) ? 'flex' : 'none';
 
-  // Bonus row — in "lost" only before milestone
+  // Bonus in "lost" only before milestone, moves to "stays" after
   const br = document.getElementById('bonus-row');
   const ber = document.getElementById('bonus-earned-row');
   if (afterMilestone) {
@@ -476,45 +473,51 @@ function updateRetention() {
     if (ber) ber.style.display = 'none';
   }
 
-  // "Immediately after cancelling" section — hide entirely after milestone (nothing lost)
+  // Hide "gone" section entirely after milestone (nothing lost)
   const goneLabel = document.getElementById('gone-label');
-  const goneLists = document.querySelectorAll('#screen-retention .loss-list');
-  const firstList = goneLists[0];
+  const goneList = document.getElementById('gone-list');
   if (afterMilestone) {
     if (goneLabel) goneLabel.style.display = 'none';
-    if (firstList) firstList.style.display = 'none';
+    if (goneList) goneList.style.display = 'none';
   } else {
     if (goneLabel) goneLabel.style.display = 'block';
-    if (firstList) firstList.style.display = 'block';
-    goneLabel.textContent = isPremier ? 'Immediately after cancelling' : 'What you\u2019d lose';
+    if (goneList) goneList.style.display = 'block';
   }
+}
 
-  // Confirmation invoice row
-  const ci = document.getElementById('conf-invoice');
-  if (ci) ci.textContent = isNoDelivery ? 'Full shipping — products held until paid' : 'Standard — regular billing date';
+function syncPauseDates() {
+  const resumeLabels = { 1:'1 May 2026', 2:'1 Jun 2026', 3:'1 Jul 2026' };
+  const ship = shipLabels[selectedPause] || shipLabels[1];
+  const resume = resumeLabels[selectedPause] || resumeLabels[1];
+  ['pause-resume-date','paused-resume-date'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = resume;
+  });
+  ['pause-next-ship','paused-next-ship'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = ship;
+  });
 }
 
 function selectPause(m) {
+  selectedPause = m;
   [1,2,3].forEach(n => {
     document.getElementById('po-'+n).classList.toggle('selected', n===m);
     document.getElementById('pr-'+n).classList.toggle('on', n===m);
   });
-  document.getElementById('next-ship').textContent = 'Next shipment: ' + shipLabels[m];
+  document.getElementById('next-ship').textContent = 'Next shipment: '+shipLabels[m];
 }
 
 function simSet(type, val) {
   simState[type] = val;
-  if (type === 'milestone') {
+  if (type==='milestone') {
     document.getElementById('sim-before').classList.toggle('on', val==='before');
     document.getElementById('sim-after').classList.toggle('on', val==='after');
-  } else if (type === 'kit') {
+  } else if (type==='kit') {
     document.getElementById('sim-premier').classList.toggle('on', val==='premier');
     document.getElementById('sim-standard').classList.toggle('on', val==='standard');
-  } else if (type === 'billing') {
-    document.getElementById('sim-regular').classList.toggle('on', val==='regular');
-    document.getElementById('sim-nodelivery').classList.toggle('on', val==='no-delivery');
   }
-  if (current === 'retention') updateRetention();
+  if (current==='retention') updateRetention();
 }
 </script>
 </body>
